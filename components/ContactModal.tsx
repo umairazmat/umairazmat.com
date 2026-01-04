@@ -41,18 +41,20 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     const toastId = toast.loading('Sending your message...')
 
     try {
-      // In a real app, you'd send this to an API endpoint
-      // For now, we'll simulate an API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
 
-      // You can integrate with services like:
-      // - Formspree
-      // - EmailJS
-      // - Your own API endpoint
-      // - SendGrid, etc.
+      const result = await response.json()
 
-      console.log('Form data:', data)
-      
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send message')
+      }
+
       toast.success('Message sent successfully! I&apos;ll get back to you soon.', {
         id: toastId,
       })
@@ -61,9 +63,15 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         onClose()
       }, 1500)
     } catch (error) {
-      toast.error('Failed to send message. Please try again or email me directly.', {
-        id: toastId,
-      })
+      console.error('Error:', error)
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : 'Failed to send message. Please try again or email me directly.',
+        {
+          id: toastId,
+        }
+      )
     } finally {
       setIsSubmitting(false)
     }

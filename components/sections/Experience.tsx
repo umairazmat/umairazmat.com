@@ -62,16 +62,16 @@ export default function Experience() {
           ))}
         </div>
 
-        {/* Experience Timeline */}
-        <div id="experience-timeline" role="tabpanel" className="space-y-6 max-w-4xl mx-auto">
+        {/* Experience Grid - 2 columns */}
+        <div id="experience-timeline" role="tabpanel" className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
           {filteredExperiences.map((experience, index) => (
             <motion.div
               key={experience.id}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className={`card cursor-pointer transition-all ${
+              className={`card cursor-pointer transition-all h-full flex flex-col ${
                 selectedExperience === experience.id
                   ? 'ring-2 ring-primary-600 shadow-xl'
                   : 'hover:shadow-lg'
@@ -82,40 +82,47 @@ export default function Experience() {
                 )
               }
             >
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+              <div className="flex flex-col gap-4 flex-1">
                 <div className="flex-1">
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <h3 className="text-2xl font-bold text-gray-900">
-                        {experience.role}
-                      </h3>
-                      <p className="text-xl text-primary-600 font-semibold">
-                        {experience.company}
-                      </p>
+                  <div className="mb-3">
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-gray-900 mb-1">
+                          {experience.role}
+                        </h3>
+                        <p className="text-lg text-primary-600 font-semibold">
+                          {experience.company}
+                        </p>
+                      </div>
+                      <span className="px-2 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-medium ml-2 flex-shrink-0">
+                        {experience.type}
+                      </span>
                     </div>
-                    <span className="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium">
-                      {experience.type}
-                    </span>
+
+                    <div className="flex flex-wrap items-center gap-3 text-xs text-gray-600">
+                      <div className="flex items-center gap-1">
+                        <Calendar size={14} />
+                        {formatDate(experience.startDate)} - {formatDate(experience.endDate)}
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <MapPin size={14} />
+                        {experience.location}
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-4">
-                    <div className="flex items-center gap-1">
-                      <Calendar size={16} />
-                      {formatDate(experience.startDate)} - {formatDate(experience.endDate)}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <MapPin size={16} />
-                      {experience.location}
-                    </div>
-                  </div>
-
-                  <ul className="space-y-2 mb-4">
-                    {experience.description.map((desc, idx) => (
+                  <ul className="space-y-1.5 mb-4 flex-1">
+                    {experience.description.slice(0, 3).map((desc, idx) => (
                       <li key={idx} className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary-600 rounded-full mt-2 flex-shrink-0" />
-                        <span className="text-gray-700">{desc}</span>
+                        <div className="w-1 h-1 bg-primary-600 rounded-full mt-2 flex-shrink-0" />
+                        <span className="text-sm text-gray-700 line-clamp-2">{desc}</span>
                       </li>
                     ))}
+                    {experience.description.length > 3 && (
+                      <li className="text-xs text-primary-600 font-medium mt-1">
+                        +{experience.description.length - 3} more responsibilities
+                      </li>
+                    )}
                   </ul>
 
                   {/* Technologies */}
@@ -136,7 +143,7 @@ export default function Experience() {
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      className="mt-6 pt-6 border-t border-gray-200 space-y-4"
+                      className="mt-4 pt-4 border-t border-gray-200 space-y-4"
                     >
                       {experience.achievements && experience.achievements.length > 0 && (
                         <div>
