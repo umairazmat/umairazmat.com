@@ -67,21 +67,23 @@ export default function Chatbot() {
       const SpeechRecognition =
         (window as any).webkitSpeechRecognition ||
         (window as any).SpeechRecognition
-      recognitionRef.current = new SpeechRecognition()
-      recognitionRef.current.continuous = false
-      recognitionRef.current.interimResults = false
-      recognitionRef.current.lang = 'en-US'
+      const recognition = new SpeechRecognition()
+      recognition.continuous = false
+      recognition.interimResults = false
+      recognition.lang = 'en-US'
 
-      recognitionRef.current.onresult = (event: any) => {
+      recognition.onresult = (event: any) => {
         const transcript = event.results[0][0].transcript
         setInput(transcript)
         setIsListening(false)
         handleSend(transcript)
       }
 
-      recognitionRef.current.onerror = () => {
+      recognition.onerror = () => {
         setIsListening(false)
       }
+
+      recognitionRef.current = recognition
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

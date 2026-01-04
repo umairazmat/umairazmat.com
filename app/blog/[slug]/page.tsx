@@ -5,7 +5,6 @@ import { getBlogPost, getAllBlogPosts } from '@/lib/blog'
 import { format } from 'date-fns'
 import { Calendar, Tag, ArrowLeft } from 'lucide-react'
 import { MDXRemote } from 'next-mdx-remote/rsc'
-import { serialize } from 'next-mdx-remote/serialize'
 
 interface BlogPostPageProps {
   params: {
@@ -51,8 +50,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound()
   }
 
-  const mdxSource = await serialize(post.content)
-
   return (
     <article className="min-h-screen pt-16">
       <div className="section-container">
@@ -92,7 +89,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </header>
 
           <div className="prose prose-lg prose-headings:font-bold prose-a:text-primary-600 prose-code:bg-gray-100 prose-code:px-1 prose-code:rounded max-w-none">
-            <MDXRemote {...mdxSource} />
+            <MDXRemote source={post.content} />
           </div>
         </div>
       </div>
