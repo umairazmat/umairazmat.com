@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Loader from '@/components/Loader'
 import SkipToContent from '@/components/SkipToContent'
+import Toaster from '@/components/Toaster'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -59,6 +60,7 @@ export default function RootLayout({
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />
+        <Toaster />
       </body>
     </html>
   )
