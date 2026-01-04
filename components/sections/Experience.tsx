@@ -39,12 +39,19 @@ export default function Experience() {
         </p>
 
         {/* Filter Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-8">
+        <div
+          role="tablist"
+          aria-label="Filter experiences by company"
+          className="flex flex-wrap justify-center gap-3 mb-8"
+        >
           {filters.map((filter) => (
             <button
               key={filter}
               onClick={() => setSelectedFilter(filter)}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              role="tab"
+              aria-selected={selectedFilter === filter}
+              aria-controls="experience-timeline"
+              className={`px-4 py-2 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
                 selectedFilter === filter
                   ? 'bg-primary-600 text-white'
                   : 'bg-white text-gray-700 hover:bg-gray-100'
@@ -56,7 +63,7 @@ export default function Experience() {
         </div>
 
         {/* Experience Timeline */}
-        <div className="space-y-6 max-w-4xl mx-auto">
+        <div id="experience-timeline" role="tabpanel" className="space-y-6 max-w-4xl mx-auto">
           {filteredExperiences.map((experience, index) => (
             <motion.div
               key={experience.id}
