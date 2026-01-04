@@ -23,6 +23,7 @@
     "react-dom": "^18.3.0",
     "react-hook-form": "^7.50.0",
     "react-hot-toast": "^2.6.0",
+    "resend": "^6.6.0",
     "zod": "^3.22.0"
   },
   "devDependencies": {
