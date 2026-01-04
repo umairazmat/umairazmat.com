@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { MessageCircle } from 'lucide-react'
+import toast from 'react-hot-toast'
 import { personalInfo } from '@/constants'
 
 export default function WhatsAppButton() {
@@ -9,6 +10,7 @@ export default function WhatsAppButton() {
     const phoneNumber = personalInfo.phone?.replace(/\D/g, '') || '923217061116'
     const message = encodeURIComponent("Hi Umair, I'd like to connect...")
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
+    toast.success('Opening WhatsApp...')
   }
 
   return (

@@ -6,6 +6,7 @@ import { X, Send, Mail, MessageSquare, User } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
+import toast from 'react-hot-toast'
 import { personalInfo } from '@/constants'
 
 const contactSchema = z.object({
@@ -24,7 +25,6 @@ interface ContactModalProps {
 
 export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
   const {
     register,
@@ -37,7 +37,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true)
-    setSubmitStatus('idle')
+
+    const toastId = toast.loading('Sending your message...')
 
     try {
       // In a real app, you'd send this to an API endpoint
@@ -51,14 +52,18 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       // - SendGrid, etc.
 
       console.log('Form data:', data)
-      setSubmitStatus('success')
+      
+      toast.success('Message sent successfully! I&apos;ll get back to you soon.', {
+        id: toastId,
+      })
       reset()
       setTimeout(() => {
         onClose()
-        setSubmitStatus('idle')
-      }, 2000)
+      }, 1500)
     } catch (error) {
-      setSubmitStatus('error')
+      toast.error('Failed to send message. Please try again or email me directly.', {
+        id: toastId,
+      })
     } finally {
       setIsSubmitting(false)
     }
@@ -191,24 +196,6 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
                   )}
                 </div>
-
-                {/* Submit Status */}
-                {submitStatus === 'success' && (
-                  <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
-                    Message sent successfully! I&apos;ll get back to you soon.
-                  </div>
-                )}
-                {submitStatus === 'error' && (
-                  <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
-                    Something went wrong. Please try again or email me directly at{' '}
-                    <a
-                      href={`mailto:${personalInfo.email}`}
-                      className="underline font-semibold"
-                    >
-                      {personalInfo.email}
-                    </a>
-                  </div>
-                )}
 
                 {/* Submit Button */}
                 <div className="flex gap-4">

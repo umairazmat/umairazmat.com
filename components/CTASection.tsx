@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { MessageCircle, Mail, Send } from 'lucide-react'
 import { personalInfo } from '@/constants'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 import ContactModal from './ContactModal'
 
 interface CTASectionProps {
