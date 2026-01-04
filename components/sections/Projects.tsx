@@ -17,7 +17,7 @@ export default function Projects() {
       : projects.filter((p) => p.category === selectedCategory)
 
   return (
-    <section id="projects" className="section-container bg-white">
+    <section id="projects" className="section-container bg-white transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
