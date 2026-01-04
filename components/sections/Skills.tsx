@@ -46,12 +46,19 @@ export default function Skills() {
         </p>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div
+          role="tablist"
+          aria-label="Filter skills by category"
+          className="flex flex-wrap justify-center gap-3 mb-12"
+        >
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              role="tab"
+              aria-selected={selectedCategory === category}
+              aria-controls="skills-grid"
+              className={`px-4 py-2 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
                 selectedCategory === category
                   ? 'bg-primary-600 text-white'
                   : 'bg-white text-gray-700 hover:bg-gray-100'
@@ -63,7 +70,7 @@ export default function Skills() {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div id="skills-grid" role="tabpanel" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {Object.entries(groupedSkills).map(([category, categorySkills], categoryIndex) => (
             <motion.div
               key={category}

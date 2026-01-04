@@ -6,9 +6,39 @@
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
     @apply bg-gray-50 text-gray-900 antialiased;
+  }
+
+  /* Screen reader only class */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .focus\:not-sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
+  /* Focus visible styles for accessibility */
+  *:focus-visible {
+    outline: 2px solid theme('colors.primary.600');
+    outline-offset: 2px;
   }
 }
 
@@ -16,21 +46,20 @@
   .section-container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20;
   }
-  
+
   .gradient-text {
     @apply bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent;
   }
-  
+
   .card {
     @apply bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow duration-300;
   }
-  
+
   .btn-primary {
     @apply bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors duration-200 shadow-md hover:shadow-lg;
   }
-  
+
   .btn-secondary {
     @apply bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors duration-200;
   }
 }
-

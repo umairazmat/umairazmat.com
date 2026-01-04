@@ -34,7 +34,11 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="text-2xl font-bold gradient-text">
+          <Link
+            href="/"
+            className="text-2xl font-bold gradient-text"
+            aria-label={`${personalInfo.name} - Home`}
+          >
             {personalInfo.name.split(' ')[0]}
           </Link>
 
@@ -53,8 +57,9 @@ export default function Navbar() {
               href={personalInfo.resumeUrl}
               download
               className="btn-primary flex items-center gap-2"
+              aria-label="Download resume PDF"
             >
-              <Download size={18} />
+              <Download size={18} aria-hidden="true" />
               Resume
             </a>
           </div>
@@ -89,8 +94,9 @@ export default function Navbar() {
               download
               className="btn-primary flex items-center gap-2 w-full justify-center mt-4"
               onClick={() => setIsOpen(false)}
+              aria-label="Download resume PDF"
             >
-              <Download size={18} />
+              <Download size={18} aria-hidden="true" />
               Resume
             </a>
           </div>

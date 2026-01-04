@@ -104,7 +104,8 @@ export default function CTASection({
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <button
             onClick={handleClick}
-            className={`w-full rounded-lg border-2 ${ctaConfig.borderColor} ${ctaConfig.bgColor} ${ctaConfig.textColor} p-6 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] flex flex-col items-center gap-3 group`}
+            aria-label={`${displayMessage} - ${ctaConfig.text}`}
+            className={`w-full rounded-lg border-2 ${ctaConfig.borderColor} ${ctaConfig.bgColor} ${ctaConfig.textColor} p-6 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] flex flex-col items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2`}
           >
             <div className={`flex items-center gap-3 ${ctaConfig.iconColor}`}>
               <Icon size={24} className="transition-transform group-hover:scale-110" />
