@@ -158,18 +158,53 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Chatbot Toggle Button */}
-      <motion.button
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-40 bg-primary-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow"
-        aria-label="Open chatbot"
+      {/* Chatbot Toggle Button - Enhanced with animations */}
+      <motion.div
+        className="fixed bottom-6 right-6 z-40"
+        initial={{ scale: 0, rotate: -180 }}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ type: 'spring', stiffness: 200, damping: 15 }}
       >
-        {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
-      </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.1, rotate: 5 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setIsOpen(!isOpen)}
+          className="bg-primary-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative group hover:bg-primary-700"
+          aria-label="Open chatbot"
+        >
+          {isOpen ? (
+            <X size={24} className="transition-transform duration-200" />
+          ) : (
+            <motion.div
+              animate={{
+                rotate: [0, -10, 10, -10, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatDelay: 3,
+                ease: 'easeInOut',
+              }}
+            >
+              <MessageCircle size={24} />
+            </motion.div>
+          )}
+          {!isOpen && (
+            <motion.span
+              className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [1, 0.7, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            />
+          )}
+        </motion.button>
+      </motion.div>
 
       {/* Chatbot Window */}
       <AnimatePresence>
