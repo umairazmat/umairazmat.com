@@ -95,7 +95,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900">Get In Touch</h2>
                     <p className="text-sm text-gray-600">
-                      I'll get back to you within 24 hours
+                      I&apos;ll get back to you within 24 hours
                     </p>
                   </div>
                 </div>
@@ -195,7 +195,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 {/* Submit Status */}
                 {submitStatus === 'success' && (
                   <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
-                    Message sent successfully! I'll get back to you soon.
+                    Message sent successfully! I&apos;ll get back to you soon.
                   </div>
                 )}
                 {submitStatus === 'error' && (

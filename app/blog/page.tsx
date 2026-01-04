@@ -27,7 +27,7 @@ export default async function BlogPage() {
             <div className="text-center py-16">
               <p className="text-gray-600 mb-4">No blog posts yet. Check back soon!</p>
               <p className="text-sm text-gray-500">
-                Blog posts will appear here once they're published.
+                Blog posts will appear here once they&apos;re published.
               </p>
             </div>
           ) : (

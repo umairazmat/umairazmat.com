@@ -22,8 +22,8 @@ export default function Contact() {
           Get In <span className="gradient-text">Touch</span>
         </h2>
         <p className="text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
-          I'm always open to discussing new opportunities, interesting projects, or just
-          having a chat about technology. Let's connect!
+          I&apos;m always open to discussing new opportunities, interesting projects, or just
+          having a chat about technology. Let&apos;s connect!
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">

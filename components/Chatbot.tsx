@@ -259,7 +259,7 @@ export default function Chatbot() {
                 </button>
               </div>
               <p className="text-xs text-gray-500 mt-2">
-                Try: "Tell me about your experience" or "What projects have you built?"
+                Try: &quot;Tell me about your experience&quot; or &quot;What projects have you built?&quot;
               </p>
             </div>
           </motion.div>
