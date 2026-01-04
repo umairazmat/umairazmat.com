@@ -5,7 +5,7 @@ import { personalInfo } from '@/constants'
 
 export default function About() {
   return (
-    <section id="about" className="section-container bg-white">
+    <section id="about" className="section-container bg-white transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

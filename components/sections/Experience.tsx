@@ -24,7 +24,7 @@ export default function Experience() {
   }
 
   return (
-    <section id="experience" className="section-container bg-gray-50">
+    <section id="experience" className="section-container bg-gray-100 transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
