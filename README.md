@@ -154,20 +154,85 @@ Update SEO metadata in:
 
 ## Deployment
 
+This project is configured for deployment on both **Vercel** and **Netlify**. Configuration files are included for both platforms.
+
 ### Vercel (Recommended)
 
-1. Push to GitHub
-2. Import project in Vercel
-3. Deploy automatically
+Vercel is the recommended platform as it's built by the Next.js team and offers the best integration.
 
-### Other Platforms
+**Quick Deploy:**
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com) and sign in
+3. Click "Add New Project" and import your repository
+4. Vercel will auto-detect Next.js settings from `vercel.json`
+5. Click "Deploy" - that's it!
 
-Build the project:
+**Manual Deploy:**
 ```bash
-npm run build
+npm install -g vercel
+vercel
 ```
 
-The `out` directory contains the static export (if using static export).
+**Configuration:**
+- `vercel.json` is already configured
+- Build command: `npm run build`
+- Framework: Next.js (auto-detected)
+- Regions: US East (iad1)
+
+### Netlify
+
+Netlify also provides excellent Next.js support with their plugin.
+
+**Quick Deploy:**
+1. Push your code to GitHub
+2. Go to [netlify.com](https://netlify.com) and sign in
+3. Click "Add new site" → "Import an existing project"
+4. Connect your GitHub repository
+5. Netlify will auto-detect settings from `netlify.toml`
+6. Click "Deploy site"
+
+**Manual Deploy:**
+```bash
+npm install -g netlify-cli
+netlify deploy --prod
+```
+
+**Configuration:**
+- `netlify.toml` is already configured
+- Build command: `npm run build`
+- Publish directory: `.next`
+- Uses `@netlify/plugin-nextjs` for optimal Next.js support
+- Node version: 18
+
+**Important for Netlify:**
+Make sure to install the Netlify Next.js plugin:
+```bash
+npm install @netlify/plugin-nextjs --save-dev
+```
+
+### Environment Variables
+
+For both platforms, add environment variables in their respective dashboards:
+
+**Vercel:**
+- Settings → Environment Variables
+
+**Netlify:**
+- Site settings → Build & deploy → Environment variables
+
+**Common Variables:**
+- `NEXT_PUBLIC_SITE_URL` - Your site URL (e.g., `https://umairazmat.com`)
+- `OPENAI_API_KEY` - For enhanced chatbot (optional)
+
+### Build Verification
+
+Test the build locally before deploying:
+```bash
+npm run build
+npm start
+```
+
+Visit `http://localhost:3000` to verify everything works.
 
 ## Environment Variables
 

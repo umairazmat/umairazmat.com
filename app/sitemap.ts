@@ -5,7 +5,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://umairazmat.com'
   
   // Get all blog posts
-  const blogPosts = await getAllBlogPosts()
+  const blogPosts = getAllBlogPosts()
   
   const blogUrls = blogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,

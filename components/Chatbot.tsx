@@ -32,30 +32,6 @@ export default function Chatbot() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
-  useEffect(() => {
-    // Initialize Web Speech API if available
-    if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
-      const SpeechRecognition =
-        (window as any).webkitSpeechRecognition ||
-        (window as any).SpeechRecognition
-      recognitionRef.current = new SpeechRecognition()
-      recognitionRef.current.continuous = false
-      recognitionRef.current.interimResults = false
-      recognitionRef.current.lang = 'en-US'
-
-      recognitionRef.current.onresult = (event: any) => {
-        const transcript = event.results[0][0].transcript
-        setInput(transcript)
-        setIsListening(false)
-        handleSend(transcript)
-      }
-
-      recognitionRef.current.onerror = () => {
-        setIsListening(false)
-      }
-    }
-  }, [])
-
   const handleSend = async (message?: string) => {
     const userMessage = message || input.trim()
     if (!userMessage) return
@@ -84,6 +60,31 @@ export default function Chatbot() {
       setIsProcessing(false)
     }, 1000)
   }
+
+  useEffect(() => {
+    // Initialize Web Speech API if available
+    if (typeof window !== 'undefined' && 'webkitSpeechRecognition' in window) {
+      const SpeechRecognition =
+        (window as any).webkitSpeechRecognition ||
+        (window as any).SpeechRecognition
+      recognitionRef.current = new SpeechRecognition()
+      recognitionRef.current.continuous = false
+      recognitionRef.current.interimResults = false
+      recognitionRef.current.lang = 'en-US'
+
+      recognitionRef.current.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript
+        setInput(transcript)
+        setIsListening(false)
+        handleSend(transcript)
+      }
+
+      recognitionRef.current.onerror = () => {
+        setIsListening(false)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const generateResponse = (query: string): string => {
     const lowerQuery = query.toLowerCase()

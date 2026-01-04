@@ -2,8 +2,8 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { getBlogPost, getAllBlogPosts } from '@/lib/blog'
-import { Calendar, Tag, ArrowLeft } from 'lucide-react'
 import { format } from 'date-fns'
+import { Calendar, Tag, ArrowLeft } from 'lucide-react'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { serialize } from 'next-mdx-remote/serialize'
 
@@ -69,13 +69,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{post.title}</h1>
             <div className="flex items-center gap-4 text-sm text-gray-600 mb-6">
               <div className="flex items-center gap-1">
-                <Calendar size={16} />
-                {format(new Date(post.date), 'MMMM d, yyyy')}
+                <Calendar className="inline" size={16} />
+                <span>{format(new Date(post.date), 'MMMM d, yyyy')}</span>
               </div>
               <span>By {post.author}</span>
               {post.tags.length > 0 && (
                 <div className="flex items-center gap-2">
-                  <Tag size={16} />
+                  <Tag className="inline" size={16} />
                   <div className="flex gap-2">
                     {post.tags.map((tag) => (
                       <span

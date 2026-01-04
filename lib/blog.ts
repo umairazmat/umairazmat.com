@@ -55,25 +55,22 @@ export function getAllBlogPosts(): BlogPost[] {
 
 export function getBlogPost(slug: string): BlogPost | null {
   try {
+    if (!fs.existsSync(postsDirectory)) {
+      return null
+    }
+
     const fullPath = path.join(postsDirectory, `${slug}.mdx`)
+    let filePath = fullPath
+    
     if (!fs.existsSync(fullPath)) {
       const mdPath = path.join(postsDirectory, `${slug}.md`)
       if (!fs.existsSync(mdPath)) {
         return null
       }
-      const fileContents = fs.readFileSync(mdPath, 'utf8')
-      const { data, content } = matter(fileContents)
-      return {
-        slug,
-        title: data.title || 'Untitled',
-        date: data.date || new Date().toISOString(),
-        excerpt: data.excerpt || content.substring(0, 150) + '...',
-        content,
-        author: data.author || 'Umair Azmat',
-        tags: data.tags || [],
-      }
+      filePath = mdPath
     }
-    const fileContents = fs.readFileSync(fullPath, 'utf8')
+
+    const fileContents = fs.readFileSync(filePath, 'utf8')
     const { data, content } = matter(fileContents)
     return {
       slug,
@@ -85,6 +82,7 @@ export function getBlogPost(slug: string): BlogPost | null {
       tags: data.tags || [],
     }
   } catch (error) {
+    console.error('Error reading blog post:', error)
     return null
   }
 }

@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { getAllBlogPosts } from '@/lib/blog'
-import { Calendar, Tag, ArrowRight } from 'lucide-react'
 import { format } from 'date-fns'
+import { Calendar, Tag, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -44,12 +44,12 @@ export default async function BlogPage() {
                   </Link>
                   <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
                     <div className="flex items-center gap-1">
-                      <Calendar size={16} />
-                      {format(new Date(post.date), 'MMMM d, yyyy')}
+                      <Calendar className="inline" size={16} />
+                      <span>{format(new Date(post.date), 'MMMM d, yyyy')}</span>
                     </div>
                     {post.tags.length > 0 && (
                       <div className="flex items-center gap-2">
-                        <Tag size={16} />
+                        <Tag className="inline" size={16} />
                         <div className="flex gap-2">
                           {post.tags.slice(0, 3).map((tag) => (
                             <span
