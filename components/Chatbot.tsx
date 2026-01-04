@@ -27,6 +27,7 @@ export default function Chatbot() {
   const [isProcessing, setIsProcessing] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const recognitionRef = useRef<SpeechRecognition | null>(null)
+  const chatWindowRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -209,17 +210,22 @@ export default function Chatbot() {
       {/* Chatbot Window */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="fixed bottom-24 right-6 z-40 w-96 h-[600px] bg-white rounded-lg shadow-2xl flex flex-col"
-          >
+              <motion.div
+                ref={chatWindowRef}
+                initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 20, scale: 0.9 }}
+                className="fixed bottom-24 right-6 z-40 w-96 h-[600px] bg-white rounded-lg shadow-2xl flex flex-col"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="chatbot-title"
+                aria-describedby="chatbot-description"
+              >
             {/* Header */}
             <div className="bg-primary-600 text-white p-4 rounded-t-lg flex items-center justify-between">
               <div>
-                <h3 className="font-bold text-lg">AI Assistant</h3>
-                <p className="text-sm text-primary-100">Ask me anything!</p>
+                <h3 id="chatbot-title" className="font-bold text-lg">AI Assistant</h3>
+                <p id="chatbot-description" className="text-sm text-primary-100">Ask me anything!</p>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
