@@ -27,6 +27,7 @@ export default function Chatbot() {
   const [isProcessing, setIsProcessing] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const recognitionRef = useRef<SpeechRecognition | null>(null)
+  const chatWindowRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -158,33 +159,73 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Chatbot Toggle Button */}
-      <motion.button
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-40 bg-primary-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-shadow"
-        aria-label="Open chatbot"
+      {/* Chatbot Toggle Button - Enhanced with animations */}
+      <motion.div
+        className="fixed bottom-6 right-6 z-40"
+        initial={{ scale: 0, rotate: -180 }}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ type: 'spring', stiffness: 200, damping: 15 }}
       >
-        {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
-      </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.1, rotate: 5 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setIsOpen(!isOpen)}
+          className="bg-primary-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative group hover:bg-primary-700"
+          aria-label="Open chatbot"
+        >
+          {isOpen ? (
+            <X size={24} className="transition-transform duration-200" />
+          ) : (
+            <motion.div
+              animate={{
+                rotate: [0, -10, 10, -10, 0],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatDelay: 3,
+                ease: 'easeInOut',
+              }}
+            >
+              <MessageCircle size={24} />
+            </motion.div>
+          )}
+          {!isOpen && (
+            <motion.span
+              className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [1, 0.7, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            />
+          )}
+        </motion.button>
+      </motion.div>
 
       {/* Chatbot Window */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.9 }}
-            className="fixed bottom-24 right-6 z-40 w-96 h-[600px] bg-white rounded-lg shadow-2xl flex flex-col"
-          >
+              <motion.div
+                ref={chatWindowRef}
+                initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 20, scale: 0.9 }}
+                className="fixed bottom-24 right-6 z-40 w-96 h-[600px] bg-white rounded-lg shadow-2xl flex flex-col"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="chatbot-title"
+                aria-describedby="chatbot-description"
+              >
             {/* Header */}
             <div className="bg-primary-600 text-white p-4 rounded-t-lg flex items-center justify-between">
               <div>
-                <h3 className="font-bold text-lg">AI Assistant</h3>
-                <p className="text-sm text-primary-100">Ask me anything!</p>
+                <h3 id="chatbot-title" className="font-bold text-lg">AI Assistant</h3>
+                <p id="chatbot-description" className="text-sm text-primary-100">Ask me anything!</p>
               </div>
               <button
                 onClick={() => setIsOpen(false)}

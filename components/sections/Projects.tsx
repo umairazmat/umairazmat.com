@@ -17,7 +17,7 @@ export default function Projects() {
       : projects.filter((p) => p.category === selectedCategory)
 
   return (
-    <section id="projects" className="section-container bg-white">
+    <section id="projects" className="section-container bg-white transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -32,25 +32,32 @@ export default function Projects() {
         </p>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
+        <div
+          role="tablist"
+          aria-label="Filter projects by category"
+          className="flex flex-wrap justify-center gap-3 mb-12"
+        >
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 ${
+              role="tab"
+              aria-selected={selectedCategory === category}
+              aria-controls="projects-grid"
+              className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
                 selectedCategory === category
                   ? 'bg-primary-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              <Filter size={16} />
+              <Filter size={16} aria-hidden="true" />
               {category}
             </button>
           ))}
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div id="projects-grid" role="tabpanel" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}

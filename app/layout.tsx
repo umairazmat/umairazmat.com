@@ -3,16 +3,19 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import Loader from '@/components/Loader'
+import SkipToContent from '@/components/SkipToContent'
+import Toaster from '@/components/Toaster'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: {
-    default: 'Umair Azmat - Full Stack Developer & AI Engineer',
+    default: 'Umair Azmat - Full-Stack Software Engineer',
     template: '%s | Umair Azmat',
   },
-  description: 'Professional portfolio of Umair Azmat - Full Stack Developer, AI Engineer, and Educator specializing in MERN stack, Python, and Machine Learning. Available for remote opportunities.',
-  keywords: ['Full Stack Developer', 'AI Engineer', 'MERN Stack', 'Python', 'Machine Learning', 'Remote Developer', 'Next.js', 'React'],
+  description: 'Full-Stack Software Engineer with 2+ years of experience building production-grade, scalable web applications using React, Next.js, Angular, Node.js, and REST APIs. Skilled in frontend feature ownership, clean modular UI architecture, API integrations, cloud deployment (AWS/GCP), and AI-assisted development. Available for remote work opportunities.',
+  keywords: ['Full-Stack Software Engineer', 'React', 'Next.js', 'Node.js', 'Python', 'AWS Cloud', 'GenAI', 'MERN Stack', 'Angular', 'TypeScript', 'FastAPI', 'Remote Developer', 'Umair Azmat', 'Software Engineer Portfolio', 'Frontend Developer', 'Backend Developer', 'Full Stack Development', 'Web Development', 'Lahore Pakistan'],
   authors: [{ name: 'Umair Azmat' }],
   creator: 'Umair Azmat',
   openGraph: {
@@ -20,13 +23,13 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://umairazmat.com',
     siteName: 'Umair Azmat Portfolio',
-    title: 'Umair Azmat - Full Stack Developer & AI Engineer',
-    description: 'Professional portfolio showcasing full stack development, AI/ML projects, and teaching experience.',
+    title: 'Umair Azmat - Full-Stack Software Engineer',
+    description: 'Full-Stack Software Engineer with 2+ years of experience building production-grade, scalable web applications using React, Next.js, Angular, Node.js, and REST APIs.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Umair Azmat - Full Stack Developer & AI Engineer',
-    description: 'Professional portfolio showcasing full stack development, AI/ML projects, and teaching experience.',
+    title: 'Umair Azmat - Full-Stack Software Engineer',
+    description: 'Full-Stack Software Engineer with 2+ years of experience building production-grade, scalable web applications using React, Next.js, Angular, Node.js, and REST APIs.',
   },
   robots: {
     index: true,
@@ -52,9 +55,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <SkipToContent />
+        <Loader />
         <Navbar />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer />
+        <Toaster />
       </body>
     </html>
   )

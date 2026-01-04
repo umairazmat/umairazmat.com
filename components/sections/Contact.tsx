@@ -10,7 +10,7 @@ export default function Contact() {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
-    <section id="contact" className="section-container bg-white">
+    <section id="contact" className="section-container bg-white transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
