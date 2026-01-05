@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import toast from 'react-hot-toast'
 import { personalInfo } from '@/constants'
+import { useTranslation } from 'react-i18next'
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -24,6 +25,7 @@ interface ContactModalProps {
 }
 
 export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
+  const { t } = useTranslation()
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const {
@@ -38,7 +40,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true)
 
-    const toastId = toast.loading('Sending your message...')
+    const toastId = toast.loading(t('contactForm.sending'))
 
     try {
       const response = await fetch('/api/contact', {
@@ -55,7 +57,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         throw new Error(result.error || 'Failed to send message')
       }
 
-      toast.success('Message sent successfully! I&apos;ll get back to you soon.', {
+      toast.success(t('contactForm.success'), {
         id: toastId,
       })
       reset()
@@ -67,7 +69,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       toast.error(
         error instanceof Error
           ? error.message
-          : 'Failed to send message. Please try again or email me directly.',
+          : t('contactForm.error'),
         {
           id: toastId,
         }
@@ -106,9 +108,9 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     <MessageSquare className="text-primary-600 dark:text-primary-400" size={24} />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Get In Touch</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('contactForm.title')}</h2>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                      I&apos;ll get back to you within 24 hours
+                      {t('contactForm.subtitle')}
                     </p>
                   </div>
                 </div>
@@ -130,14 +132,14 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                   >
                     <User size={16} className="inline mr-2" />
-                    Name
+                    {t('contactForm.name')}
                   </label>
                   <input
                     {...register('name')}
                     type="text"
                     id="name"
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
-                    placeholder="Your name"
+                    placeholder={t('contactForm.namePlaceholder')}
                   />
                   {errors.name && (
                     <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
@@ -151,14 +153,14 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                   >
                     <Mail size={16} className="inline mr-2" />
-                    Email
+                    {t('contactForm.email')}
                   </label>
                   <input
                     {...register('email')}
                     type="email"
                     id="email"
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
-                    placeholder="your.email@example.com"
+                    placeholder={t('contactForm.emailPlaceholder')}
                   />
                   {errors.email && (
                     <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
@@ -171,14 +173,14 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     htmlFor="subject"
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                   >
-                    Subject
+                    {t('contactForm.subject')}
                   </label>
                   <input
                     {...register('subject')}
                     type="text"
                     id="subject"
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
-                    placeholder="What's this about?"
+                    placeholder={t('contactForm.subjectPlaceholder')}
                   />
                   {errors.subject && (
                     <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>
@@ -191,14 +193,14 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     htmlFor="message"
                     className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
                   >
-                    Message
+                    {t('contactForm.message')}
                   </label>
                   <textarea
                     {...register('message')}
                     id="message"
                     rows={6}
                     className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
-                    placeholder="Tell me about your project or opportunity..."
+                    placeholder={t('contactForm.messagePlaceholder')}
                   />
                   {errors.message && (
                     <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
@@ -213,7 +215,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     className="btn-secondary flex-1"
                     disabled={isSubmitting}
                   >
-                    Cancel
+                    {t('contactForm.cancel')}
                   </button>
                   <button
                     type="submit"
@@ -223,12 +225,12 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     {isSubmitting ? (
                       <>
                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        Sending...
+                        {t('contactForm.sending')}
                       </>
                     ) : (
                       <>
                         <Send size={20} />
-                        Send Message
+                        {t('contactForm.send')}
                       </>
                     )}
                   </button>

@@ -5,14 +5,17 @@ import { motion } from 'framer-motion'
 import { ExternalLink, Github, Filter } from 'lucide-react'
 import { projects } from '@/constants'
 import { Project as ProjectType } from '@/constants'
+import { useTranslation } from 'react-i18next'
 
 export default function Projects() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All')
+  const { t } = useTranslation()
+  const allLabel = t('projects.all')
+  const [selectedCategory, setSelectedCategory] = useState<string>(allLabel)
 
-  const categories = ['All', ...new Set(projects.map((p) => p.category))]
+  const categories = [allLabel, ...new Set(projects.map((p) => p.category))]
 
   const filteredProjects =
-    selectedCategory === 'All'
+    selectedCategory === allLabel
       ? projects
       : projects.filter((p) => p.category === selectedCategory)
 
@@ -25,10 +28,10 @@ export default function Projects() {
         transition={{ duration: 0.6 }}
       >
         <h2 className="text-4xl font-bold mb-4 text-center">
-          Featured <span className="gradient-text">Projects</span>
+          {t('projects.title')} <span className="gradient-text">{t('projects.projects')}</span>
         </h2>
-        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-          A selection of projects showcasing my skills in full-stack development and AI/ML
+        <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+          {t('projects.description')}
         </p>
 
         {/* Category Filter */}

@@ -2,8 +2,10 @@
 
 import { motion } from 'framer-motion'
 import { personalInfo } from '@/constants'
+import { useTranslation } from 'react-i18next'
 
 export default function About() {
+  const { t } = useTranslation()
   return (
     <section id="about" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300">
       <motion.div
@@ -14,10 +16,10 @@ export default function About() {
         className="max-w-4xl mx-auto"
       >
         <h2 className="text-4xl font-bold mb-8 text-center">
-          About <span className="gradient-text">Me</span>
+          {t('about.title')} <span className="gradient-text">{t('about.me')}</span>
         </h2>
         <div className="space-y-6 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-          <p>{personalInfo.about.summary}</p>
+          <p>{t('about.summary')}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
             {personalInfo.about.highlights.map((highlight, index) => (
               <motion.div

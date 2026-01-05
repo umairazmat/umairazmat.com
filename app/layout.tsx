@@ -11,6 +11,8 @@ import { ThemeProvider } from '@/contexts/ThemeContext'
 import ContactAutoPopup from '@/components/ContactAutoPopup'
 import StructuredData from '@/components/StructuredData'
 import AnalyticsProvider from '@/components/AnalyticsProvider'
+import I18nProvider from '@/providers/I18nProvider'
+import RTLHandler from '@/components/RTLHandler'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -58,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning dir="ltr">
       <head>
         <StructuredData />
       </head>
@@ -87,16 +89,19 @@ export default function RootLayout({
             `,
           }}
         />
-        <ThemeProvider>
-          <AnalyticsProvider />
-          <SkipToContent />
-          <Loader />
-          <Navbar />
-          <main id="main-content">{children}</main>
-          <Footer />
-          <Toaster />
-          <ContactAutoPopup />
-        </ThemeProvider>
+        <I18nProvider>
+          <RTLHandler />
+          <ThemeProvider>
+            <AnalyticsProvider />
+            <SkipToContent />
+            <Loader />
+            <Navbar />
+            <main id="main-content">{children}</main>
+            <Footer />
+            <Toaster />
+            <ContactAutoPopup />
+          </ThemeProvider>
+        </I18nProvider>
       </body>
     </html>
   )
