@@ -31,7 +31,7 @@ export default function Skills() {
   }, {} as Record<string, SkillType[]>)
 
   return (
-    <section id="skills" className="section-container bg-gray-100 transition-colors duration-300">
+    <section id="skills" className="section-container bg-gray-100 dark:bg-gray-800 transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -41,7 +41,7 @@ export default function Skills() {
         <h2 className="text-4xl font-bold mb-4 text-center">
           Technical <span className="gradient-text">Skills</span>
         </h2>
-        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+        <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
           Technologies and tools I work with
         </p>
 
@@ -61,7 +61,7 @@ export default function Skills() {
               className={`px-4 py-2 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
                 selectedCategory === category
                   ? 'bg-primary-600 text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                  : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
               }`}
             >
               {category}
@@ -80,15 +80,15 @@ export default function Skills() {
               transition={{ delay: categoryIndex * 0.1, duration: 0.5 }}
               className="card"
             >
-              <h3 className="text-xl font-bold text-gray-900 mb-4">{category}</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{category}</h3>
               <div className="space-y-4">
                 {categorySkills.map((skill, index) => (
                   <div key={skill.name}>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="font-medium text-gray-900">{skill.name}</span>
-                      <span className="text-sm text-gray-600">{skill.level}</span>
+                      <span className="font-medium text-gray-900 dark:text-white">{skill.name}</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">{skill.level}</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: '100%' }}

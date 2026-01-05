@@ -13,7 +13,7 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="bg-gray-900 text-gray-300">
+    <footer className="bg-gray-900 dark:bg-black text-gray-300 dark:text-gray-400 border-t border-gray-800 dark:border-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
@@ -70,7 +70,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-400">
+        <div className="mt-8 pt-8 border-t border-gray-800 dark:border-gray-900 text-center text-sm text-gray-400 dark:text-gray-500">
           <p>&copy; {currentYear} Umair Azmat. All rights reserved.</p>
         </div>
       </div>

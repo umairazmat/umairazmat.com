@@ -17,7 +17,7 @@ export default function Projects() {
       : projects.filter((p) => p.category === selectedCategory)
 
   return (
-    <section id="projects" className="section-container bg-white transition-colors duration-300">
+    <section id="projects" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="card group hover:scale-105 transition-transform"
+              className="card dark:bg-gray-800 group hover:scale-105 transition-transform"
             >
               {/* Project Image Placeholder */}
               <div className="w-full h-48 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg mb-4 flex items-center justify-center">
@@ -77,12 +77,12 @@ export default function Projects() {
               <div className="space-y-4">
                 <div>
                   <div className="flex items-start justify-between mb-2">
-                    <h3 className="text-xl font-bold text-gray-900">{project.title}</h3>
-                    <span className="px-2 py-1 bg-primary-100 text-primary-700 rounded text-xs font-medium">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">{project.title}</h3>
+                    <span className="px-2 py-1 bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 rounded text-xs font-medium">
                       {project.category}
                     </span>
                   </div>
-                  <p className="text-gray-600 text-sm">{project.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm">{project.description}</p>
                 </div>
 
                 {/* Technologies */}
@@ -90,7 +90,7 @@ export default function Projects() {
                   {project.technologies.slice(0, 4).map((tech) => (
                     <span
                       key={tech}
-                      className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs"
+                      className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs"
                     >
                       {tech}
                     </span>
