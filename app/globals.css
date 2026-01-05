@@ -7,8 +7,16 @@
     scroll-behavior: smooth;
   }
 
+  html.light {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
+    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 antialiased transition-colors duration-300;
   }
 
   /* Screen reader only class */
@@ -40,6 +48,33 @@
     outline: 2px solid theme('colors.primary.600');
     outline-offset: 2px;
   }
+
+  /* RTL Support */
+  html[dir='rtl'] {
+    direction: rtl;
+  }
+
+  html[dir='rtl'] .flex {
+    flex-direction: row-reverse;
+  }
+
+  html[dir='rtl'] .text-left {
+    text-align: right;
+  }
+
+  html[dir='rtl'] .text-right {
+    text-align: left;
+  }
+
+  html[dir='rtl'] .ml-auto {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  html[dir='rtl'] .mr-auto {
+    margin-right: 0;
+    margin-left: auto;
+  }
 }
 
 @layer components {
@@ -52,7 +87,7 @@
   }
 
   .card {
-    @apply bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow duration-300;
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 p-6 hover:shadow-xl transition-shadow duration-300 text-gray-900 dark:text-gray-100;
   }
 
   .btn-primary {

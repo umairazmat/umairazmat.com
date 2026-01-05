@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "about": "Über mich",
+    "experience": "Erfahrung",
+    "projects": "Projekte",
+    "skills": "Fähigkeiten",
+    "contact": "Kontakt",
+    "blog": "Blog",
+    "resume": "Lebenslauf"
+  },
+  "hero": {
+    "greeting": "Hallo, ich bin",
+    "title": "Full-Stack Software Engineer",
+    "description": "Ich entwickle produktionsreife Webanwendungen mit React, Next.js, Node.js & Python. Leidenschaftlich für saubere Architektur, skalierbare Systeme & KI-gestützte Entwicklung.",
+    "downloadResume": "Lebenslauf herunterladen",
+    "getInTouch": "Kontakt aufnehmen",
+    "scheduleCall": "Anruf planen",
+    "years": "Jahre",
+    "projects": "Projekte",
+    "students": "Studenten",
+    "githubStars": "GitHub Stars"
+  },
+  "about": {
+    "title": "Über",
+    "me": "mich",
+    "summary": "Full-Stack Software Engineer mit über 2 Jahren Erfahrung im Aufbau und der Wartung von produktionsreifen, skalierbaren Webanwendungen mit React, Next.js, Angular, Node.js und REST APIs. Erfahren in Frontend-Feature-Ownership, sauberer modularer UI-Architektur, API-Integrationen, Cloud-Deployment (AWS/GCP) und KI-gestützter Entwicklung. Erfahren in der Unterstützung von Live-Systemen in Remote-Agile-Teams, die End-to-End-Lösungen für Unternehmen und interne Tools liefern."
+  },
+  "experience": {
+    "title": "Berufliche",
+    "experience": "Erfahrung",
+    "description": "Klicken Sie auf eine Erfahrung, um detaillierte Informationen, Erfolge und Metriken anzuzeigen",
+    "all": "Alle",
+    "keyAchievements": "Wichtige Erfolge",
+    "metrics": "Metriken & Auswirkungen",
+    "moreResponsibilities": "weitere Verantwortlichkeiten"
+  },
+  "projects": {
+    "title": "Ausgewählte",
+    "projects": "Projekte",
+    "description": "Einige meiner neuesten Arbeiten und Nebenprojekte",
+    "all": "Alle",
+    "viewProject": "Projekt ansehen",
+    "viewCode": "Code ansehen"
+  },
+  "skills": {
+    "title": "Technische",
+    "skills": "Fähigkeiten",
+    "description": "Technologien und Tools, mit denen ich arbeite",
+    "all": "Alle"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "touch": "aufnehmen",
+    "description": "Ich bin immer offen für die Diskussion neuer Möglichkeiten, interessanter Projekte oder einfach für ein Gespräch über Technologie. Lassen Sie uns in Kontakt treten!",
+    "email": "E-Mail",
+    "availability": "Verfügbarkeit",
+    "responseTime": "Antwortzeit",
+    "sendMessage": "Nachricht senden"
+  },
+  "footer": {
+    "tagline": "Full Stack Entwickler & KI-Ingenieur",
+    "available": "Verfügbar für Remote-Möglichkeiten",
+    "quickLinks": "Schnelllinks",
+    "connect": "Verbinden",
+    "rights": "Alle Rechte vorbehalten"
+  },
+  "availability": {
+    "available": "Verfügbar für Remote",
+    "openToOpportunities": "Offen für neue Möglichkeiten",
+    "locationTimezone": "Standort & Zeitzone",
+    "responseTime": "Antwortzeit",
+    "preferredStack": "Bevorzugter Stack",
+    "scheduleCall": "Anruf planen"
+  },
+  "cta": {
+    "workTogether": "Lassen Sie uns zusammenarbeiten!",
+    "discussProject": "Möchten Sie ein Projekt besprechen?",
+    "letsConnect": "Lassen Sie uns in Kontakt treten!",
+    "haveQuestion": "Haben Sie eine Frage?",
+    "buildAmazing": "Lassen Sie uns etwas Erstaunliches bauen!",
+    "contactWhatsApp": "Kontakt über WhatsApp",
+    "emailNow": "Jetzt E-Mail senden",
+    "chatNow": "Jetzt chatten"
+  },
+  "chatbot": {
+    "title": "KI-Assistent",
+    "subtitle": "Fragen Sie mich alles!",
+    "initialMessage": "Hallo! Ich bin Umairs KI-Assistent. Fragen Sie mich nach Erfahrung, Projekten oder Fähigkeiten!",
+    "placeholder": "Fragen Sie mich alles...",
+    "suggestions": "Versuchen Sie: \"Erfahrung\" oder \"Projekte\"",
+    "close": "Assistent schließen",
+    "open": "Assistent öffnen"
+  },
+  "contactForm": {
+    "title": "Kontakt aufnehmen",
+    "subtitle": "Ich werde Ihnen innerhalb von 24 Stunden antworten",
+    "name": "Name",
+    "email": "E-Mail",
+    "subject": "Betreff",
+    "message": "Nachricht",
+    "send": "Nachricht senden",
+    "sending": "Wird gesendet...",
+    "cancel": "Abbrechen",
+    "namePlaceholder": "Ihr Name",
+    "emailPlaceholder": "ihre.email@beispiel.com",
+    "subjectPlaceholder": "Worum geht es?",
+    "messagePlaceholder": "Erzählen Sie mir von Ihrem Projekt oder Ihrer Möglichkeit...",
+    "success": "Nachricht erfolgreich gesendet! Ich werde Ihnen bald antworten.",
+    "error": "Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie mich direkt per E-Mail."
+  },
+  "whatsapp": {
+    "tooltip": "Auf WhatsApp chatten",
+    "open": "WhatsApp wird geöffnet..."
+  },
+  "common": {
+    "loading": "Wird geladen...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "close": "Schließen",
+    "open": "Öffnen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "submit": "Absenden",
+    "download": "Herunterladen",
+    "view": "Ansehen",
+    "learnMore": "Mehr erfahren"
+  }
+}
+
