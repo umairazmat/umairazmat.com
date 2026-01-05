@@ -5,15 +5,17 @@ import { MessageCircle, X } from 'lucide-react'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { personalInfo } from '@/constants'
+import { useTranslation } from 'react-i18next'
 
 export default function WhatsAppButton() {
+  const { t } = useTranslation()
   const [showTooltip, setShowTooltip] = useState(false)
 
   const handleClick = () => {
     const phoneNumber = personalInfo.phone?.replace(/\D/g, '') || '923217061116'
     const message = encodeURIComponent("Hi Umair, I'd like to connect...")
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
-    toast.success('Opening WhatsApp...')
+    toast.success(t('whatsapp.open'))
     setShowTooltip(false)
   }
 
@@ -27,7 +29,7 @@ export default function WhatsAppButton() {
             exit={{ opacity: 0, x: -10, scale: 0.8 }}
             className="absolute bottom-full left-0 mb-2 px-4 py-2 bg-gray-900 dark:bg-gray-800 text-white text-sm rounded-lg shadow-xl whitespace-nowrap"
           >
-            <span>Chat on WhatsApp</span>
+            <span>{t('whatsapp.tooltip')}</span>
             <div className="absolute bottom-0 left-4 transform translate-y-full">
               <div className="w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-800" />
             </div>

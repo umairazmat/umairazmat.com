@@ -5,8 +5,11 @@ import Link from 'next/link'
 import { Menu, X, Download } from 'lucide-react'
 import { personalInfo } from '@/constants'
 import ThemeToggle from './ThemeToggle'
+import LanguageSwitcher from './LanguageSwitcher'
+import { useTranslation } from 'react-i18next'
 
 export default function Navbar() {
+  const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -19,12 +22,12 @@ export default function Navbar() {
   }, [])
 
   const navLinks = [
-    { href: '#about', label: 'About' },
-    { href: '#experience', label: 'Experience' },
-    { href: '#projects', label: 'Projects' },
-    { href: '#skills', label: 'Skills' },
-    { href: '#contact', label: 'Contact' },
-    { href: '/blog', label: 'Blog' },
+    { href: '#about', label: t('nav.about') },
+    { href: '#experience', label: t('nav.experience') },
+    { href: '#projects', label: t('nav.projects') },
+    { href: '#skills', label: t('nav.skills') },
+    { href: '#contact', label: t('nav.contact') },
+    { href: '/blog', label: t('nav.blog') },
   ]
 
   return (
@@ -56,6 +59,7 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <LanguageSwitcher />
             <ThemeToggle />
             <a
               href={personalInfo.resumeUrl}
@@ -64,7 +68,7 @@ export default function Navbar() {
               aria-label="Download resume PDF"
             >
               <Download size={18} aria-hidden="true" />
-              Resume
+              {t('nav.resume')}
             </a>
           </div>
 
@@ -93,6 +97,10 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <div className="flex items-center justify-between pt-2">
+              <span className="text-sm text-gray-600 dark:text-gray-400">Language:</span>
+              <LanguageSwitcher />
+            </div>
             <div className="flex items-center justify-between pt-2">
               <span className="text-sm text-gray-600 dark:text-gray-400">Theme:</span>
               <ThemeToggle />

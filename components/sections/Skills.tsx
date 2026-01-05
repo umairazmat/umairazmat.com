@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { skills } from '@/constants'
 import { Skill as SkillType } from '@/constants'
+import { useTranslation } from 'react-i18next'
 
 const levelColors = {
   Expert: 'bg-green-500',
@@ -13,12 +14,14 @@ const levelColors = {
 }
 
 export default function Skills() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All')
+  const { t } = useTranslation()
+  const allLabel = t('skills.all')
+  const [selectedCategory, setSelectedCategory] = useState<string>(allLabel)
 
-  const categories = ['All', ...new Set(skills.map((s) => s.category))]
+  const categories = [allLabel, ...new Set(skills.map((s) => s.category))]
 
   const filteredSkills =
-    selectedCategory === 'All'
+    selectedCategory === allLabel
       ? skills
       : skills.filter((s) => s.category === selectedCategory)
 
@@ -39,10 +42,10 @@ export default function Skills() {
         transition={{ duration: 0.6 }}
       >
         <h2 className="text-4xl font-bold mb-4 text-center">
-          Technical <span className="gradient-text">Skills</span>
+          {t('skills.title')} <span className="gradient-text">{t('skills.skills')}</span>
         </h2>
         <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-          Technologies and tools I work with
+          {t('skills.description')}
         </p>
 
         {/* Category Filter */}

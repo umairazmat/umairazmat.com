@@ -5,15 +5,18 @@ import { motion } from 'framer-motion'
 import { Calendar, MapPin, Briefcase, TrendingUp } from 'lucide-react'
 import { experiences } from '@/constants'
 import { Experience as ExperienceType } from '@/constants'
+import { useTranslation } from 'react-i18next'
 
 export default function Experience() {
-  const [selectedFilter, setSelectedFilter] = useState<string>('All')
+  const { t } = useTranslation()
+  const [selectedFilter, setSelectedFilter] = useState<string>(t('experience.all'))
   const [selectedExperience, setSelectedExperience] = useState<string | null>(null)
 
-  const filters = ['All', ...new Set(experiences.map((exp) => exp.company))]
+  const allLabel = t('experience.all')
+  const filters = [allLabel, ...new Set(experiences.map((exp) => exp.company))]
 
   const filteredExperiences =
-    selectedFilter === 'All'
+    selectedFilter === allLabel
       ? experiences
       : experiences.filter((exp) => exp.company === selectedFilter)
 
@@ -32,10 +35,10 @@ export default function Experience() {
         transition={{ duration: 0.6 }}
       >
         <h2 className="text-4xl font-bold mb-4 text-center">
-          Professional <span className="gradient-text">Experience</span>
+          {t('experience.title')} <span className="gradient-text">{t('experience.experience')}</span>
         </h2>
         <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-          Click on any experience to view detailed information, achievements, and metrics
+          {t('experience.description')}
         </p>
 
         {/* Filter Tabs */}
@@ -120,7 +123,7 @@ export default function Experience() {
                     ))}
                     {experience.description.length > 3 && (
                       <li className="text-xs text-primary-600 font-medium mt-1">
-                        +{experience.description.length - 3} more responsibilities
+                        +{experience.description.length - 3} {t('experience.moreResponsibilities')}
                       </li>
                     )}
                   </ul>
@@ -149,7 +152,7 @@ export default function Experience() {
                         <div>
                           <h4 className="font-semibold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
                             <TrendingUp size={18} />
-                            Key Achievements
+                            {t('experience.keyAchievements')}
                           </h4>
                           <ul className="space-y-2">
                             {experience.achievements.map((achievement, idx) => (
@@ -166,7 +169,7 @@ export default function Experience() {
                         <div>
                           <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
                             <Briefcase size={18} />
-                            Metrics & Impact
+                            {t('experience.metrics')}
                           </h4>
                           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                             {experience.metrics.map((metric, idx) => (

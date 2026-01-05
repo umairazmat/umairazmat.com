@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "about": "نبذة",
+    "experience": "الخبرة",
+    "projects": "المشاريع",
+    "skills": "المهارات",
+    "contact": "اتصل",
+    "blog": "المدونة",
+    "resume": "السيرة الذاتية"
+  },
+  "hero": {
+    "greeting": "مرحباً، أنا",
+    "title": "مهندس برمجيات Full-Stack",
+    "description": "أبني تطبيقات ويب عالية الجودة باستخدام React و Next.js و Node.js و Python. شغوف بالهندسة المعمارية النظيفة والأنظمة القابلة للتوسع والتطوير المدعوم بالذكاء الاصطناعي.",
+    "downloadResume": "تحميل السيرة الذاتية",
+    "getInTouch": "تواصل معي",
+    "scheduleCall": "جدولة مكالمة",
+    "years": "سنوات",
+    "projects": "مشاريع",
+    "students": "طالب",
+    "githubStars": "نجوم GitHub"
+  },
+  "about": {
+    "title": "نبذة",
+    "me": "عني",
+    "summary": "مهندس برمجيات Full-Stack مع أكثر من سنتين من الخبرة في بناء وصيانة تطبيقات ويب عالية الجودة وقابلة للتوسع باستخدام React و Next.js و Angular و Node.js و REST APIs. متخصص في ملكية ميزات الواجهة الأمامية، وهندسة واجهة المستخدم النمطية النظيفة، وتكاملات API، ونشر السحابة (AWS/GCP)، والتطوير المدعوم بالذكاء الاصطناعي. لديه خبرة في دعم الأنظمة الحية في فرق Agile عن بُعد، وتقديم حلول شاملة للمؤسسات والأدوات الداخلية."
+  },
+  "experience": {
+    "title": "الخبرة",
+    "experience": "المهنية",
+    "description": "انقر على أي خبرة لعرض المعلومات التفصيلية والإنجازات والمقاييس",
+    "all": "الكل",
+    "keyAchievements": "الإنجازات الرئيسية",
+    "metrics": "المقاييس والتأثير",
+    "moreResponsibilities": "مسؤوليات إضافية"
+  },
+  "projects": {
+    "title": "المشاريع",
+    "projects": "المميزة",
+    "description": "بعض أعمالي الأخيرة والمشاريع الجانبية",
+    "all": "الكل",
+    "viewProject": "عرض المشروع",
+    "viewCode": "عرض الكود"
+  },
+  "skills": {
+    "title": "المهارات",
+    "skills": "التقنية",
+    "description": "التقنيات والأدوات التي أعمل بها",
+    "all": "الكل"
+  },
+  "contact": {
+    "title": "تواصل",
+    "touch": "معي",
+    "description": "أنا دائماً منفتح لمناقشة الفرص الجديدة أو المشاريع المثيرة للاهتمام أو مجرد التحدث عن التكنولوجيا. دعنا نتصل!",
+    "email": "البريد الإلكتروني",
+    "availability": "التوفر",
+    "responseTime": "وقت الاستجابة",
+    "sendMessage": "إرسال رسالة"
+  },
+  "footer": {
+    "tagline": "مطور Full Stack ومهندس ذكاء اصطناعي",
+    "available": "متاح للفرص عن بُعد",
+    "quickLinks": "روابط سريعة",
+    "connect": "تواصل",
+    "rights": "جميع الحقوق محفوظة"
+  },
+  "availability": {
+    "available": "متاح للعمل عن بُعد",
+    "openToOpportunities": "منفتح على الفرص الجديدة",
+    "locationTimezone": "الموقع والمنطقة الزمنية",
+    "responseTime": "وقت الاستجابة",
+    "preferredStack": "التقنيات المفضلة",
+    "scheduleCall": "جدولة مكالمة"
+  },
+  "cta": {
+    "workTogether": "دعنا نعمل معاً!",
+    "discussProject": "تريد مناقشة مشروع؟",
+    "letsConnect": "دعنا نتصل!",
+    "haveQuestion": "لديك سؤال؟",
+    "buildAmazing": "دعنا نبني شيئاً رائعاً!",
+    "contactWhatsApp": "تواصل عبر WhatsApp",
+    "emailNow": "أرسل بريداً الآن",
+    "chatNow": "دردش الآن"
+  },
+  "chatbot": {
+    "title": "المساعد الذكي",
+    "subtitle": "اسألني أي شيء!",
+    "initialMessage": "مرحباً! أنا المساعد الذكي لعمير. اسألني عن الخبرة أو المشاريع أو المهارات!",
+    "placeholder": "اسألني أي شيء...",
+    "suggestions": "جرب: \"الخبرة\" أو \"المشاريع\"",
+    "close": "إغلاق المساعد",
+    "open": "فتح المساعد"
+  },
+  "contactForm": {
+    "title": "تواصل معي",
+    "subtitle": "سأرد عليك خلال 24 ساعة",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "subject": "الموضوع",
+    "message": "الرسالة",
+    "send": "إرسال الرسالة",
+    "sending": "جاري الإرسال...",
+    "cancel": "إلغاء",
+    "namePlaceholder": "اسمك",
+    "emailPlaceholder": "بريدك.الإلكتروني@example.com",
+    "subjectPlaceholder": "عن ماذا يتعلق هذا؟",
+    "messagePlaceholder": "أخبرني عن مشروعك أو الفرصة...",
+    "success": "تم إرسال الرسالة بنجاح! سأرد عليك قريباً.",
+    "error": "فشل إرسال الرسالة. يرجى المحاولة مرة أخرى أو مراسلتي مباشرة."
+  },
+  "whatsapp": {
+    "tooltip": "دردش على WhatsApp",
+    "open": "جاري فتح WhatsApp..."
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجح",
+    "close": "إغلاق",
+    "open": "فتح",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "submit": "إرسال",
+    "download": "تحميل",
+    "view": "عرض",
+    "learnMore": "اعرف المزيد"
+  }
+}
+

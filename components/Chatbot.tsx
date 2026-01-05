@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MessageCircle, X, Send, Mic, MicOff, Loader2 } from 'lucide-react'
 import { personalInfo, experiences, projects, skills } from '@/constants'
+import { useTranslation } from 'react-i18next'
 
 interface Message {
   id: string
@@ -18,6 +19,7 @@ interface ChatbotProps {
 }
 
 export default function Chatbot({ isOpen: externalIsOpen, onClose }: ChatbotProps = {}) {
+  const { t } = useTranslation()
   const [internalIsOpen, setInternalIsOpen] = useState(false)
   const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen
   const setIsOpen = onClose || setInternalIsOpen
@@ -25,7 +27,7 @@ export default function Chatbot({ isOpen: externalIsOpen, onClose }: ChatbotProp
     {
       id: '1',
       role: 'assistant',
-      content: `Hi! I'm ${personalInfo.name.split(' ')[0]}'s AI assistant. Ask me about experience, projects, or skills!`,
+      content: t('chatbot.initialMessage'),
       timestamp: new Date(),
     },
   ])
@@ -240,14 +242,14 @@ export default function Chatbot({ isOpen: externalIsOpen, onClose }: ChatbotProp
                   <MessageCircle size={14} />
                 </div>
                 <div className="min-w-0">
-                  <h3 id="chatbot-title" className="font-bold text-sm leading-tight">AI Assistant</h3>
-                  <p id="chatbot-description" className="text-[10px] text-primary-100 leading-tight">Ask me anything!</p>
+                  <h3 id="chatbot-title" className="font-bold text-sm leading-tight">{t('chatbot.title')}</h3>
+                  <p id="chatbot-description" className="text-[10px] text-primary-100 leading-tight">{t('chatbot.subtitle')}</p>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
                 className="text-white hover:text-gray-200 hover:bg-white/10 rounded-lg p-1 transition-colors flex-shrink-0"
-                aria-label="Close chatbot"
+                aria-label={t('chatbot.close')}
               >
                 <X size={16} />
               </button>
@@ -303,7 +305,7 @@ export default function Chatbot({ isOpen: externalIsOpen, onClose }: ChatbotProp
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder="Ask me anything..."
+                  placeholder={t('chatbot.placeholder')}
                   className="flex-1 px-2.5 py-1.5 text-xs border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                 />
                 <button

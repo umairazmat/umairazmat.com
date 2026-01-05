@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "about": "About",
+    "experience": "Experience",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact",
+    "blog": "Blog",
+    "resume": "Resume"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "title": "Full-Stack Software Engineer",
+    "description": "Building production-grade web applications with React, Next.js, Node.js & Python. Passionate about clean architecture, scalable systems & AI-assisted development.",
+    "downloadResume": "Download Resume",
+    "getInTouch": "Get In Touch",
+    "scheduleCall": "Schedule Call",
+    "years": "Years",
+    "projects": "Projects",
+    "students": "Students",
+    "githubStars": "GitHub Stars"
+  },
+  "about": {
+    "title": "About",
+    "me": "Me",
+    "summary": "Full-Stack Software Engineer with 2+ years of experience building and maintaining production-grade, scalable web applications using React, Next.js, Angular, Node.js, and REST APIs. Skilled in frontend feature ownership, clean modular UI architecture, API integrations, cloud deployment (AWS/GCP), and AI-assisted development. Experienced in supporting live systems in remote, Agile teams, delivering end-to-end solutions for enterprise and internal tools."
+  },
+  "experience": {
+    "title": "Professional",
+    "experience": "Experience",
+    "description": "Click on any experience to view detailed information, achievements, and metrics",
+    "all": "All",
+    "keyAchievements": "Key Achievements",
+    "metrics": "Metrics & Impact",
+    "moreResponsibilities": "more responsibilities"
+  },
+  "projects": {
+    "title": "Featured",
+    "projects": "Projects",
+    "description": "Some of my recent work and side projects",
+    "all": "All",
+    "viewProject": "View Project",
+    "viewCode": "View Code"
+  },
+  "skills": {
+    "title": "Technical",
+    "skills": "Skills",
+    "description": "Technologies and tools I work with",
+    "all": "All"
+  },
+  "contact": {
+    "title": "Get In",
+    "touch": "Touch",
+    "description": "I'm always open to discussing new opportunities, interesting projects, or just having a chat about technology. Let's connect!",
+    "email": "Email",
+    "availability": "Availability",
+    "responseTime": "Response Time",
+    "sendMessage": "Send Message"
+  },
+  "footer": {
+    "tagline": "Full Stack Developer & AI Engineer",
+    "available": "Available for remote opportunities",
+    "quickLinks": "Quick Links",
+    "connect": "Connect",
+    "rights": "All rights reserved"
+  },
+  "availability": {
+    "available": "Available for Remote",
+    "openToOpportunities": "Open to new opportunities",
+    "locationTimezone": "Location & Timezone",
+    "responseTime": "Response Time",
+    "preferredStack": "Preferred Stack",
+    "scheduleCall": "Schedule a Call"
+  },
+  "cta": {
+    "workTogether": "Let's work together!",
+    "discussProject": "Want to discuss a project?",
+    "letsConnect": "Let's connect!",
+    "haveQuestion": "Have a question?",
+    "buildAmazing": "Let's build something amazing!",
+    "contactWhatsApp": "Contact on WhatsApp",
+    "emailNow": "Email Now",
+    "chatNow": "Chat Now"
+  },
+  "chatbot": {
+    "title": "AI Assistant",
+    "subtitle": "Ask me anything!",
+    "initialMessage": "Hi! I'm Umair's AI assistant. Ask me about experience, projects, or skills!",
+    "placeholder": "Ask me anything...",
+    "suggestions": "Try: \"Experience\" or \"Projects\"",
+    "close": "Close chatbot",
+    "open": "Open chatbot"
+  },
+  "contactForm": {
+    "title": "Get In Touch",
+    "subtitle": "I'll get back to you within 24 hours",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "cancel": "Cancel",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "your.email@example.com",
+    "subjectPlaceholder": "What's this about?",
+    "messagePlaceholder": "Tell me about your project or opportunity...",
+    "success": "Message sent successfully! I'll get back to you soon.",
+    "error": "Failed to send message. Please try again or email me directly."
+  },
+  "whatsapp": {
+    "tooltip": "Chat on WhatsApp",
+    "open": "Opening WhatsApp..."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "close": "Close",
+    "open": "Open",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "download": "Download",
+    "view": "View",
+    "learnMore": "Learn More"
+  }
+}
+

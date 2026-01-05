@@ -6,8 +6,10 @@ import { Download, Mail, Calendar } from 'lucide-react'
 import { personalInfo } from '@/constants'
 import AvailabilityWidget from '@/components/AvailabilityWidget'
 import Image from 'next/image'
+import { useTranslation } from 'react-i18next'
 
 export default function Hero() {
+  const { t } = useTranslation()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -33,7 +35,7 @@ export default function Hero() {
                   transition={{ delay: 0.2, duration: 0.6 }}
                   className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
                 >
-                  Hi, I&apos;m{' '}
+                  {t('hero.greeting')}{' '}
                   <span className="gradient-text">{personalInfo.name}</span>
                 </motion.h1>
                 <motion.p
@@ -42,7 +44,7 @@ export default function Hero() {
                   transition={{ delay: 0.3, duration: 0.6 }}
                   className="text-xl md:text-2xl text-gray-700 dark:text-gray-200 font-medium"
                 >
-                  {personalInfo.title.split('|')[0].trim()}
+                  {t('hero.title')}
                 </motion.p>
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
@@ -50,8 +52,7 @@ export default function Hero() {
                   transition={{ delay: 0.4, duration: 0.6 }}
                   className="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
                 >
-                  Building production-grade web applications with React, Next.js, Node.js & Python. 
-                  Passionate about clean architecture, scalable systems & AI-assisted development.
+                  {t('hero.description')}
                 </motion.p>
               </div>
 
@@ -69,25 +70,25 @@ export default function Hero() {
                   aria-label="Download Resume"
                 >
                   <Download size={20} />
-                  Download Resume
+                  {t('hero.downloadResume')}
                 </a>
                 <a
                   href="#contact"
                   className="btn-secondary flex items-center gap-2"
-                  aria-label="Get In Touch"
+                  aria-label={t('hero.getInTouch')}
                 >
                   <Mail size={20} />
-                  Get In Touch
+                  {t('hero.getInTouch')}
                 </a>
                 <a
                   href={personalInfo.calendlyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-secondary flex items-center gap-2"
-                  aria-label="Schedule Call"
+                  aria-label={t('hero.scheduleCall')}
                 >
                   <Calendar size={20} />
-                  Schedule Call
+                  {t('hero.scheduleCall')}
                 </a>
               </motion.div>
 
@@ -102,25 +103,25 @@ export default function Hero() {
                   <div className="text-2xl md:text-3xl font-bold gradient-text">
                     {personalInfo.metrics.yearsExperience}+
                   </div>
-                    <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400">Years</div>
+                    <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400">{t('hero.years')}</div>
                 </div>
                 <div className="text-center lg:text-left">
                   <div className="text-2xl md:text-3xl font-bold gradient-text">
                     {personalInfo.metrics.projectsDelivered}+
                   </div>
-                  <div className="text-xs md:text-sm text-gray-600">Projects</div>
+                  <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400">{t('hero.projects')}</div>
                 </div>
                 <div className="text-center lg:text-left">
                   <div className="text-2xl md:text-3xl font-bold gradient-text">
                     {personalInfo.metrics.studentsTrained}+
                   </div>
-                  <div className="text-xs md:text-sm text-gray-600">Students</div>
+                  <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400">{t('hero.students')}</div>
                 </div>
                 <div className="text-center lg:text-left">
                   <div className="text-2xl md:text-3xl font-bold gradient-text">
                     {personalInfo.metrics.githubStars}+
                   </div>
-                  <div className="text-xs md:text-sm text-gray-600">GitHub Stars</div>
+                  <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400">{t('hero.githubStars')}</div>
                 </div>
               </motion.div>
             </motion.div>
