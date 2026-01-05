@@ -15,7 +15,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-primary-50 via-white to-primary-50 pt-20 pb-12">
+    <section className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-primary-50 dark:from-gray-900 via-white dark:via-gray-900 to-primary-50 dark:to-gray-800 pt-20 pb-12">
       <div className="section-container">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center lg:items-start">
@@ -40,7 +40,7 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={mounted ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.3, duration: 0.6 }}
-                  className="text-xl md:text-2xl text-gray-700 font-medium"
+                  className="text-xl md:text-2xl text-gray-700 dark:text-gray-200 font-medium"
                 >
                   {personalInfo.title.split('|')[0].trim()}
                 </motion.p>
@@ -48,7 +48,7 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={mounted ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.4, duration: 0.6 }}
-                  className="text-base md:text-lg text-gray-600 leading-relaxed"
+                  className="text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
                 >
                   Building production-grade web applications with React, Next.js, Node.js & Python. 
                   Passionate about clean architecture, scalable systems & AI-assisted development.
@@ -102,7 +102,7 @@ export default function Hero() {
                   <div className="text-2xl md:text-3xl font-bold gradient-text">
                     {personalInfo.metrics.yearsExperience}+
                   </div>
-                  <div className="text-xs md:text-sm text-gray-600">Years</div>
+                    <div className="text-xs md:text-sm text-gray-600 dark:text-gray-400">Years</div>
                 </div>
                 <div className="text-center lg:text-left">
                   <div className="text-2xl md:text-3xl font-bold gradient-text">

@@ -7,8 +7,16 @@
     scroll-behavior: smooth;
   }
 
+  html.light {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
+    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 antialiased transition-colors duration-300;
   }
 
   /* Screen reader only class */
@@ -52,7 +60,7 @@
   }
 
   .card {
-    @apply bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow duration-300;
+    @apply bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50 p-6 hover:shadow-xl transition-shadow duration-300 text-gray-900 dark:text-gray-100;
   }
 
   .btn-primary {

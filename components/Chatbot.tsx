@@ -12,13 +12,20 @@ interface Message {
   timestamp: Date
 }
 
-export default function Chatbot() {
-  const [isOpen, setIsOpen] = useState(false)
+interface ChatbotProps {
+  isOpen?: boolean
+  onClose?: () => void
+}
+
+export default function Chatbot({ isOpen: externalIsOpen, onClose }: ChatbotProps = {}) {
+  const [internalIsOpen, setInternalIsOpen] = useState(false)
+  const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen
+  const setIsOpen = onClose || setInternalIsOpen
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
       role: 'assistant',
-      content: `Hi! I'm ${personalInfo.name}'s AI assistant. I can help you learn about his experience, projects, skills, and more. What would you like to know?`,
+      content: `Hi! I'm ${personalInfo.name.split(' ')[0]}'s AI assistant. Ask me about experience, projects, or skills!`,
       timestamp: new Date(),
     },
   ])
@@ -157,55 +164,60 @@ export default function Chatbot() {
     }
   }
 
+  // Only show toggle button if not externally controlled
+  const showToggleButton = externalIsOpen === undefined
+
   return (
     <>
-      {/* Chatbot Toggle Button - Enhanced with animations */}
-      <motion.div
-        className="fixed bottom-6 right-6 z-40"
-        initial={{ scale: 0, rotate: -180 }}
-        animate={{ scale: 1, rotate: 0 }}
-        transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-      >
-        <motion.button
-          whileHover={{ scale: 1.1, rotate: 5 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setIsOpen(!isOpen)}
-          className="bg-primary-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative group hover:bg-primary-700"
-          aria-label="Open chatbot"
+      {/* Chatbot Toggle Button - Only show if not externally controlled */}
+      {showToggleButton && (
+        <motion.div
+          className="fixed bottom-6 right-6 z-40"
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ type: 'spring', stiffness: 200, damping: 15 }}
         >
-          {isOpen ? (
-            <X size={24} className="transition-transform duration-200" />
-          ) : (
-            <motion.div
-              animate={{
-                rotate: [0, -10, 10, -10, 0],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                repeatDelay: 3,
-                ease: 'easeInOut',
-              }}
-            >
-              <MessageCircle size={24} />
-            </motion.div>
-          )}
-          {!isOpen && (
-            <motion.span
-              className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [1, 0.7, 1],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            />
-          )}
-        </motion.button>
-      </motion.div>
+          <motion.button
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={() => setIsOpen(!isOpen)}
+            className="bg-primary-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative group hover:bg-primary-700"
+            aria-label="Open chatbot"
+          >
+            {isOpen ? (
+              <X size={24} className="transition-transform duration-200" />
+            ) : (
+              <motion.div
+                animate={{
+                  rotate: [0, -10, 10, -10, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatDelay: 3,
+                  ease: 'easeInOut',
+                }}
+              >
+                <MessageCircle size={24} />
+              </motion.div>
+            )}
+            {!isOpen && (
+              <motion.span
+                className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full"
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [1, 0.7, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              />
+            )}
+          </motion.button>
+        </motion.div>
+      )}
 
       {/* Chatbot Window */}
       <AnimatePresence>
@@ -215,94 +227,107 @@ export default function Chatbot() {
                 initial={{ opacity: 0, y: 20, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 20, scale: 0.9 }}
-                className="fixed bottom-24 right-6 z-40 w-96 h-[600px] bg-white rounded-lg shadow-2xl flex flex-col"
+                className="w-[300px] sm:w-[340px] max-w-[calc(100vw-2rem)] h-[420px] max-h-[calc(100vh-8rem)] bg-white dark:bg-gray-800 rounded-lg shadow-2xl flex flex-col border border-gray-200 dark:border-gray-700"
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="chatbot-title"
                 aria-describedby="chatbot-description"
               >
             {/* Header */}
-            <div className="bg-primary-600 text-white p-4 rounded-t-lg flex items-center justify-between">
-              <div>
-                <h3 id="chatbot-title" className="font-bold text-lg">AI Assistant</h3>
-                <p id="chatbot-description" className="text-sm text-primary-100">Ask me anything!</p>
+            <div className="bg-primary-600 dark:bg-primary-700 text-white px-3 py-2 rounded-t-lg flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <MessageCircle size={14} />
+                </div>
+                <div className="min-w-0">
+                  <h3 id="chatbot-title" className="font-bold text-sm leading-tight">AI Assistant</h3>
+                  <p id="chatbot-description" className="text-[10px] text-primary-100 leading-tight">Ask me anything!</p>
+                </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-white hover:text-gray-200"
+                className="text-white hover:text-gray-200 hover:bg-white/10 rounded-lg p-1 transition-colors flex-shrink-0"
                 aria-label="Close chatbot"
               >
-                <X size={20} />
+                <X size={16} />
               </button>
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 overflow-y-auto p-2.5 space-y-2 bg-gray-50 dark:bg-gray-900">
               {messages.map((message) => (
-                <div
+                <motion.div
                   key={message.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
                   className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[80%] rounded-lg p-3 ${
+                    className={`max-w-[85%] rounded-lg p-2 shadow-sm ${
                       message.role === 'user'
-                        ? 'bg-primary-600 text-white'
-                        : 'bg-gray-100 text-gray-900'
+                        ? 'bg-primary-600 dark:bg-primary-700 text-white'
+                        : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700'
                     }`}
                   >
-                    <p className="text-sm whitespace-pre-wrap">{message.content}</p>
-                    <p className="text-xs mt-1 opacity-70">
+                    <p className="text-xs whitespace-pre-wrap leading-relaxed">{message.content}</p>
+                    <p className={`text-[10px] mt-0.5 ${
+                      message.role === 'user' ? 'text-primary-100' : 'text-gray-500 dark:text-gray-400'
+                    }`}>
                       {message.timestamp.toLocaleTimeString([], {
                         hour: '2-digit',
                         minute: '2-digit',
                       })}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               ))}
               {isProcessing && (
-                <div className="flex justify-start">
-                  <div className="bg-gray-100 rounded-lg p-3">
-                    <Loader2 className="animate-spin" size={20} />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="flex justify-start"
+                >
+                  <div className="bg-white dark:bg-gray-800 rounded-lg p-3 shadow-sm border border-gray-200 dark:border-gray-700">
+                    <Loader2 className="animate-spin text-primary-600 dark:text-primary-400" size={20} />
                   </div>
-                </div>
+                </motion.div>
               )}
               <div ref={messagesEndRef} />
             </div>
 
             {/* Input */}
-            <div className="border-t border-gray-200 p-4">
-              <div className="flex gap-2">
+            <div className="border-t border-gray-200 dark:border-gray-700 p-2.5">
+              <div className="flex gap-1.5">
                 <input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Ask me anything..."
-                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  className="flex-1 px-2.5 py-1.5 text-xs border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                 />
                 <button
                   onClick={toggleListening}
-                  className={`p-2 rounded-lg transition-colors ${
+                  className={`p-1.5 rounded-lg transition-colors flex-shrink-0 ${
                     isListening
                       ? 'bg-red-500 text-white'
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      : 'bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500'
                   }`}
                   aria-label="Voice input"
                 >
-                  {isListening ? <MicOff size={20} /> : <Mic size={20} />}
+                  {isListening ? <MicOff size={16} /> : <Mic size={16} />}
                 </button>
                 <button
                   onClick={() => handleSend()}
                   disabled={!input.trim() || isProcessing}
-                  className="btn-primary p-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="btn-primary p-1.5 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
                   aria-label="Send message"
                 >
-                  <Send size={20} />
+                  <Send size={16} />
                 </button>
               </div>
-              <p className="text-xs text-gray-500 mt-2">
-                Try: &quot;Tell me about your experience&quot; or &quot;What projects have you built?&quot;
+              <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-1 text-center">
+                Try: &quot;Experience&quot; or &quot;Projects&quot;
               </p>
             </div>
           </motion.div>

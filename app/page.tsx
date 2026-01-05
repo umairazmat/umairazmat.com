@@ -5,6 +5,7 @@ import Projects from '@/components/sections/Projects'
 import Skills from '@/components/sections/Skills'
 import Contact from '@/components/sections/Contact'
 import Chatbot from '@/components/Chatbot'
+import ChatbotFloatingButton from '@/components/ChatbotFloatingButton'
 import CTASection from '@/components/CTASection'
 import WhatsAppButton from '@/components/WhatsAppButton'
 
@@ -23,7 +24,7 @@ export default function Home() {
       <Contact />
       <div id="chatbot-trigger" />
       <WhatsAppButton />
-      <Chatbot />
+      <ChatbotFloatingButton />
     </>
   )
 }

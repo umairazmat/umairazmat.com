@@ -1,11 +1,16 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Loader from '@/components/Loader'
 import SkipToContent from '@/components/SkipToContent'
 import Toaster from '@/components/Toaster'
+import { ThemeProvider } from '@/contexts/ThemeContext'
+import ContactAutoPopup from '@/components/ContactAutoPopup'
+import StructuredData from '@/components/StructuredData'
+import AnalyticsProvider from '@/components/AnalyticsProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -53,14 +58,45 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <StructuredData />
+      </head>
       <body className={inter.className}>
-        <SkipToContent />
-        <Loader />
-        <Navbar />
-        <main id="main-content">{children}</main>
-        <Footer />
-        <Toaster />
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const theme = localStorage.getItem('theme') || 'system';
+                  const root = document.documentElement;
+                  root.classList.remove('light', 'dark');
+                  let resolvedTheme;
+                  if (theme === 'system') {
+                    resolvedTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                  } else {
+                    resolvedTheme = theme;
+                  }
+                  root.classList.add(resolvedTheme);
+                } catch (e) {
+                  console.error('Theme initialization error:', e);
+                }
+              })();
+            `,
+          }}
+        />
+        <ThemeProvider>
+          <AnalyticsProvider />
+          <SkipToContent />
+          <Loader />
+          <Navbar />
+          <main id="main-content">{children}</main>
+          <Footer />
+          <Toaster />
+          <ContactAutoPopup />
+        </ThemeProvider>
       </body>
     </html>
   )

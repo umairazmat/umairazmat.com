@@ -5,7 +5,7 @@ import { personalInfo } from '@/constants'
 
 export default function About() {
   return (
-    <section id="about" className="section-container bg-white transition-colors duration-300">
+    <section id="about" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -16,7 +16,7 @@ export default function About() {
         <h2 className="text-4xl font-bold mb-8 text-center">
           About <span className="gradient-text">Me</span>
         </h2>
-        <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
+        <div className="space-y-6 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
           <p>{personalInfo.about.summary}</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
             {personalInfo.about.highlights.map((highlight, index) => (
