@@ -1,12 +1,23 @@
 {
-  "nav": {
+  "navbar": {
     "about": "About",
+    "education": "Education",
     "experience": "Experience",
+    "volunteer": "Volunteer",
     "projects": "Projects",
     "skills": "Skills",
+    "certificates": "Certificates",
+    "learning": "Learning",
+    "references": "References",
+    "faq": "FAQ",
+    "appointment": "Schedule",
     "contact": "Contact",
     "blog": "Blog",
-    "resume": "Resume"
+    "resume": "Resume",
+    "theme": "Theme",
+    "language": "Language",
+    "more": "More",
+    "downloadResumePdf": "Download Resume PDF"
   },
   "hero": {
     "greeting": "Hi, I'm",
@@ -61,6 +72,7 @@
     "tagline": "Full Stack Developer & AI Engineer",
     "available": "Available for remote opportunities",
     "quickLinks": "Quick Links",
+    "moreLinks": "More",
     "connect": "Connect",
     "rights": "All rights reserved"
   },
@@ -110,7 +122,92 @@
   },
   "whatsapp": {
     "tooltip": "Chat on WhatsApp",
-    "open": "Opening WhatsApp..."
+    "open": "Opening WhatsApp...",
+    "chatOnWhatsApp": "Chat on WhatsApp",
+    "contactOnWhatsApp": "Contact on WhatsApp"
+  },
+  "certificates": {
+    "title": "Certificates",
+    "licenses": "& Licenses",
+    "description": "Professional certifications and achievements that demonstrate my expertise and commitment to continuous learning.",
+    "all": "All",
+    "expires": "Expires",
+    "credentialId": "ID",
+    "more": "more",
+    "noCertificates": "No certificates found in this category."
+  },
+  "volunteer": {
+    "title": "Volunteer",
+    "experience": "Experience",
+    "description": "Contributing to communities and organizations through volunteer work and professional development programs.",
+    "all": "All",
+    "present": "Present",
+    "more": "more",
+    "noExperiences": "No volunteer experiences found in this category."
+  },
+  "learning": {
+    "title": "Learning",
+    "progress": "& Progress",
+    "description": "Continuous learning and professional development to stay at the forefront of technology.",
+    "currentFocus": "Currently focusing on cloud infrastructure and AWS services.",
+    "milestones": "Learning Milestones"
+  },
+  "references": {
+    "title": "References",
+    "recommendations": "& Recommendations",
+    "description": "What industry professionals and colleagues say about working with me."
+  },
+  "appointment": {
+    "title": "Schedule",
+    "meeting": "a Meeting",
+    "description": "Book a time to discuss your project, collaboration opportunities, or just have a chat.",
+    "videoCall": "Video Call",
+    "videoCallDesc": "Connect via Zoom, Google Meet, or Microsoft Teams.",
+    "phoneCall": "Phone Call",
+    "phoneCallDesc": "Traditional phone call for quick discussions.",
+    "availableSlots": "Available Time Slots",
+    "selectTime": "Select a time that works best for you.",
+    "bookNow": "Book Appointment Now",
+    "poweredBy": "Powered by Calendly"
+  },
+  "faq": {
+    "title": "Frequently Asked",
+    "questions": "Questions",
+    "description": "Find answers to common questions about my experience, availability, and services.",
+    "noFAQs": "No FAQs found in this category."
+  },
+  "education": {
+    "title": "Education",
+    "background": "Background",
+    "description": "Academic achievements and educational foundation that shaped my software engineering career.",
+    "highlights": "Key Highlights",
+    "achievements": "Achievements",
+    "scholarship": "Scholarship",
+    "fullScholarship": "Full scholarship from the Government of Punjab",
+    "leadership": "Leadership",
+    "classRep": "Class Representative; Founded a student tech society",
+    "excellence": "Academic Excellence",
+    "perfectGPA": "Achieved 4.00 CGPA in two semesters",
+    "keyCoursework": "Key Coursework",
+    "coursework": "Coursework",
+    "skills": "Skills",
+    "training": "Training Programs",
+    "school": "School Education"
+  },
+  "chatbot": {
+    "title": "AI Assistant",
+    "subtitle": "Ask me anything!",
+    "initialMessage": "Hi! I'm Umair's AI assistant. Ask me about experience, projects, or skills!",
+    "placeholder": "Ask me anything...",
+    "suggestions": "Try: \"Experience\" or \"Projects\"",
+    "close": "Close chatbot",
+    "open": "Open chatbot",
+    "closeChatbot": "Close chatbot",
+    "openChatbot": "Open chatbot",
+    "prompt1": "Ask me about my experience!",
+    "prompt2": "Want to know about my projects?",
+    "prompt3": "Curious about my skills?",
+    "prompt4": "How can I help you?"
   },
   "common": {
     "loading": "Loading...",

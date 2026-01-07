@@ -67,6 +67,90 @@ export default function StructuredData() {
     ],
   }
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'How many years of experience do you have?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'I have 4+ years of professional experience in full-stack software development, working with technologies like React, Next.js, Node.js, Python, and cloud platforms like AWS.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Are you available for remote work?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes, I am available for remote work opportunities. I have extensive experience working in remote, Agile teams and am comfortable with async communication and full feature ownership.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What is your preferred tech stack?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'My preferred tech stack includes MERN (MongoDB, Express, React, Node.js), Next.js, TypeScript, Python, FastAPI, and AWS Cloud services. I also work with Angular, Tailwind CSS, and various databases.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What types of projects have you worked on?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'I have worked on diverse projects including e-commerce platforms, 3D e-commerce websites, EV charging station management systems, AI-powered applications, internal enterprise tools, and educational platforms.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What is your typical response time?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'I typically respond within 24 hours. For urgent matters, I can respond faster. Feel free to reach out via email, WhatsApp, or schedule a call through the appointment system.',
+        },
+      },
+    ],
+  }
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: websiteUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'About',
+        item: `${websiteUrl}/#about`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'Experience',
+        item: `${websiteUrl}/#experience`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
+        name: 'Projects',
+        item: `${websiteUrl}/#projects`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 5,
+        name: 'Contact',
+        item: `${websiteUrl}/#contact`,
+      },
+    ],
+  }
+
   return (
     <>
       <script
@@ -80,6 +164,14 @@ export default function StructuredData() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
     </>
   )
