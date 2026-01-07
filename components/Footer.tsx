@@ -34,22 +34,52 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link href="#about" className="hover:text-white transition-colors">
-                  {t('nav.about')}
+                  {t('navbar.about')}
                 </Link>
               </li>
               <li>
                 <Link href="#experience" className="hover:text-white transition-colors">
-                  {t('nav.experience')}
+                  {t('navbar.experience')}
+                </Link>
+              </li>
+              <li>
+                <Link href="#volunteer" className="hover:text-white transition-colors">
+                  {t('navbar.volunteer')}
                 </Link>
               </li>
               <li>
                 <Link href="#projects" className="hover:text-white transition-colors">
-                  {t('nav.projects')}
+                  {t('navbar.projects')}
+                </Link>
+              </li>
+              <li>
+                <Link href="#skills" className="hover:text-white transition-colors">
+                  {t('navbar.skills')}
+                </Link>
+              </li>
+              <li>
+                <Link href="#certificates" className="hover:text-white transition-colors">
+                  {t('navbar.certificates')}
+                </Link>
+              </li>
+              <li>
+                <Link href="#references" className="hover:text-white transition-colors">
+                  {t('navbar.references')}
+                </Link>
+              </li>
+              <li>
+                <Link href="#appointment" className="hover:text-white transition-colors">
+                  {t('navbar.appointment')}
+                </Link>
+              </li>
+              <li>
+                <Link href="#contact" className="hover:text-white transition-colors">
+                  {t('navbar.contact')}
                 </Link>
               </li>
               <li>
                 <Link href="/blog" className="hover:text-white transition-colors">
-                  {t('nav.blog')}
+                  {t('navbar.blog')}
                 </Link>
               </li>
             </ul>

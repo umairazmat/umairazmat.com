@@ -44,7 +44,7 @@ export default function Skills() {
         <h2 className="text-4xl font-bold mb-4 text-center">
           {t('skills.title')} <span className="gradient-text">{t('skills.skills')}</span>
         </h2>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+        <p className="text-center text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
           {t('skills.description')}
         </p>
 
@@ -52,7 +52,7 @@ export default function Skills() {
         <div
           role="tablist"
           aria-label="Filter skills by category"
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-2 mb-6"
         >
           {categories.map((category) => (
             <button
@@ -61,7 +61,7 @@ export default function Skills() {
               role="tab"
               aria-selected={selectedCategory === category}
               aria-controls="skills-grid"
-              className={`px-4 py-2 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
                 selectedCategory === category
                   ? 'bg-primary-600 text-white'
                   : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
@@ -72,45 +72,33 @@ export default function Skills() {
           ))}
         </div>
 
-        {/* Skills Grid */}
-        <div id="skills-grid" role="tabpanel" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {/* Skills Grid - Compact Tag Layout */}
+        <div id="skills-grid" role="tabpanel" className="max-w-6xl mx-auto">
           {Object.entries(groupedSkills).map(([category, categorySkills], categoryIndex) => (
             <motion.div
               key={category}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: categoryIndex * 0.1, duration: 0.5 }}
-              className="card"
+              transition={{ delay: categoryIndex * 0.05, duration: 0.3 }}
+              className="mb-6 last:mb-0"
             >
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">{category}</h3>
-              <div className="space-y-4">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">{category}</h3>
+              <div className="flex flex-wrap gap-2">
                 {categorySkills.map((skill, index) => (
-                  <div key={skill.name}>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-medium text-gray-900 dark:text-white">{skill.name}</span>
-                      <span className="text-sm text-gray-600 dark:text-gray-400">{skill.level}</span>
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.02, duration: 0.2 }}
+                    className="group relative"
+                  >
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-gray-700 rounded-full border border-gray-200 dark:border-gray-600 hover:border-primary-500 dark:hover:border-primary-400 transition-all">
+                      <span className="text-sm font-medium text-gray-900 dark:text-white">{skill.name}</span>
+                      <span className={`w-2 h-2 rounded-full ${levelColors[skill.level]}`} title={skill.level} />
                     </div>
-                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: '100%' }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.05, duration: 0.8 }}
-                        className={`h-2 rounded-full ${levelColors[skill.level]}`}
-                        style={{
-                          width:
-                            skill.level === 'Expert'
-                              ? '100%'
-                              : skill.level === 'Advanced'
-                              ? '80%'
-                              : skill.level === 'Intermediate'
-                              ? '60%'
-                              : '40%',
-                        }}
-                      />
-                    </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </motion.div>

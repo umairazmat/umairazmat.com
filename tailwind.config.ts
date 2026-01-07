@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)', 'var(--font-roboto)', 'system-ui', 'sans-serif'],
+        roboto: ['var(--font-roboto)', 'sans-serif'],
+      },
       colors: {
         primary: {
           50: '#f0f9ff',
