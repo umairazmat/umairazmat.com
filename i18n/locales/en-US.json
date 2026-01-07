@@ -1,6 +1,7 @@
 {
   "navbar": {
     "about": "About",
+    "education": "Education",
     "experience": "Experience",
     "volunteer": "Volunteer",
     "projects": "Projects",
@@ -8,6 +9,7 @@
     "certificates": "Certificates",
     "learning": "Learning",
     "references": "References",
+    "faq": "FAQ",
     "appointment": "Schedule",
     "contact": "Contact",
     "blog": "Blog",
@@ -70,6 +72,7 @@
     "tagline": "Full Stack Developer & AI Engineer",
     "available": "Available for remote opportunities",
     "quickLinks": "Quick Links",
+    "moreLinks": "More",
     "connect": "Connect",
     "rights": "All rights reserved"
   },
@@ -166,6 +169,30 @@
     "selectTime": "Select a time that works best for you.",
     "bookNow": "Book Appointment Now",
     "poweredBy": "Powered by Calendly"
+  },
+  "faq": {
+    "title": "Frequently Asked",
+    "questions": "Questions",
+    "description": "Find answers to common questions about my experience, availability, and services.",
+    "noFAQs": "No FAQs found in this category."
+  },
+  "education": {
+    "title": "Education",
+    "background": "Background",
+    "description": "Academic achievements and educational foundation that shaped my software engineering career.",
+    "highlights": "Key Highlights",
+    "achievements": "Achievements",
+    "scholarship": "Scholarship",
+    "fullScholarship": "Full scholarship from the Government of Punjab",
+    "leadership": "Leadership",
+    "classRep": "Class Representative; Founded a student tech society",
+    "excellence": "Academic Excellence",
+    "perfectGPA": "Achieved 4.00 CGPA in two semesters",
+    "keyCoursework": "Key Coursework",
+    "coursework": "Coursework",
+    "skills": "Skills",
+    "training": "Training Programs",
+    "school": "School Education"
   },
   "chatbot": {
     "title": "AI Assistant",
