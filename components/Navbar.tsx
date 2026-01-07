@@ -24,12 +24,14 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '#about', label: t('navbar.about') },
+    { href: '#education', label: t('navbar.education') },
     { href: '#experience', label: t('navbar.experience') },
     { href: '#volunteer', label: t('navbar.volunteer') },
     { href: '#projects', label: t('navbar.projects') },
     { href: '#skills', label: t('navbar.skills') },
     { href: '#certificates', label: t('navbar.certificates') },
     { href: '#references', label: t('navbar.references') },
+    { href: '#faq', label: t('navbar.faq') },
     { href: '#appointment', label: t('navbar.appointment') },
     { href: '#contact', label: t('navbar.contact') },
   ]

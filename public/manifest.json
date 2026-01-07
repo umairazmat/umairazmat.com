@@ -1,0 +1,28 @@
+{
+  "name": "Umair Azmat - Full-Stack Software Engineer Portfolio",
+  "short_name": "Umair Azmat",
+  "description": "Full-Stack Software Engineer with 4+ years of experience building production-grade, scalable web applications",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0284c7",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["portfolio", "developer", "software engineer"],
+  "lang": "en-US",
+  "dir": "ltr"
+}
+

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     default: 'Umair Azmat - Full-Stack Software Engineer | React, Next.js, Node.js, Python | AWS Cloud',
     template: '%s | Umair Azmat',
   },
-  description: 'Full-Stack Software Engineer with 2+ years of experience building production-grade, scalable web applications using React, Next.js, Angular, Node.js, and REST APIs. Skilled in frontend feature ownership, clean modular UI architecture, API integrations, cloud deployment (AWS/GCP), and AI-assisted development. Available for remote work opportunities in Lahore, Pakistan.',
+  description: 'Full-Stack Software Engineer with 4+ years of experience building production-grade, scalable web applications using React, Next.js, Angular, Node.js, and REST APIs. Skilled in frontend feature ownership, clean modular UI architecture, API integrations, cloud deployment (AWS/GCP), and AI-assisted development. Available for remote work opportunities in Lahore, Pakistan.',
   keywords: [
     'Umair Azmat',
     'Full-Stack Software Engineer',
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     url: 'https://umairazmat.com',
     siteName: 'Umair Azmat Portfolio',
     title: 'Umair Azmat - Full-Stack Software Engineer | React, Next.js, Node.js, Python',
-    description: 'Full-Stack Software Engineer with 2+ years of experience building production-grade, scalable web applications using React, Next.js, Angular, Node.js, and REST APIs. Available for remote work.',
+    description: 'Full-Stack Software Engineer with 4+ years of experience building production-grade, scalable web applications using React, Next.js, Angular, Node.js, and REST APIs. Available for remote work.',
     images: [
       {
         url: '/og-image.jpg',
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     site: '@umairazmatt',
     creator: '@umairazmatt',
     title: 'Umair Azmat - Full-Stack Software Engineer',
-    description: 'Full-Stack Software Engineer with 2+ years of experience building production-grade, scalable web applications.',
+    description: 'Full-Stack Software Engineer with 4+ years of experience building production-grade, scalable web applications.',
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -108,6 +108,20 @@ export const metadata: Metadata = {
       'de': 'https://umairazmat.com',
     },
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/icon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+  },
+  manifest: '/manifest.json',
   verification: {
     google: process.env.GOOGLE_VERIFICATION_CODE || 'your-google-verification-code',
   },

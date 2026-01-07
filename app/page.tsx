@@ -1,5 +1,6 @@
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
+import Education from '@/components/sections/Education'
 import Experience from '@/components/sections/Experience'
 import Volunteer from '@/components/sections/Volunteer'
 import Projects from '@/components/sections/Projects'
@@ -8,6 +9,7 @@ import Certificates from '@/components/sections/Certificates'
 import Learning from '@/components/sections/Learning'
 import References from '@/components/sections/References'
 import AppointmentSystem from '@/components/AppointmentSystem'
+import FAQ from '@/components/sections/FAQ'
 import Contact from '@/components/sections/Contact'
 import Chatbot from '@/components/Chatbot'
 import ChatbotFloatingButton from '@/components/ChatbotFloatingButton'
@@ -20,6 +22,8 @@ export default function Home() {
       <Hero />
       <About />
       <CTASection variant="chat" message="Let's work together!" />
+      <Education />
+      <CTASection variant="email" message="Want to know more?" />
       <Experience />
       <CTASection variant="whatsapp" message="Want to discuss a project?" />
       <Volunteer />
@@ -34,6 +38,8 @@ export default function Home() {
       <References />
       <AppointmentSystem />
       <CTASection variant="chat" message="Ready to schedule a meeting?" />
+      <FAQ />
+      <CTASection variant="email" message="Still have questions?" />
       <Contact />
       <div id="chatbot-trigger" />
       <WhatsAppButton />
