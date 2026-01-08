@@ -6,6 +6,7 @@ import { volunteerExperiences } from '@/constants'
 import { Heart, Calendar, MapPin, Users } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import Pagination from '@/components/Pagination'
+import TextToSpeech from '@/components/TextToSpeech'
 
 const ITEMS_PER_PAGE = 4 // 2 rows x 2 columns
 
@@ -39,18 +40,23 @@ export default function Volunteer() {
     return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })
   }
 
+  const volunteerText = `${t('volunteer.description', 'Contributing to communities and organizations through volunteer work and professional development programs.')}. ${filteredExperiences.length} ${t('volunteer.experience', 'experiences')} available.`
+
   return (
-    <section id="volunteer" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300">
+    <section id="volunteer" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300 px-4 sm:px-6">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl font-bold mb-4 text-center">
-          {t('volunteer.title', 'Volunteer')} <span className="gradient-text">{t('volunteer.experience', 'Experience')}</span>
-        </h2>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
+            {t('volunteer.title', 'Volunteer')} <span className="gradient-text">{t('volunteer.experience', 'Experience')}</span>
+          </h2>
+          <TextToSpeech text={volunteerText} sectionId="volunteer" />
+        </div>
+        <p className="text-center text-gray-600 dark:text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base px-4">
           {t('volunteer.description', 'Contributing to communities and organizations through volunteer work and professional development programs.')}
         </p>
 
@@ -58,7 +64,7 @@ export default function Volunteer() {
         <div
           role="tablist"
           aria-label="Filter volunteer experiences by type"
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 px-2"
         >
           {types.map((type) => (
             <button
@@ -70,10 +76,10 @@ export default function Volunteer() {
               role="tab"
               aria-selected={selectedType === type}
               aria-controls="volunteer-grid"
-              className={`px-4 py-2 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-medium text-xs sm:text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
                 selectedType === type
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  ? 'bg-primary-700 text-white dark:bg-primary-600'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               {type}
@@ -81,10 +87,10 @@ export default function Volunteer() {
           ))}
         </div>
 
-        {/* Volunteer Grid - 2 columns, max 2 rows */}
+        {/* Volunteer Grid - Responsive */}
         <div
           id="volunteer-grid"
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6"
         >
           {paginatedExperiences.map((experience, index) => (
             <motion.div

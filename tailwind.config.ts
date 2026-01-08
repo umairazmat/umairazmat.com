@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        'xs': '300px', // Extra small devices (phones, 300px and up)
+      },
       fontFamily: {
         sans: ['var(--font-inter)', 'var(--font-roboto)', 'system-ui', 'sans-serif'],
         roboto: ['var(--font-roboto)', 'sans-serif'],
