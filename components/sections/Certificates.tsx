@@ -6,6 +6,7 @@ import { certificates, Certificate } from '@/constants'
 import { Award, ExternalLink, Calendar } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import Pagination from '@/components/Pagination'
+import TextToSpeech from '@/components/TextToSpeech'
 
 const categoryColors = {
   'AWS & Cloud': 'bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800',
@@ -51,18 +52,23 @@ export default function Certificates() {
     return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })
   }
 
+  const certificatesText = `${t('certificates.description', 'Professional certifications and achievements that demonstrate my expertise and commitment to continuous learning.')}. ${filteredCertificates.length} ${t('certificates.title', 'certificates')} available.`
+
   return (
-    <section id="certificates" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300">
+    <section id="certificates" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300 px-4 sm:px-6">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-4xl font-bold mb-4 text-center">
-          {t('certificates.title', 'Certificates')} <span className="gradient-text">{t('certificates.licenses', '& Licenses')}</span>
-        </h2>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
+            {t('certificates.title', 'Certificates')} <span className="gradient-text">{t('certificates.licenses', '& Licenses')}</span>
+          </h2>
+          <TextToSpeech text={certificatesText} sectionId="certificates" />
+        </div>
+        <p className="text-center text-gray-600 dark:text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base px-4">
           {t('certificates.description', 'Professional certifications and achievements that demonstrate my expertise and commitment to continuous learning.')}
         </p>
 
@@ -70,7 +76,7 @@ export default function Certificates() {
         <div
           role="tablist"
           aria-label="Filter certificates by category"
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 px-2"
         >
           {categories.map((category) => (
             <button
@@ -82,10 +88,10 @@ export default function Certificates() {
               role="tab"
               aria-selected={selectedCategory === category}
               aria-controls="certificates-grid"
-              className={`px-4 py-2 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-medium text-xs sm:text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
                 selectedCategory === category
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  ? 'bg-primary-700 text-white dark:bg-primary-600'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               {category}
@@ -93,10 +99,10 @@ export default function Certificates() {
           ))}
         </div>
 
-        {/* Certificates Grid - Compact 2 rows max */}
+        {/* Certificates Grid - Responsive */}
         <div
           id="certificates-grid"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-6"
         >
           {paginatedCertificates.map((certificate, index) => (
             <motion.div

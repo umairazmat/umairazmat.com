@@ -92,26 +92,29 @@ export default function FAQ() {
     setOpenId(openId === id ? null : id)
   }
 
+  const faqText = `${t('faq.description', 'Find answers to common questions about my experience, availability, and services.')}. ${filteredFAQs.length} ${t('faq.questions', 'questions')} available.`
+
   return (
-    <section id="faq" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300">
+    <section id="faq" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300 px-4 sm:px-6">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <HelpCircle size={32} className="text-primary-600 dark:text-primary-400" />
-          <h2 className="text-4xl font-bold text-center">
+        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
+          <HelpCircle size={24} className="sm:w-8 sm:h-8 text-primary-700 dark:text-primary-400" />
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
             {t('faq.title', 'Frequently Asked')} <span className="gradient-text">{t('faq.questions', 'Questions')}</span>
           </h2>
+          <TextToSpeech text={faqText} sectionId="faq" />
         </div>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+        <p className="text-center text-gray-700 dark:text-gray-400 mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base px-4">
           {t('faq.description', 'Find answers to common questions about my experience, availability, and services.')}
         </p>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
+        <div className="flex flex-wrap justify-center gap-2 mb-6 sm:mb-8 px-2">
           {categories.map((category) => (
             <button
               key={category}
@@ -119,10 +122,10 @@ export default function FAQ() {
                 setSelectedCategory(category)
                 setOpenId(null)
               }}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
                 selectedCategory === category
-                  ? 'bg-primary-600 text-white'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  ? 'bg-primary-700 text-white dark:bg-primary-600'
+                  : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
               }`}
             >
               {category}
@@ -130,44 +133,40 @@ export default function FAQ() {
           ))}
         </div>
 
-        {/* FAQ Items */}
-        <div className="max-w-4xl mx-auto space-y-4">
+        {/* FAQ Items - Compact Grid Layout */}
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
           {filteredFAQs.map((faq, index) => (
             <motion.div
               key={faq.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05, duration: 0.3 }}
-              className="card"
+              transition={{ delay: index * 0.03, duration: 0.3 }}
+              className="card p-3 sm:p-4"
             >
               <button
                 onClick={() => toggleFAQ(faq.id)}
-                className="w-full flex items-center justify-between gap-4 text-left p-4 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-lg"
+                className="w-full flex items-start justify-between gap-2 sm:gap-3 text-left focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-lg"
                 aria-expanded={openId === faq.id}
                 aria-controls={`faq-answer-${faq.id}`}
               >
-                <div className="flex-1">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
-                    {faq.question}
-                  </h3>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-start gap-2 mb-1">
+                    <h3 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white line-clamp-2 flex-1">
+                      {faq.question}
+                    </h3>
+                    <ChevronDown
+                      size={18}
+                      className={`sm:w-5 sm:h-5 text-gray-500 dark:text-gray-400 transition-transform flex-shrink-0 mt-0.5 ${
+                        openId === faq.id ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
                   {faq.category && (
-                    <span className="text-xs text-primary-600 dark:text-primary-400">
+                    <span className="text-[10px] sm:text-xs text-primary-700 dark:text-primary-400 font-medium">
                       {faq.category}
                     </span>
                   )}
-                </div>
-                <div className="flex items-center gap-2">
-                  <TextToSpeech
-                    text={`${faq.question}. ${faq.answer}`}
-                    sectionId={`faq-${faq.id}`}
-                  />
-                  <ChevronDown
-                    size={20}
-                    className={`text-gray-500 dark:text-gray-400 transition-transform flex-shrink-0 ${
-                      openId === faq.id ? 'rotate-180' : ''
-                    }`}
-                  />
                 </div>
               </button>
 
@@ -179,16 +178,16 @@ export default function FAQ() {
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
+                    className="overflow-hidden mt-2 sm:mt-3"
                   >
-                    <div className="px-4 pb-4 pt-0">
-                      <div className="flex items-start gap-3">
+                    <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+                      <div className="flex items-start gap-2 sm:gap-3">
                         <TextToSpeech
                           text={faq.answer}
                           sectionId={`faq-answer-${faq.id}`}
-                          className="mt-1"
+                          className="mt-0.5"
                         />
-                        <p className="text-gray-700 dark:text-gray-300 leading-relaxed flex-1">
+                        <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed flex-1">
                           {faq.answer}
                         </p>
                       </div>
@@ -201,7 +200,7 @@ export default function FAQ() {
         </div>
 
         {filteredFAQs.length === 0 && (
-          <p className="text-center text-gray-500 dark:text-gray-400 mt-8">
+          <p className="text-center text-gray-600 dark:text-gray-400 mt-8 text-sm sm:text-base">
             {t('faq.noFAQs', 'No FAQs found in this category.')}
           </p>
         )}

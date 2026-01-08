@@ -123,7 +123,7 @@ export default function Education() {
   }
 
   return (
-    <section id="education" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300">
+    <section id="education" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300 px-4 sm:px-6">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -131,14 +131,14 @@ export default function Education() {
         transition={{ duration: 0.6 }}
         className="max-w-6xl mx-auto"
       >
-        <div className="flex items-center justify-center gap-3 mb-8">
-          <GraduationCap size={32} className="text-primary-600 dark:text-primary-400" />
-          <h2 className="text-4xl font-bold text-center">
+        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+          <GraduationCap size={24} className="sm:w-8 sm:h-8 text-primary-600 dark:text-primary-400" />
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
             {t('education.title', 'Education')} <span className="gradient-text">{t('education.background', 'Background')}</span>
           </h2>
           <TextToSpeech text={educationText} sectionId="education" />
         </div>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+        <p className="text-center text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base px-4">
           {t('education.description', 'Academic achievements and educational foundation that shaped my software engineering career.')}
         </p>
 
@@ -148,83 +148,83 @@ export default function Education() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="card mb-8 border-2 border-primary-200 dark:border-primary-800 bg-gradient-to-br from-primary-50/50 dark:from-primary-900/10 to-white dark:to-gray-800"
+          className="card mb-6 sm:mb-8 border-2 border-primary-200 dark:border-primary-800 bg-gradient-to-br from-primary-50/50 dark:from-primary-900/10 to-white dark:to-gray-800 p-4 sm:p-6"
         >
-          <div className="flex flex-col md:flex-row gap-6">
+          <div className="flex flex-col md:flex-row gap-4 sm:gap-6">
             {/* University Logo/Icon - Featured */}
-            <div className="flex-shrink-0">
-              <div className="w-28 h-28 bg-primary-600 dark:bg-primary-700 rounded-xl flex items-center justify-center shadow-lg">
-                <GraduationCap size={56} className="text-white" />
+            <div className="flex-shrink-0 flex justify-center md:justify-start">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-primary-600 dark:bg-primary-700 rounded-xl flex items-center justify-center shadow-lg">
+                <GraduationCap size={40} className="sm:w-14 sm:h-14 md:w-14 md:h-14 text-white" />
               </div>
             </div>
 
             {/* Education Details */}
             <div className="flex-1">
-              <div className="mb-4">
-                <div className="flex items-start justify-between mb-2">
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
+              <div className="mb-3 sm:mb-4">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+                  <div className="flex-1">
+                    <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-1 line-clamp-2">
                       {gcuEducation.institution}
                     </h3>
-                    <p className="text-xl text-primary-600 dark:text-primary-400 font-semibold mb-1">
+                    <p className="text-lg sm:text-xl text-primary-600 dark:text-primary-400 font-semibold mb-1 line-clamp-1">
                       {gcuEducation.degree}
                     </p>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                    <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-2 sm:mb-3 line-clamp-1">
                       {gcuEducation.field}
                     </p>
                   </div>
-                  <div className="px-3 py-1 bg-primary-600 text-white rounded-full text-xs font-bold">
+                  <div className="px-2 sm:px-3 py-1 bg-primary-700 dark:bg-primary-600 text-white rounded-full text-[10px] sm:text-xs font-bold flex-shrink-0 self-start">
                     FEATURED
                   </div>
                 </div>
-                <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
-                  <span className="flex items-center gap-1.5">
-                    <BookOpen size={16} />
+                <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3 sm:mb-4">
+                  <span className="flex items-center gap-1 sm:gap-1.5">
+                    <BookOpen size={14} className="sm:w-4 sm:h-4" />
                     {gcuEducation.period}
                   </span>
-                  <span className="flex items-center gap-1.5">
-                    <Award size={16} />
+                  <span className="flex items-center gap-1 sm:gap-1.5">
+                    <Award size={14} className="sm:w-4 sm:h-4" />
                     Grade: {gcuEducation.grade}
                   </span>
                 </div>
               </div>
 
               {/* CGPA and Achievement Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-                <div className="p-3 bg-white dark:bg-gray-700 rounded-lg border border-primary-200 dark:border-primary-800">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Trophy size={18} className="text-primary-600 dark:text-primary-400" />
-                    <h4 className="font-bold text-sm text-gray-900 dark:text-white">CGPA</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-3 sm:mb-4">
+                <div className="p-2 sm:p-3 bg-white dark:bg-gray-700 rounded-lg border border-primary-200 dark:border-primary-800">
+                  <div className="flex items-center gap-1.5 sm:gap-2 mb-1">
+                    <Trophy size={16} className="sm:w-4.5 sm:h-4.5 text-primary-600 dark:text-primary-400" />
+                    <h4 className="font-bold text-xs sm:text-sm text-gray-900 dark:text-white">CGPA</h4>
                   </div>
-                  <p className="text-2xl font-bold text-primary-600 dark:text-primary-400">
+                  <p className="text-xl sm:text-2xl font-bold text-primary-600 dark:text-primary-400">
                     3.78 / 4.00
                   </p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">(A+)</p>
+                  <p className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">(A+)</p>
                 </div>
 
-                <div className="p-3 bg-white dark:bg-gray-700 rounded-lg border border-primary-200 dark:border-primary-800">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Medal size={18} className="text-primary-600 dark:text-primary-400" />
-                    <h4 className="font-bold text-sm text-gray-900 dark:text-white">Achievement</h4>
+                <div className="p-2 sm:p-3 bg-white dark:bg-gray-700 rounded-lg border border-primary-200 dark:border-primary-800">
+                  <div className="flex items-center gap-1.5 sm:gap-2 mb-1">
+                    <Medal size={16} className="sm:w-4.5 sm:h-4.5 text-primary-600 dark:text-primary-400" />
+                    <h4 className="font-bold text-xs sm:text-sm text-gray-900 dark:text-white">Achievement</h4>
                   </div>
-                  <p className="text-lg font-bold text-gray-900 dark:text-white">
+                  <p className="text-base sm:text-lg font-bold text-gray-900 dark:text-white">
                     Silver Medalist 🥈
                   </p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">2nd Position</p>
+                  <p className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">2nd Position</p>
                 </div>
               </div>
 
               {/* Achievements - Compact */}
-              <div className="mb-4">
-                <h4 className="font-semibold text-sm text-gray-900 dark:text-white mb-2 flex items-center gap-2">
-                  <Trophy size={16} className="text-primary-600 dark:text-primary-400" />
+              <div className="mb-3 sm:mb-4">
+                <h4 className="font-semibold text-xs sm:text-sm text-gray-900 dark:text-white mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2">
+                  <Trophy size={14} className="sm:w-4 sm:h-4 text-primary-600 dark:text-primary-400" />
                   {t('education.achievements', 'Achievements')}
                 </h4>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {gcuEducation.achievements?.slice(0, 3).map((achievement, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 bg-primary-100 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 rounded-lg text-xs font-medium border border-primary-200 dark:border-primary-800"
+                      className="px-2 sm:px-2.5 py-0.5 sm:py-1 bg-primary-100 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 rounded-lg text-[10px] sm:text-xs font-medium border border-primary-200 dark:border-primary-800"
                     >
                       {achievement.split(':')[0]}
                     </span>
@@ -234,15 +234,15 @@ export default function Education() {
 
               {/* Key Coursework - Compact */}
               <div>
-                <h4 className="font-semibold text-sm text-gray-900 dark:text-white mb-2 flex items-center gap-2">
-                  <BookOpen size={16} className="text-primary-600 dark:text-primary-400" />
+                <h4 className="font-semibold text-xs sm:text-sm text-gray-900 dark:text-white mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2">
+                  <BookOpen size={14} className="sm:w-4 sm:h-4 text-primary-600 dark:text-primary-400" />
                   {t('education.keyCoursework', 'Key Coursework')}
                 </h4>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-1 sm:gap-1.5">
                   {gcuEducation.coursework?.map((course, idx) => (
                     <span
                       key={idx}
-                      className="px-2 py-0.5 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs border border-gray-200 dark:border-gray-600"
+                      className="px-1.5 sm:px-2 py-0.5 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-[10px] sm:text-xs border border-gray-200 dark:border-gray-600"
                     >
                       {course}
                     </span>
@@ -254,8 +254,8 @@ export default function Education() {
         </motion.div>
 
         {/* Tabs for Other Education */}
-        <div className="mb-6">
-          <div className="flex flex-wrap justify-center gap-2 mb-6">
+        <div className="mb-4 sm:mb-6">
+          <div className="flex flex-wrap justify-center gap-2 mb-4 sm:mb-6 px-2">
             {[
               { key: 'training' as const, label: t('education.training', 'Training Programs') },
               { key: 'school' as const, label: t('education.school', 'School Education') },
@@ -266,10 +266,10 @@ export default function Education() {
                   setActiveTab(tab.key)
                   setExpandedId(null)
                 }}
-                className={`px-4 py-2 rounded-lg font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-medium text-xs sm:text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
                   activeTab === tab.key
-                    ? 'bg-primary-600 text-white'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                    ? 'bg-primary-700 text-white dark:bg-primary-600'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 {tab.label}
@@ -278,7 +278,7 @@ export default function Education() {
           </div>
 
           {/* Other Education Items - Compact Accordion */}
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             {filteredItems.map((edu, index) => (
               <motion.div
                 key={edu.id}
@@ -286,38 +286,38 @@ export default function Education() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05, duration: 0.3 }}
-                className="card p-4"
+                className="card p-3 sm:p-4"
               >
                 <button
                   onClick={() => toggleExpand(edu.id)}
-                  className="w-full flex items-center justify-between gap-4 text-left focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-lg"
+                  className="w-full flex items-center justify-between gap-2 sm:gap-4 text-left focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-lg"
                   aria-expanded={expandedId === edu.id}
                 >
-                  <div className="flex items-start gap-3 flex-1">
-                    <div className="p-2 bg-primary-100 dark:bg-primary-900/20 rounded-lg flex-shrink-0">
+                  <div className="flex items-start gap-2 sm:gap-3 flex-1 min-w-0">
+                    <div className="p-1.5 sm:p-2 bg-primary-100 dark:bg-primary-900/20 rounded-lg flex-shrink-0">
                       {edu.type === 'training' ? (
-                        <Medal size={20} className="text-primary-600 dark:text-primary-400" />
+                        <Medal size={16} className="sm:w-5 sm:h-5 text-primary-600 dark:text-primary-400" />
                       ) : (
-                        <School size={20} className="text-primary-600 dark:text-primary-400" />
+                        <School size={16} className="sm:w-5 sm:h-5 text-primary-600 dark:text-primary-400" />
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-base font-bold text-gray-900 dark:text-white mb-1 line-clamp-1">
+                      <h3 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-0.5 sm:mb-1 line-clamp-1">
                         {edu.institution}
                       </h3>
-                      <p className="text-sm text-primary-600 dark:text-primary-400 font-medium mb-1 line-clamp-1">
+                      <p className="text-xs sm:text-sm text-primary-600 dark:text-primary-400 font-medium mb-0.5 sm:mb-1 line-clamp-1">
                         {edu.degree}
                       </p>
-                      <div className="flex items-center gap-3 text-xs text-gray-600 dark:text-gray-400">
-                        <span>{edu.period}</span>
+                      <div className="flex items-center gap-2 sm:gap-3 text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">
+                        <span className="line-clamp-1">{edu.period}</span>
                         <span>•</span>
-                        <span>Grade: {edu.grade}</span>
+                        <span className="line-clamp-1">Grade: {edu.grade}</span>
                       </div>
                     </div>
                   </div>
                   <ChevronDown
-                    size={20}
-                    className={`text-gray-400 flex-shrink-0 transition-transform ${
+                    size={18}
+                    className={`sm:w-5 sm:h-5 text-gray-400 flex-shrink-0 transition-transform ${
                       expandedId === edu.id ? 'rotate-180' : ''
                     }`}
                   />
