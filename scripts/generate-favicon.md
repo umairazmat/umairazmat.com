@@ -27,3 +27,5 @@ To generate favicon files, you can use online tools or create them manually:
 # Replace with actual logo/icon later
 ```
 
+
+

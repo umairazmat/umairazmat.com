@@ -114,7 +114,7 @@ export default function CTASection({
               <Icon size={24} className="transition-transform group-hover:scale-110" />
               <span className="font-semibold text-lg">{displayMessage}</span>
             </div>
-            <span className="text-sm opacity-80 font-medium">{ctaConfig.text}</span>
+            <span className={`text-sm font-medium ${ctaConfig.textColor} opacity-90`}>{ctaConfig.text}</span>
           </button>
         </div>
       </motion.div>
