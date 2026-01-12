@@ -2,14 +2,16 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Calendar, Github, Linkedin, Mail, Code, Download } from 'lucide-react'
+import { Calendar, Github, Linkedin, Mail, Code, Download, MessageSquare } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import { personalInfo } from '@/constants'
+import ContactModal from '@/components/ContactModal'
 
 export default function Hero() {
   const { t } = useTranslation()
   const [mounted, setMounted] = useState(false)
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -183,23 +185,21 @@ export default function Hero() {
                 href="#projects"
                 className="px-5 py-2.5 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-sky-500/50 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
               >
-                {t('hero.seeSelectedWork')}
+                {t('hero.viewMyWork')}
               </a>
               
-              <a
-                href={personalInfo.calendlyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => setIsContactModalOpen(true)}
                 className="px-5 py-2.5 bg-transparent border-2 border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white dark:text-sky-400 dark:hover:text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
               >
-                <Calendar size={14} />
-                {t('hero.scheduleCall')}
-              </a>
+                <MessageSquare size={14} />
+                {t('hero.contactMe')}
+              </button>
               
               <a
                 href={personalInfo.resumeUrl}
                 download
-                className="px-5 py-2.5 bg-transparent border-2 border-gray-500 text-gray-700 hover:bg-gray-500 hover:text-white dark:text-gray-300 dark:border-gray-400 dark:hover:bg-gray-400 dark:hover:text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                className="px-5 py-2.5 bg-transparent border-2 border-sky-400 dark:border-sky-500 text-sky-600 dark:text-sky-400 hover:bg-sky-400 dark:hover:bg-sky-500 hover:text-white dark:hover:text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 dark:focus:ring-sky-500 focus:ring-offset-2"
               >
                 <Download size={14} />
                 {t('hero.downloadResume')}
@@ -307,6 +307,9 @@ export default function Hero() {
         </div>
 
       </motion.div>
+      
+      {/* Contact Modal */}
+      <ContactModal isOpen={isContactModalOpen} onClose={() => setIsContactModalOpen(false)} />
     </section>
   )
 }

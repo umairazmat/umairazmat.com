@@ -1,14 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+export const dynamic = 'force-dynamic'
+
 // In-memory storage (replace with database in production)
 let comments: any[] = []
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const commentId = params.id
+    const { id } = await params
+    const commentId = id
 
     // In production, use a database
     // For now, this is a placeholder

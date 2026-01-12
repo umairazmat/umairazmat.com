@@ -36,11 +36,13 @@
     "headlineHighlight": "sistemi web e IA pronti per la produzione e scalabili",
     "headlineEnd": "",
     "subheadline": "Stanco di app che si rompono con utenti reali? Costruisco sistemi che si scalano, rimangono mantenibili e supportano la crescita aziendale reale.",
-    "projectsShipped": "progetti lanciati",
-    "studentsTrained": "studenti formati",
-    "usersImpacted": "utenti impattati",
-    "seeSelectedWork": "Vedi Lavori Selezionati",
-    "workStyle": "Prima remoto • Amichevole asincrono • Focalizzato sulla produzione"
+        "projectsShipped": "progetti lanciati",
+        "studentsTrained": "studenti formati",
+        "usersImpacted": "utenti impattati",
+        "seeSelectedWork": "Vedi Lavori Selezionati",
+        "viewMyWork": "Vedi Il Mio Lavoro",
+        "contactMe": "Contattami",
+        "workStyle": "Prima remoto • Amichevole asincrono • Focalizzato sulla produzione"
   },
   "about": {
     "title": "Chi sono",

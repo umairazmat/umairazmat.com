@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+export const dynamic = 'force-dynamic'
+
 // In-memory storage for comments (replace with database in production)
 // This is a simple implementation for Phase 02
 let comments: any[] = []

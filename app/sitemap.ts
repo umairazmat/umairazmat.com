@@ -15,21 +15,59 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }))
   
   return [
-    // Main Pages
+    // Homepage - Highest Priority
     {
       url: baseUrl,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 1.0,
     },
+    
+    // Homepage Sections (for deep linking)
+    {
+      url: `${baseUrl}/#about`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/#how-i-work`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/#projects`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/#testimonials`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/#faq`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/#contact`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    
+    // Main Pages
     {
       url: `${baseUrl}/blog`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
-    
-    // Dedicated Pages
     {
       url: `${baseUrl}/projects`,
       lastModified: now,
@@ -40,7 +78,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/skills`,
       lastModified: now,
       changeFrequency: 'monthly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/experiences`,
