@@ -1,14 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Send, Mail, MessageSquare, User } from 'lucide-react'
+import { X, Send, Mail, MessageSquare, User, FileText, Shield } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import toast from 'react-hot-toast'
-import { personalInfo } from '@/constants'
-import { useTranslation } from 'react-i18next'
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -25,7 +23,6 @@ interface ContactModalProps {
 }
 
 export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
-  const { t } = useTranslation()
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const {
@@ -37,10 +34,22 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
     resolver: zodResolver(contactSchema),
   })
 
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
+
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true)
 
-    const toastId = toast.loading(t('contactForm.sending'))
+    const toastId = toast.loading('Sending message...')
 
     try {
       const response = await fetch('/api/contact', {
@@ -57,21 +66,23 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         throw new Error(result.error || 'Failed to send message')
       }
 
-      toast.success(t('contactForm.success'), {
+      toast.success('Thanks for reaching out! I\'ll respond within 24 hours.', {
         id: toastId,
+        duration: 4000,
       })
       reset()
       setTimeout(() => {
         onClose()
-      }, 1500)
+      }, 2000)
     } catch (error) {
       console.error('Error:', error)
       toast.error(
         error instanceof Error
           ? error.message
-          : t('contactForm.error'),
+          : 'Failed to send message. Please try again.',
         {
           id: toastId,
+          duration: 4000,
         }
       )
     } finally {
@@ -88,159 +99,164 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black bg-opacity-50 z-[90]"
+            className="fixed inset-0 bg-black/75 backdrop-blur-sm z-[99999]"
           />
 
           {/* Modal */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed inset-0 z-[90] flex items-center justify-center p-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-              {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-primary-100 dark:bg-primary-900 rounded-lg">
-                    <MessageSquare className="text-primary-600 dark:text-primary-400" size={24} />
+          <div className="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-4 pointer-events-none">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 10 }}
+              transition={{ 
+                duration: 0.2,
+                ease: [0.16, 1, 0.3, 1]
+              }}
+              className="relative bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full border border-gray-200 dark:border-gray-700 pointer-events-auto overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header - Compact */}
+              <div className="flex items-center justify-between p-3.5 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                <div className="flex items-center gap-2">
+                  <div className="p-1.5 bg-sky-100 dark:bg-sky-900/20 rounded-lg">
+                    <MessageSquare className="text-sky-500 dark:text-sky-400" size={18} />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('contactForm.title')}</h2>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {t('contactForm.subtitle')}
+                    <h2 className="text-base font-bold text-gray-900 dark:text-white leading-tight">
+                      Get in Touch
+                    </h2>
+                    <p className="text-xs text-gray-600 dark:text-gray-400 leading-tight">
+                      I&apos;ll get back to you within 24 hours.
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={onClose}
-                  className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                  className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg flex-shrink-0"
                   aria-label="Close modal"
                 >
-                  <X size={24} />
+                  <X size={18} />
                 </button>
               </div>
 
-              {/* Form */}
-              <form onSubmit={handleSubmit(onSubmit)} className="p-6 space-y-6">
+              {/* Form - Compact, No Scroll */}
+              <form onSubmit={handleSubmit(onSubmit)} className="p-3.5 space-y-2.5 bg-white dark:bg-gray-800">
                 {/* Name */}
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                  >
-                    <User size={16} className="inline mr-2" />
-                    {t('contactForm.name')}
+                  <label htmlFor="name" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Your full name
                   </label>
-                  <input
-                    {...register('name')}
-                    type="text"
-                    id="name"
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
-                    placeholder={t('contactForm.namePlaceholder')}
-                  />
+                  <div className="relative">
+                    <User className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500" size={14} />
+                    <input
+                      {...register('name')}
+                      type="text"
+                      id="name"
+                      className="w-full pl-8 pr-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 dark:focus:border-sky-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
+                      placeholder="Enter your full name"
+                    />
+                  </div>
                   {errors.name && (
-                    <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                    <p className="mt-0.5 text-xs text-red-600 dark:text-red-400">{errors.name.message}</p>
                   )}
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                  >
-                    <Mail size={16} className="inline mr-2" />
-                    {t('contactForm.email')}
+                  <label htmlFor="email" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Email
                   </label>
-                  <input
-                    {...register('email')}
-                    type="email"
-                    id="email"
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
-                    placeholder={t('contactForm.emailPlaceholder')}
-                  />
+                  <div className="relative">
+                    <Mail className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500" size={14} />
+                    <input
+                      {...register('email')}
+                      type="email"
+                      id="email"
+                      className="w-full pl-8 pr-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 dark:focus:border-sky-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
+                      placeholder="your.email@example.com"
+                    />
+                  </div>
                   {errors.email && (
-                    <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                    <p className="mt-0.5 text-xs text-red-600 dark:text-red-400">{errors.email.message}</p>
                   )}
+                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                    <Shield size={10} />
+                    We respect your privacy and won&apos;t share your information.
+                  </p>
                 </div>
 
                 {/* Subject */}
                 <div>
-                  <label
-                    htmlFor="subject"
-                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                  >
-                    {t('contactForm.subject')}
+                  <label htmlFor="subject" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Subject
                   </label>
-                  <input
-                    {...register('subject')}
-                    type="text"
-                    id="subject"
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
-                    placeholder={t('contactForm.subjectPlaceholder')}
-                  />
+                  <div className="relative">
+                    <FileText className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500" size={14} />
+                    <input
+                      {...register('subject')}
+                      type="text"
+                      id="subject"
+                      className="w-full pl-8 pr-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 dark:focus:border-sky-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
+                      placeholder="What's this about?"
+                    />
+                  </div>
                   {errors.subject && (
-                    <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>
+                    <p className="mt-0.5 text-xs text-red-600 dark:text-red-400">{errors.subject.message}</p>
                   )}
                 </div>
 
                 {/* Message */}
                 <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-                  >
-                    {t('contactForm.message')}
+                  <label htmlFor="message" className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Message
                   </label>
                   <textarea
                     {...register('message')}
                     id="message"
-                    rows={6}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
-                    placeholder={t('contactForm.messagePlaceholder')}
+                    rows={3}
+                    className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500 dark:focus:border-sky-400 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500"
+                    placeholder="Tell me about your project or opportunity…"
                   />
                   {errors.message && (
-                    <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
+                    <p className="mt-0.5 text-xs text-red-600 dark:text-red-400">{errors.message.message}</p>
                   )}
                 </div>
 
-                {/* Submit Button */}
-                <div className="flex gap-4">
+                {/* Submit Buttons */}
+                <div className="flex gap-2 pt-1">
                   <button
                     type="button"
                     onClick={onClose}
-                    className="btn-secondary flex-1"
+                    className="flex-1 px-3 py-2 bg-transparent border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 font-semibold rounded-lg transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isSubmitting}
                   >
-                    {t('contactForm.cancel')}
+                    Cancel
                   </button>
                   <button
                     type="submit"
-                    className="btn-primary flex-1 flex items-center justify-center gap-2"
+                    className="flex-1 px-3 py-2 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg transition-all flex items-center justify-center gap-1.5 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
                       <>
-                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        {t('contactForm.sending')}
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        Sending...
                       </>
                     ) : (
                       <>
-                        <Send size={20} />
-                        {t('contactForm.send')}
+                        <Send size={14} />
+                        Send Message
                       </>
                     )}
                   </button>
                 </div>
               </form>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>
   )
 }
-

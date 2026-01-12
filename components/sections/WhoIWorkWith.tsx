@@ -27,6 +27,7 @@ export default function WhoIWorkWith() {
     'You want "just UI" with no backend or architecture thinking',
     'You want rushed delivery without planning',
     'You don\'t care about maintainability, scalability, or long-term stability',
+    "You are not open to feedback or collaboration during the development process",
   ]
 
   return (

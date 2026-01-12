@@ -8,7 +8,11 @@ import { Experience as ExperienceType } from '@/constants'
 import { useTranslation } from 'react-i18next'
 import TextToSpeech from '@/components/TextToSpeech'
 
-export default function Experience() {
+interface ExperienceProps {
+  hideHeading?: boolean
+}
+
+export default function Experience({ hideHeading = false }: ExperienceProps) {
   const { t } = useTranslation()
   const [selectedFilter, setSelectedFilter] = useState<string>(t('experience.all'))
   const [selectedExperience, setSelectedExperience] = useState<string | null>(null)
@@ -30,22 +34,26 @@ export default function Experience() {
   }
 
   return (
-    <section id="experience" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300 px-4 sm:px-6">
+    <section id="experience" className="transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
-            {t('experience.title')} <span className="gradient-text">{t('experience.experience')}</span>
-          </h2>
-          <TextToSpeech text={experienceText} sectionId="experience" />
-        </div>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base px-4">
-          {t('experience.description')}
-        </p>
+        {!hideHeading && (
+          <>
+            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
+                {t('experience.title')} <span className="gradient-text">{t('experience.experience')}</span>
+              </h2>
+              <TextToSpeech text={experienceText} sectionId="experience" />
+            </div>
+            <p className="text-center text-gray-600 dark:text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base px-4">
+              {t('experience.description')}
+            </p>
+          </>
+        )}
 
         {/* Filter Tabs */}
         <div
@@ -60,10 +68,10 @@ export default function Experience() {
               role="tab"
               aria-selected={selectedFilter === filter}
               aria-controls="experience-timeline"
-              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-medium text-xs sm:text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-medium text-xs sm:text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 ${
                 selectedFilter === filter
-                  ? 'bg-primary-700 text-white dark:bg-primary-600'
-                  : 'bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
+                  ? 'bg-sky-500 dark:bg-sky-600 text-white'
+                  : 'bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm text-gray-800 dark:text-gray-200 hover:bg-white/90 dark:hover:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50'
               }`}
             >
               {filter}
@@ -80,10 +88,10 @@ export default function Experience() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className={`card cursor-pointer transition-all h-full flex flex-col p-4 sm:p-6 ${
+              className={`bg-white/40 dark:bg-gray-800/40 backdrop-blur-md rounded-xl cursor-pointer transition-all h-full flex flex-col p-4 sm:p-6 border border-gray-200/20 dark:border-gray-700/20 ${
                 selectedExperience === experience.id
-                  ? 'ring-2 ring-primary-600 shadow-xl'
-                  : 'hover:shadow-lg'
+                  ? 'ring-2 ring-sky-500 dark:ring-sky-400 shadow-xl bg-white/60 dark:bg-gray-800/60'
+                  : 'hover:shadow-lg hover:bg-white/50 dark:hover:bg-gray-800/50'
               }`}
               onClick={() =>
                 setSelectedExperience(
