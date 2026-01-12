@@ -5,6 +5,13 @@ import { Bot, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import Chatbot from './Chatbot'
 
+const prompts = [
+  "What do you want to know?",
+  "How can Umair help you?",
+  "Ask me anything!",
+  "Let's chat!",
+]
+
 export default function ChatbotFloatingButton() {
   const [isOpen, setIsOpen] = useState(false)
   const [showPrompt, setShowPrompt] = useState(false)
@@ -21,13 +28,6 @@ export default function ChatbotFloatingButton() {
 
     return () => clearTimeout(timer)
   }, [isOpen])
-
-  const prompts = [
-    "What do you want to know?",
-    "How can Umair help you?",
-    "Ask me anything!",
-    "Let's chat!",
-  ]
 
   const [currentPrompt, setCurrentPrompt] = useState(prompts[0])
 

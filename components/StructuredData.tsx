@@ -76,7 +76,7 @@ export default function StructuredData() {
         name: 'How many years of experience do you have?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'I have 4+ years of professional experience in full-stack software development, working with technologies like React, Next.js, Node.js, Python, and cloud platforms like AWS.',
+          text: 'I have 2+ years of professional experience in full-stack software development, working with technologies like React, Next.js, Node.js, Python, and cloud platforms like AWS.',
         },
       },
       {
