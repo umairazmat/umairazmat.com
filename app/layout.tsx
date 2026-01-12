@@ -8,7 +8,6 @@ import Loader from '@/components/Loader'
 import SkipToContent from '@/components/SkipToContent'
 import Toaster from '@/components/Toaster'
 import { ThemeProvider } from '@/contexts/ThemeContext'
-import ContactAutoPopup from '@/components/ContactAutoPopup'
 import StructuredData from '@/components/StructuredData'
 import AnalyticsProvider from '@/components/AnalyticsProvider'
 import I18nProvider from '@/providers/I18nProvider'
@@ -64,7 +63,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    alternateLocale: ['en_GB', 'ar', 'de'],
+    alternateLocale: ['en_GB', 'ar', 'de', 'it'],
     url: 'https://umairazmat.com',
     siteName: 'Umair Azmat Portfolio',
     title: 'Umair Azmat - Full-Stack Software Engineer | React, Next.js, Node.js, Python',
@@ -106,6 +105,7 @@ export const metadata: Metadata = {
       'en-GB': 'https://umairazmat.com',
       'ar': 'https://umairazmat.com',
       'de': 'https://umairazmat.com',
+      'it': 'https://umairazmat.com',
     },
   },
   icons: {
@@ -178,7 +178,6 @@ export default function RootLayout({
             <main id="main-content">{children}</main>
             <Footer />
             <Toaster />
-            <ContactAutoPopup />
           </ThemeProvider>
         </I18nProvider>
       </body>
