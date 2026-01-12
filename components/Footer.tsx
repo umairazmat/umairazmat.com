@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Github, Linkedin, Mail, Heart, Calendar, Briefcase } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Github, Linkedin, Heart, Briefcase } from 'lucide-react'
 import { personalInfo } from '@/constants'
 import { useTranslation } from 'react-i18next'
 
@@ -29,18 +30,51 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="relative bg-gray-900 dark:bg-black text-gray-300 dark:text-gray-400 border-t border-gray-800 dark:border-gray-900 overflow-hidden">
-      {/* Same Background Pattern as Other Sections */}
-      <div className="absolute inset-0 pointer-events-none opacity-5">
-        <div 
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(56, 189, 248, 0.2) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(56, 189, 248, 0.2) 1px, transparent 1px)
-            `,
-            backgroundSize: '50px 50px',
+    <footer className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-black dark:via-gray-950 dark:to-black text-gray-300 dark:text-gray-400 border-t border-gray-700 dark:border-gray-900 overflow-hidden w-full">
+      {/* Animated Background Pattern */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {/* Animated Grid Pattern */}
+        <div className="absolute inset-0 opacity-10 dark:opacity-15">
+          <div 
+            className="absolute inset-0 animate-grid-move"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(56, 189, 248, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.3) 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px',
+            }}
+          />
+        </div>
+
+        {/* Floating 3D Shapes - Subtle for dark background */}
+        <motion.div
+          className="absolute top-10 left-4 sm:left-10 w-48 h-48 sm:w-72 sm:h-72 bg-gradient-to-br from-sky-500/5 dark:from-sky-500/10 to-cyan-500/5 dark:to-cyan-500/10 rounded-full blur-3xl"
+          animate={{
+            x: [0, 30, 0],
+            y: [0, -30, 0],
+            scale: [1, 1.1, 1],
           }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          style={{ willChange: 'transform' }}
+        />
+        <motion.div
+          className="absolute bottom-10 right-4 sm:right-10 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-br from-cyan-500/5 dark:from-cyan-500/10 to-sky-600/5 dark:to-sky-600/10 rounded-full blur-3xl"
+          animate={{
+            x: [0, -30, 0],
+            y: [0, 40, 0],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          style={{ willChange: 'transform' }}
         />
       </div>
 
@@ -48,9 +82,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-6">
           {/* Brand Section */}
           <div>
-            <h3 className="text-white text-lg sm:text-xl font-bold mb-2">Umair Azmat</h3>
-            <p className="text-gray-400 text-xs sm:text-sm mb-4">
-              Full Stack Developer & AI Engineer
+            <h3 className="text-white text-lg sm:text-xl font-bold mb-2">{personalInfo.name}</h3>
+            <p className="text-gray-300 dark:text-gray-400 text-xs sm:text-sm mb-4">
+              {t('footer.tagline')}
             </p>
             <div className="flex space-x-3 mb-4">
               {socialLinks.map(({ icon: Icon, href, label }) => (
@@ -59,7 +93,7 @@ export default function Footer() {
                   href={href}
                   target={href === '#' ? undefined : '_blank'}
                   rel={href === '#' ? undefined : 'noopener noreferrer'}
-                  className="text-gray-400 hover:text-sky-400 dark:hover:text-sky-400 transition-colors"
+                  className="text-gray-400 dark:text-gray-500 hover:text-sky-400 dark:hover:text-sky-400 transition-colors"
                   aria-label={label}
                 >
                   <Icon size={18} />
@@ -67,103 +101,82 @@ export default function Footer() {
               ))}
             </div>
             <div className="text-xs text-gray-500 dark:text-gray-500">
-              Remote-first, async-friendly
+              {t('footer.workStyle')}
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-semibold mb-3 text-sm sm:text-base">Quick Links</h4>
-            <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-xs sm:text-sm">
-              <Link href={getHref('#about')} className="hover:text-white transition-colors text-gray-400">
-                About
-              </Link>
-              <span className="text-gray-600">|</span>
-              <Link href="/projects" className="hover:text-white transition-colors text-gray-400">
-                Projects
-              </Link>
-              <span className="text-gray-600">|</span>
-              <Link href="/skills" className="hover:text-white transition-colors text-gray-400">
-                Skills
-              </Link>
-              <span className="text-gray-600">|</span>
-              <Link href="/certifications" className="hover:text-white transition-colors text-gray-400">
-                Certifications
-              </Link>
-              <span className="text-gray-600">|</span>
-              <Link href="/experiences" className="hover:text-white transition-colors text-gray-400">
-                Experiences
-              </Link>
-              <span className="text-gray-600">|</span>
-              <Link href="/learning" className="hover:text-white transition-colors text-gray-400">
-                Learning
-              </Link>
-              <span className="text-gray-600">|</span>
-              <Link href="/blog" className="hover:text-white transition-colors text-gray-400">
-                Blog
-              </Link>
-              <span className="text-gray-600">|</span>
-              <Link href={getHref('#contact')} className="hover:text-white transition-colors text-gray-400">
-                Contact
-              </Link>
+            <h4 className="text-white font-semibold mb-3 text-sm sm:text-base">{t('footer.quickLinks')}</h4>
+            <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-xs sm:text-sm">
+              {/* First Column - 5 links */}
+              <div className="flex flex-col gap-1.5">
+                <Link href={getHref('#about')} className="hover:text-sky-400 transition-colors text-gray-300 dark:text-gray-400">
+                  {t('navbar.about')}
+                </Link>
+                <Link href="/projects" className="hover:text-sky-400 transition-colors text-gray-300 dark:text-gray-400">
+                  {t('navbar.projects')}
+                </Link>
+                <Link href="/skills" className="hover:text-sky-400 transition-colors text-gray-300 dark:text-gray-400">
+                  {t('navbar.skills')}
+                </Link>
+                <Link href="/certifications" className="hover:text-sky-400 transition-colors text-gray-300 dark:text-gray-400">
+                  {t('navbar.certificates')}
+                </Link>
+                <Link href="/experiences" className="hover:text-sky-400 transition-colors text-gray-300 dark:text-gray-400">
+                  {t('navbar.experience')}
+                </Link>
+              </div>
+              {/* Second Column - 5 links */}
+              <div className="flex flex-col gap-1.5">
+                <Link href="/learning" className="hover:text-sky-400 transition-colors text-gray-300 dark:text-gray-400">
+                  {t('navbar.learning')}
+                </Link>
+                <Link href="/blog" className="hover:text-sky-400 transition-colors text-gray-300 dark:text-gray-400">
+                  {t('navbar.blog')}
+                </Link>
+                <Link href={getHref('#contact')} className="hover:text-sky-400 transition-colors text-gray-300 dark:text-gray-400">
+                  {t('navbar.contact')}
+                </Link>
+                <Link href="/appointments" className="hover:text-sky-400 transition-colors text-gray-300 dark:text-gray-400">
+                  {t('navbar.appointment')}
+                </Link>
+                <Link href="/experience" className="hover:text-sky-400 transition-colors text-gray-300 dark:text-gray-400">
+                  {t('navbar.experience')}
+                </Link>
+              </div>
             </div>
           </div>
 
           {/* Others Section */}
           <div>
-            <h4 className="text-white font-semibold mb-3 text-sm sm:text-base">Others</h4>
+            <h4 className="text-white font-semibold mb-3 text-sm sm:text-base">{t('footer.others')}</h4>
             <div className="space-y-2">
-              <Link href="/skills" className="block text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">
-                Skills
+              <Link href="/skills" className="block text-xs sm:text-sm text-gray-300 dark:text-gray-400 hover:text-sky-400 transition-colors">
+                {t('navbar.skills')}
               </Link>
-              <Link href="/certifications" className="block text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">
-                Certifications
+              <Link href="/certifications" className="block text-xs sm:text-sm text-gray-300 dark:text-gray-400 hover:text-sky-400 transition-colors">
+                {t('navbar.certificates')}
               </Link>
-              <Link href="/learning" className="block text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">
-                Learning
+              <Link href="/learning" className="block text-xs sm:text-sm text-gray-300 dark:text-gray-400 hover:text-sky-400 transition-colors">
+                {t('navbar.learning')}
               </Link>
-              <Link href="/experience" className="block text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">
-                Experience
+              <Link href="/experience" className="block text-xs sm:text-sm text-gray-300 dark:text-gray-400 hover:text-sky-400 transition-colors">
+                {t('navbar.experience')}
               </Link>
-              <Link href="/education" className="block text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">
-                Education
+              <Link href="/education" className="block text-xs sm:text-sm text-gray-300 dark:text-gray-400 hover:text-sky-400 transition-colors">
+                {t('navbar.education')}
               </Link>
             </div>
           </div>
         </div>
 
-        {/* CTA Section - Full Width */}
-        <div className="mb-6">
-          <h4 className="text-white font-semibold mb-3 text-sm sm:text-base">Get in Touch</h4>
-          <div className="flex flex-wrap gap-2 mb-4">
-            <a
-              href={personalInfo.calendlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white text-xs sm:text-sm font-semibold rounded-lg transition-colors"
-            >
-              <Calendar size={14} />
-              Schedule a Call
-            </a>
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-transparent border border-gray-600 hover:border-sky-500 text-gray-300 hover:text-white text-xs sm:text-sm font-semibold rounded-lg transition-colors"
-            >
-              <Mail size={14} />
-              Email Me
-            </a>
-          </div>
-          <p className="text-xs text-gray-500 dark:text-gray-500">
-            Remote-first, async-friendly
-          </p>
-        </div>
-
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-gray-800 dark:border-gray-900">
+        <div className="pt-6 border-t border-gray-700 dark:border-gray-800">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-xs sm:text-sm text-gray-400 dark:text-gray-500">
-            <p>&copy; {currentYear} Umair Azmat. All rights reserved.</p>
+            <p>&copy; {currentYear} {personalInfo.name}. {t('footer.rights')}</p>
             <p className="flex items-center gap-1">
-              Made with <Heart className="text-red-500" size={12} fill="currentColor" /> from Umair Azmat
+              {t('footer.madeWith')} <Heart className="text-red-500" size={12} fill="currentColor" /> {t('footer.from')} {personalInfo.name}
             </p>
           </div>
         </div>

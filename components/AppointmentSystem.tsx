@@ -10,20 +10,13 @@ export default function AppointmentSystem() {
   const calendlyUrl = personalInfo.calendlyUrl
 
   return (
-    <section id="appointment" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300">
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="max-w-4xl mx-auto"
-      >
-        <h2 className="text-4xl font-bold mb-4 text-center">
-          {t('appointment.title', 'Schedule')} <span className="gradient-text">{t('appointment.meeting', 'a Meeting')}</span>
-        </h2>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-          {t('appointment.description', 'Book a time to discuss your project, collaboration opportunities, or just have a chat.')}
-        </p>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="w-full"
+    >
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <motion.div
@@ -109,8 +102,7 @@ export default function AppointmentSystem() {
             </p>
           </div>
         </div>
-      </motion.div>
-    </section>
+    </motion.div>
   )
 }
 

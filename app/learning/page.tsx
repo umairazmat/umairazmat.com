@@ -5,6 +5,27 @@ import BlogBackground from '@/components/BlogBackground'
 export const metadata: Metadata = {
   title: 'Learning & Development | Umair Azmat',
   description: 'Current learning progress including AWS Cloud Certification preparation, learning milestones, and skills being developed.',
+  keywords: [
+    'continuous learning',
+    'professional development',
+    'AWS certification',
+    'skill development',
+    'learning progress',
+  ],
+  openGraph: {
+    title: 'Learning & Development | Umair Azmat',
+    description: 'Current learning progress including AWS Cloud Certification preparation and learning milestones.',
+    type: 'website',
+    url: 'https://umairazmat.com/learning',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Learning & Development | Umair Azmat',
+    description: 'Current learning progress and professional development.',
+  },
+  alternates: {
+    canonical: 'https://umairazmat.com/learning',
+  },
 }
 
 export default function LearningPage() {

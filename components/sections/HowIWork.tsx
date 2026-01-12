@@ -1,40 +1,42 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 
 export default function HowIWork() {
+  const { t } = useTranslation()
   const processSteps = [
     {
       number: '01',
-      title: 'Clarify requirements',
-      description: 'Align on goals, constraints, and success metrics before implementation.',
+      title: t('howIWork.step1Title'),
+      description: t('howIWork.step1Desc'),
     },
     {
       number: '02',
-      title: 'Design architecture',
-      description: 'Plan scalable system architecture upfront to avoid rewrites & technical debt.',
+      title: t('howIWork.step2Title'),
+      description: t('howIWork.step2Desc'),
     },
     {
       number: '03',
-      title: 'Ship in iterations',
-      description: 'Deliver in clear milestones with frequent demos & feedback loops.',
+      title: t('howIWork.step3Title'),
+      description: t('howIWork.step3Desc'),
     },
     {
       number: '04',
-      title: 'Communicate async',
-      description: 'Documented updates for remote and distributed teams.',
+      title: t('howIWork.step4Title'),
+      description: t('howIWork.step4Desc'),
     },
     {
       number: '05',
-      title: 'Production ownership',
-      description: 'Stay involved until systems are stable post-launch.',
+      title: t('howIWork.step5Title'),
+      description: t('howIWork.step5Desc'),
     },
   ]
 
   return (
-    <section id="how-i-work" className="relative flex items-center justify-center py-8 sm:py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section id="how-i-work" className="relative flex items-center justify-center py-8 sm:py-10 overflow-hidden w-full">
       {/* Same Background as Section 2 (InstantProof) */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Animated Grid Pattern */}
         <div className="absolute inset-0 opacity-10 dark:opacity-20">
           <div 
@@ -79,7 +81,7 @@ export default function HowIWork() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto">
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -89,13 +91,13 @@ export default function HowIWork() {
           className="text-center mb-6 sm:mb-8"
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-            How I Work With Teams
+            {t('howIWork.title')}
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-300 mb-2">
-            People don&apos;t just hire skills. They hire <strong className="text-sky-500 dark:text-sky-400">predictability</strong>.
+            {t('howIWork.subtitle1')} <strong className="text-sky-500 dark:text-sky-400">{t('howIWork.subtitle1Highlight')}</strong>.
           </p>
           <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-            This section explains what happens after we start working together — no surprises, no confusion.
+            {t('howIWork.subtitle2')}
           </p>
         </motion.div>
 
@@ -139,7 +141,7 @@ export default function HowIWork() {
           className="text-center"
         >
           <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-            Predictable delivery. Lower risk. Systems your team can confidently build on.
+            {t('howIWork.conclusion')}
           </p>
         </motion.div>
       </div>

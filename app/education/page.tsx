@@ -5,6 +5,27 @@ import BlogBackground from '@/components/BlogBackground'
 export const metadata: Metadata = {
   title: 'Education & Background | Umair Azmat',
   description: 'Academic achievements and educational foundation that shaped my software engineering career. Bachelor of Software Engineering from GCU Faisalabad with CGPA 3.78/4.00.',
+  keywords: [
+    'education',
+    'academic background',
+    'software engineering degree',
+    'GCU Faisalabad',
+    'bachelor degree',
+  ],
+  openGraph: {
+    title: 'Education & Background | Umair Azmat',
+    description: 'Academic achievements and educational foundation that shaped my software engineering career.',
+    type: 'website',
+    url: 'https://umairazmat.com/education',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Education & Background | Umair Azmat',
+    description: 'Academic achievements and educational foundation.',
+  },
+  alternates: {
+    canonical: 'https://umairazmat.com/education',
+  },
 }
 
 export default function EducationPage() {

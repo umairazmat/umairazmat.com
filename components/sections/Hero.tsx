@@ -2,11 +2,13 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Calendar, Github, Linkedin, Mail, Code } from 'lucide-react'
+import { Calendar, Github, Linkedin, Mail, Code, Download } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import { personalInfo } from '@/constants'
 
 export default function Hero() {
+  const { t } = useTranslation()
   const [mounted, setMounted] = useState(false)
   const heroRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
@@ -15,7 +17,7 @@ export default function Hero() {
   })
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 200])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+  const opacity = useTransform(scrollYProgress, [0, 0.9], [1, 0])
 
   useEffect(() => {
     setMounted(true)
@@ -32,12 +34,12 @@ export default function Hero() {
   return (
     <section 
       ref={heroRef}
-      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 pb-8"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 pb-8 w-full"
     >
       {/* 3D Animated Background Overlay */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Animated Grid Pattern */}
-        <div className="absolute inset-0 opacity-10 dark:opacity-20">
+        <div className="absolute inset-0 opacity-10 dark:opacity-20 overflow-hidden">
           <div 
             className="absolute inset-0 animate-grid-move"
             style={{
@@ -50,38 +52,40 @@ export default function Hero() {
           />
         </div>
 
-        {/* Floating 3D Shapes */}
+        {/* Floating 3D Shapes - Constrained to prevent overflow */}
         <motion.div
-          className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-sky-500/10 dark:from-sky-500/20 to-cyan-500/10 dark:to-cyan-500/20 rounded-full blur-3xl"
+          className="absolute top-20 left-4 sm:left-10 w-48 h-48 sm:w-72 sm:h-72 bg-gradient-to-br from-sky-500/10 dark:from-sky-500/20 to-cyan-500/10 dark:to-cyan-500/20 rounded-full blur-3xl"
           animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1],
+            x: [0, 30, 0],
+            y: [0, -30, 0],
+            scale: [1, 1.1, 1],
           }}
           transition={{
             duration: 20,
             repeat: Infinity,
             ease: "easeInOut"
           }}
+          style={{ willChange: 'transform' }}
         />
         <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-cyan-500/10 dark:from-cyan-500/20 to-sky-600/10 dark:to-sky-600/20 rounded-full blur-3xl"
+          className="absolute bottom-20 right-4 sm:right-10 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-br from-cyan-500/10 dark:from-cyan-500/20 to-sky-600/10 dark:to-sky-600/20 rounded-full blur-3xl"
           animate={{
-            x: [0, -80, 0],
-            y: [0, 60, 0],
-            scale: [1, 1.3, 1],
+            x: [0, -30, 0],
+            y: [0, 40, 0],
+            scale: [1, 1.15, 1],
           }}
           transition={{
             duration: 25,
             repeat: Infinity,
             ease: "easeInOut"
           }}
+          style={{ willChange: 'transform' }}
         />
         <motion.div
-          className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-br from-sky-400/5 dark:from-sky-400/10 to-cyan-400/5 dark:to-cyan-400/10 rounded-full blur-2xl"
+          className="absolute top-1/2 left-1/2 w-40 h-40 sm:w-64 sm:h-64 bg-gradient-to-br from-sky-400/5 dark:from-sky-400/10 to-cyan-400/5 dark:to-cyan-400/10 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2"
           animate={{
-            x: [0, 50, -50, 0],
-            y: [0, -30, 30, 0],
+            x: [0, 20, -20, 0],
+            y: [0, -20, 20, 0],
             rotate: [0, 180, 360],
           }}
           transition={{
@@ -89,6 +93,7 @@ export default function Hero() {
             repeat: Infinity,
             ease: "easeInOut"
           }}
+          style={{ willChange: 'transform' }}
         />
 
         {/* Animated Particles - Reduced */}
@@ -118,7 +123,7 @@ export default function Hero() {
       {/* Content Container */}
       <motion.div 
         style={{ y, opacity }}
-        className="relative z-10 w-full max-w-[95%] lg:max-w-[90%] xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-2 lg:gap-3 items-center">
           {/* Left Section - Content */}
@@ -130,8 +135,8 @@ export default function Hero() {
               transition={{ delay: 0.1, duration: 0.6 }}
               className="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight break-words w-full"
             >
-              I help startups and remote teams ship{' '}
-              <span className="text-sky-500 dark:text-sky-400">production-ready, scalable</span> web & AI systems
+              {t('hero.headline')}{' '}
+              <span className="text-sky-500 dark:text-sky-400">{t('hero.headlineHighlight')}</span> {t('hero.headlineEnd')}
             </motion.h1>
 
             {/* Subheadline - Pain → Promise */}
@@ -141,7 +146,7 @@ export default function Hero() {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed max-w-2xl pt-1"
             >
-              Tired of apps that break under real users? I build systems that scale, stay maintainable, and support real business growth.
+              {t('hero.subheadline')}
             </motion.p>
 
             {/* Trust Metrics */}
@@ -153,17 +158,17 @@ export default function Hero() {
             >
               <div className="flex items-center gap-1.5">
                 <span className="font-bold text-sky-500 dark:text-sky-400">{personalInfo.metrics.projectsDelivered}+</span>
-                <span className="text-gray-600 dark:text-gray-400">projects shipped</span>
+                <span className="text-gray-600 dark:text-gray-400">{t('hero.projectsShipped')}</span>
               </div>
               <div className="hidden sm:block w-1 h-1 bg-gray-400 dark:bg-gray-500 rounded-full" />
               <div className="flex items-center gap-1.5">
                 <span className="font-bold text-sky-500 dark:text-sky-400">{personalInfo.metrics.studentsTrained}+</span>
-                <span className="text-gray-600 dark:text-gray-400">students trained</span>
+                <span className="text-gray-600 dark:text-gray-400">{t('hero.studentsTrained')}</span>
               </div>
               <div className="hidden sm:block w-1 h-1 bg-gray-400 dark:bg-gray-500 rounded-full" />
               <div className="flex items-center gap-1.5">
                 <span className="font-bold text-sky-500 dark:text-sky-400">1000+</span>
-                <span className="text-gray-600 dark:text-gray-400">users impacted</span>
+                <span className="text-gray-600 dark:text-gray-400">{t('hero.usersImpacted')}</span>
               </div>
             </motion.div>
 
@@ -178,7 +183,7 @@ export default function Hero() {
                 href="#projects"
                 className="px-5 py-2.5 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-sky-500/50 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
               >
-                See Selected Work
+                {t('hero.seeSelectedWork')}
               </a>
               
               <a
@@ -188,7 +193,16 @@ export default function Hero() {
                 className="px-5 py-2.5 bg-transparent border-2 border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white dark:text-sky-400 dark:hover:text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
               >
                 <Calendar size={14} />
-                Schedule a Call
+                {t('hero.scheduleCall')}
+              </a>
+              
+              <a
+                href={personalInfo.resumeUrl}
+                download
+                className="px-5 py-2.5 bg-transparent border-2 border-gray-500 text-gray-700 hover:bg-gray-500 hover:text-white dark:text-gray-300 dark:border-gray-400 dark:hover:bg-gray-400 dark:hover:text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              >
+                <Download size={14} />
+                {t('hero.downloadResume')}
               </a>
             </motion.div>
           </div>
@@ -198,7 +212,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={mounted ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="flex flex-col items-center lg:items-center gap-4"
+            className="flex flex-col items-center lg:items-center gap-4 pt-8 sm:pt-0"
           >
             {/* Profile Image */}
             <motion.div 
@@ -211,18 +225,20 @@ export default function Hero() {
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
+              style={{ willChange: 'transform' }}
             >
               {/* Glowing Ring */}
               <motion.div
                 className="absolute inset-0 rounded-full border-4 border-sky-500/50"
                 animate={{
                   rotate: 360,
-                  scale: [1, 1.05, 1],
+                  scale: [1, 1.03, 1],
                 }}
                 transition={{
                   rotate: { duration: 20, repeat: Infinity, ease: "linear" },
                   scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }
                 }}
+                style={{ willChange: 'transform' }}
               />
               
               {/* Image Container */}
@@ -284,7 +300,7 @@ export default function Hero() {
                 transition={{ delay: 0.8, duration: 0.6 }}
                 className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 text-center font-medium"
               >
-                Remote-first • Async-friendly • Production-focused
+                {t('hero.workStyle')}
               </motion.p>
             </motion.div>
           </motion.div>

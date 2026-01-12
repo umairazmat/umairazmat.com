@@ -23,7 +23,7 @@ import ChatbotFloatingButton from '@/components/ChatbotFloatingButton'
 
 export default function Home() {
   return (
-    <>
+    <div className="overflow-x-hidden w-full">
       {/* Primary User Journey - Recruiter-Focused */}
       <Hero />
       <AboutMe />
@@ -40,7 +40,7 @@ export default function Home() {
       <div id="chatbot-trigger" />
       <WhatsAppButton />
       <ChatbotFloatingButton />
-    </>
+    </div>
   )
 }
 
