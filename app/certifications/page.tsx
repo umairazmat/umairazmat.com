@@ -5,6 +5,28 @@ import BlogBackground from '@/components/BlogBackground'
 export const metadata: Metadata = {
   title: 'Certifications & Licenses | Umair Azmat',
   description: 'Professional certifications including AWS re/Start Graduate, Stanford Code in Place Mentor, IBM Full Stack Developer, Meta Front-End Developer, and various hackathon certificates.',
+  keywords: [
+    'AWS certification',
+    'professional certifications',
+    'IBM full stack developer',
+    'Meta front-end developer',
+    'Stanford mentor',
+    'hackathon certificates',
+  ],
+  openGraph: {
+    title: 'Certifications & Licenses | Umair Azmat',
+    description: 'Professional certifications including AWS, IBM, Meta, and Stanford certifications.',
+    type: 'website',
+    url: 'https://umairazmat.com/certifications',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Certifications & Licenses | Umair Azmat',
+    description: 'Professional certifications and achievements.',
+  },
+  alternates: {
+    canonical: 'https://umairazmat.com/certifications',
+  },
 }
 
 export default function CertificationsPage() {

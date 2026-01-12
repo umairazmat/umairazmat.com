@@ -11,13 +11,13 @@ export default function About() {
   const aboutText = `${t('about.summary')}. ${personalInfo.about.highlights.join('. ')}`
   
   return (
-    <section id="about" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300 px-4 sm:px-6">
+    <section id="about" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300 w-full overflow-x-hidden">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="max-w-6xl mx-auto"
+        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
       >
         <div className="flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-12 items-center md:items-start">
           {/* Profile Image - Now in About Section */}
@@ -26,7 +26,7 @@ export default function About() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="flex-shrink-0 w-full sm:w-48 md:w-56 lg:w-64"
+            className="flex-shrink-0 w-full sm:w-48 md:w-56 lg:w-64 pt-4 sm:pt-0"
           >
             <div className="relative w-full aspect-square max-w-[256px] mx-auto md:mx-0 rounded-2xl overflow-hidden border-4 border-primary-200 dark:border-primary-800 shadow-xl bg-white dark:bg-gray-800">
               <Image

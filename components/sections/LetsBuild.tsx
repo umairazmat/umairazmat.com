@@ -2,30 +2,32 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { Calendar, Mail, MessageSquare, CheckCircle2, Clock, Globe } from 'lucide-react'
 import { personalInfo } from '@/constants'
 import ContactModal from '@/components/ContactModal'
 
 export default function LetsBuild() {
+  const { t } = useTranslation()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const whatWeCanDo = [
-    'Discuss your project, MVP, or system architecture',
-    'Walk through technical trade-offs and design decisions',
-    'Explore AI-assisted features or scalable cloud deployments',
+    t('letsBuild.whatWeCanDo1'),
+    t('letsBuild.whatWeCanDo2'),
+    t('letsBuild.whatWeCanDo3'),
   ]
 
   const availability = [
-    'Remote-first, async-friendly work style',
-    'Immediate availability for new projects',
-    'Flexible across time zones',
+    t('letsBuild.availability1'),
+    t('letsBuild.availability2'),
+    t('letsBuild.availability3'),
   ]
 
   return (
     <>
       <section id="contact" className="relative flex items-center justify-center py-8 sm:py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Same Background as Other Sections */}
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {/* Animated Grid Pattern */}
           <div className="absolute inset-0 opacity-10 dark:opacity-20">
             <div 
@@ -70,7 +72,7 @@ export default function LetsBuild() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 w-full max-w-5xl mx-auto">
+        <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -80,10 +82,10 @@ export default function LetsBuild() {
             className="text-center mb-6 sm:mb-8"
           >
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-              Let&apos;s Build Something Together
+              {t('letsBuild.title')}
             </h2>
             <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300">
-              Ready to ship production-ready systems that scale?
+              {t('letsBuild.subtitle')}
             </p>
           </motion.div>
 
@@ -96,7 +98,7 @@ export default function LetsBuild() {
             className="mb-6"
           >
             <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-4 text-center">
-              Get in Touch
+              {t('letsBuild.getInTouch')}
             </h3>
             
             {/* Three buttons in one row */}
@@ -117,10 +119,10 @@ export default function LetsBuild() {
                 </div>
                 <div>
                   <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
-                    Schedule a Call
+                    {t('letsBuild.scheduleCall')}
                   </h4>
                   <p className="text-xs text-gray-600 dark:text-gray-400">
-                    Pick a time that works for you.
+                    {t('letsBuild.scheduleCallDesc')}
                   </p>
                 </div>
               </motion.a>
@@ -139,7 +141,7 @@ export default function LetsBuild() {
                 </div>
                 <div>
                   <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
-                    Email Me
+                    {t('letsBuild.emailMe')}
                   </h4>
                   <p className="text-xs text-gray-600 dark:text-gray-400 break-all">
                     {personalInfo.email}
@@ -161,10 +163,10 @@ export default function LetsBuild() {
                 </div>
                 <div>
                   <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
-                    Send a Message
+                    {t('letsBuild.sendMessage')}
                   </h4>
                   <p className="text-xs text-gray-600 dark:text-gray-400">
-                    Fill out the form below for project inquiries or questions.
+                    {t('letsBuild.sendMessageDesc')}
                   </p>
                 </div>
               </motion.button>
@@ -180,7 +182,7 @@ export default function LetsBuild() {
             className="mb-6 p-4 bg-gradient-to-r from-sky-50 to-cyan-50 dark:from-sky-900/20 dark:to-cyan-900/20 backdrop-blur-sm rounded-lg border border-sky-200 dark:border-sky-800"
           >
             <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 text-center">
-              <strong className="text-sky-600 dark:text-sky-400">Quick Response:</strong> I typically respond within 24 hours. For urgent matters, please schedule a call or send an email directly.
+              <strong className="text-sky-600 dark:text-sky-400">{t('letsBuild.quickResponse')}:</strong> {t('letsBuild.quickResponseDesc')}
             </p>
           </motion.div>
 
@@ -196,7 +198,7 @@ export default function LetsBuild() {
             >
               <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
                 <CheckCircle2 className="text-sky-500 dark:text-sky-400" size={18} />
-                What We Can Do Together
+                {t('letsBuild.whatWeCanDoTitle')}
               </h3>
               <ul className="space-y-2">
                 {whatWeCanDo.map((item, index) => (
@@ -218,7 +220,7 @@ export default function LetsBuild() {
             >
               <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
                 <Clock className="text-sky-500 dark:text-sky-400" size={18} />
-                Availability
+                {t('letsBuild.availabilityTitle')}
               </h3>
               <ul className="space-y-2">
                 {availability.map((item, index) => (

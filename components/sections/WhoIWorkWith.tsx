@@ -1,39 +1,41 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { Rocket, Users, Shield, Code, XCircle } from 'lucide-react'
 
 export default function WhoIWorkWith() {
+  const { t } = useTranslation()
   const idealClients = [
     {
       icon: Rocket,
-      title: 'Early-stage startups shipping MVP → scaling products',
+      title: t('whoIWorkWith.ideal1'),
     },
     {
       icon: Users,
-      title: 'Remote engineering teams needing ownership',
+      title: t('whoIWorkWith.ideal2'),
     },
     {
       icon: Code,
-      title: 'Product teams maintaining live systems',
+      title: t('whoIWorkWith.ideal3'),
     },
     {
       icon: Shield,
-      title: 'Founders who value long-term stability over shortcuts',
+      title: t('whoIWorkWith.ideal4'),
     },
   ]
 
   const notGoodFit = [
-    'You want "just UI" with no backend or architecture thinking',
-    'You want rushed delivery without planning',
-    'You don\'t care about maintainability, scalability, or long-term stability',
-    "You are not open to feedback or collaboration during the development process",
+    t('whoIWorkWith.notFit1'),
+    t('whoIWorkWith.notFit2'),
+    t('whoIWorkWith.notFit3'),
+    t('whoIWorkWith.notFit4'),
   ]
 
   return (
     <section id="who-i-work-with" className="relative flex items-center justify-center py-8 sm:py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Same Background as Other Sections */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Animated Grid Pattern */}
         <div className="absolute inset-0 opacity-10 dark:opacity-20">
           <div 
@@ -78,7 +80,7 @@ export default function WhoIWorkWith() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -88,10 +90,10 @@ export default function WhoIWorkWith() {
           className="text-center mb-6 sm:mb-8"
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            Who I Work With
+            {t('whoIWorkWith.title')}
           </h2>
           <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 italic">
-            &quot;He&apos;s talking to me.&quot;
+            &quot;{t('whoIWorkWith.subtitle')}&quot;
           </p>
         </motion.div>
 
@@ -106,7 +108,7 @@ export default function WhoIWorkWith() {
             className="space-y-3 sm:space-y-4"
           >
             <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              Ideal Clients / Teams
+              {t('whoIWorkWith.idealTitle')}
             </h3>
             {idealClients.map((client, index) => {
               const Icon = client.icon
@@ -143,7 +145,7 @@ export default function WhoIWorkWith() {
             className="space-y-3 sm:space-y-4"
           >
             <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-4">
-              Not a Good Fit If
+              {t('whoIWorkWith.notFitTitle')}
             </h3>
             {notGoodFit.map((item, index) => (
               <motion.div

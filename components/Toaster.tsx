@@ -6,6 +6,9 @@ export default function Toaster() {
   return (
     <HotToaster
       position="top-right"
+      containerStyle={{
+        zIndex: 100000,
+      }}
       toastOptions={{
         duration: 4000,
         style: {

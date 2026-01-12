@@ -6,12 +6,14 @@ import enUS from './locales/en-US.json'
 import enGB from './locales/en-GB.json'
 import ar from './locales/ar.json'
 import de from './locales/de.json'
+import it from './locales/it.json'
 
 const resources = {
   'en-US': { translation: enUS },
   'en-GB': { translation: enGB },
   ar: { translation: ar },
   de: { translation: de },
+  it: { translation: it },
 }
 
 i18n
@@ -20,7 +22,7 @@ i18n
   .init({
     resources,
     fallbackLng: 'en-US',
-    supportedLngs: ['en-US', 'en-GB', 'ar', 'de'],
+    supportedLngs: ['en-US', 'en-GB', 'ar', 'de', 'it'],
     detection: {
       order: ['localStorage', 'navigator', 'htmlTag'],
       caches: ['localStorage'],

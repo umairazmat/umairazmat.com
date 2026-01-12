@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+export const dynamic = 'force-dynamic'
+
 // This is a placeholder for analytics tracking
 // In production, you would store this data in a database
 // For now, we'll just log it (you can integrate with your preferred analytics service)

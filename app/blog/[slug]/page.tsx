@@ -34,15 +34,30 @@ export async function generateMetadata({
     }
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://umairazmat.com'
+  const postUrl = `${siteUrl}/blog/${params.slug}`
+
   return {
     title: post.title,
     description: post.excerpt,
+    keywords: post.tags,
+    authors: [{ name: post.author }],
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: 'article',
       publishedTime: post.date,
       tags: post.tags,
+      url: postUrl,
+      siteName: 'Umair Azmat Portfolio',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+    },
+    alternates: {
+      canonical: postUrl,
     },
   }
 }
@@ -89,8 +104,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const readingTime = calculateReadingTime(post.content)
   const relatedPosts = getRelatedPosts(params.slug, allPosts)
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://umairazmat.com'
-  const postUrl = `${siteUrl}/blog/${params.slug}`
 
   return (
     <article className="min-h-screen pt-16 relative overflow-hidden">
@@ -162,7 +175,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               {/* Share Buttons */}
               <div className="mb-6">
-                <BlogShareButtons title={post.title} url={postUrl} excerpt={post.excerpt} />
+                <BlogShareButtons 
+                  title={post.title} 
+                  url={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://umairazmat.com'}/blog/${params.slug}`} 
+                  excerpt={post.excerpt} 
+                />
               </div>
 
               {/* Comments Section */}
