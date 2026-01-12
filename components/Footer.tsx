@@ -1,18 +1,31 @@
 'use client'
 
 import Link from 'next/link'
-import { Github, Linkedin, Mail, Heart } from 'lucide-react'
+import { usePathname } from 'next/navigation'
+import { Github, Linkedin, Mail, Heart, Calendar, Briefcase } from 'lucide-react'
 import { personalInfo } from '@/constants'
 import { useTranslation } from 'react-i18next'
 
 export default function Footer() {
   const { t } = useTranslation()
+  const pathname = usePathname()
   const currentYear = new Date().getFullYear()
+  
+  // Check if we're on the homepage
+  const isHomePage = pathname === '/'
+  
+  // Helper function to get proper href (prepend homepage if not on homepage)
+  const getHref = (href: string) => {
+    if (href.startsWith('#')) {
+      return isHomePage ? href : `/${href}`
+    }
+    return href
+  }
 
   const socialLinks = [
-    { icon: Github, href: personalInfo.social.github, label: 'GitHub' },
     { icon: Linkedin, href: personalInfo.social.linkedin, label: 'LinkedIn' },
-    { icon: Mail, href: `mailto:${personalInfo.email}`, label: 'Email' },
+    { icon: Github, href: personalInfo.social.github, label: 'GitHub' },
+    { icon: Briefcase, href: '#', label: 'Upwork' }, // Add Upwork URL if available
   ]
 
   return (
@@ -36,16 +49,16 @@ export default function Footer() {
           {/* Brand Section */}
           <div>
             <h3 className="text-white text-lg sm:text-xl font-bold mb-2">Umair Azmat</h3>
-            <p className="text-gray-400 text-xs sm:text-sm mb-3">
+            <p className="text-gray-400 text-xs sm:text-sm mb-4">
               Full Stack Developer & AI Engineer
             </p>
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 mb-4">
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={href === '#' ? undefined : '_blank'}
+                  rel={href === '#' ? undefined : 'noopener noreferrer'}
                   className="text-gray-400 hover:text-sky-400 dark:hover:text-sky-400 transition-colors"
                   aria-label={label}
                 >
@@ -53,62 +66,96 @@ export default function Footer() {
                 </a>
               ))}
             </div>
+            <div className="text-xs text-gray-500 dark:text-gray-500">
+              Remote-first, async-friendly
+            </div>
           </div>
 
           {/* Quick Links */}
           <div>
             <h4 className="text-white font-semibold mb-3 text-sm sm:text-base">Quick Links</h4>
-            <ul className="space-y-1.5">
-              <li>
-                <Link href="#approach" className="hover:text-white transition-colors text-xs sm:text-sm">
-                  Approach
-                </Link>
-              </li>
-              <li>
-                <Link href="#projects" className="hover:text-white transition-colors text-xs sm:text-sm">
-                  Work
-                </Link>
-              </li>
-              <li>
-                <Link href="#how-i-work" className="hover:text-white transition-colors text-xs sm:text-sm">
-                  Process
-                </Link>
-              </li>
-              <li>
-                <Link href="#who-i-work-with" className="hover:text-white transition-colors text-xs sm:text-sm">
-                  Clients
-                </Link>
-              </li>
-              <li>
-                <Link href="#contact" className="hover:text-white transition-colors text-xs sm:text-sm">
-                  Contact
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="hover:text-white transition-colors text-xs sm:text-sm">
-                  Blog
-                </Link>
-              </li>
-            </ul>
+            <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-xs sm:text-sm">
+              <Link href={getHref('#about')} className="hover:text-white transition-colors text-gray-400">
+                About
+              </Link>
+              <span className="text-gray-600">|</span>
+              <Link href="/projects" className="hover:text-white transition-colors text-gray-400">
+                Projects
+              </Link>
+              <span className="text-gray-600">|</span>
+              <Link href="/skills" className="hover:text-white transition-colors text-gray-400">
+                Skills
+              </Link>
+              <span className="text-gray-600">|</span>
+              <Link href="/certifications" className="hover:text-white transition-colors text-gray-400">
+                Certifications
+              </Link>
+              <span className="text-gray-600">|</span>
+              <Link href="/experiences" className="hover:text-white transition-colors text-gray-400">
+                Experiences
+              </Link>
+              <span className="text-gray-600">|</span>
+              <Link href="/learning" className="hover:text-white transition-colors text-gray-400">
+                Learning
+              </Link>
+              <span className="text-gray-600">|</span>
+              <Link href="/blog" className="hover:text-white transition-colors text-gray-400">
+                Blog
+              </Link>
+              <span className="text-gray-600">|</span>
+              <Link href={getHref('#contact')} className="hover:text-white transition-colors text-gray-400">
+                Contact
+              </Link>
+            </div>
           </div>
 
-          {/* Contact Info */}
+          {/* Others Section */}
           <div>
-            <h4 className="text-white font-semibold mb-3 text-sm sm:text-base">Connect</h4>
-            <ul className="space-y-1.5 text-xs sm:text-sm">
-              <li>
-                <a
-                  href={`mailto:${personalInfo.email}`}
-                  className="hover:text-white transition-colors text-gray-400"
-                >
-                  {personalInfo.email}
-                </a>
-              </li>
-              <li className="text-gray-400">
-                Available for remote opportunities
-              </li>
-            </ul>
+            <h4 className="text-white font-semibold mb-3 text-sm sm:text-base">Others</h4>
+            <div className="space-y-2">
+              <Link href="/skills" className="block text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">
+                Skills
+              </Link>
+              <Link href="/certifications" className="block text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">
+                Certifications
+              </Link>
+              <Link href="/learning" className="block text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">
+                Learning
+              </Link>
+              <Link href="/experience" className="block text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">
+                Experience
+              </Link>
+              <Link href="/education" className="block text-xs sm:text-sm text-gray-400 hover:text-white transition-colors">
+                Education
+              </Link>
+            </div>
           </div>
+        </div>
+
+        {/* CTA Section - Full Width */}
+        <div className="mb-6">
+          <h4 className="text-white font-semibold mb-3 text-sm sm:text-base">Get in Touch</h4>
+          <div className="flex flex-wrap gap-2 mb-4">
+            <a
+              href={personalInfo.calendlyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white text-xs sm:text-sm font-semibold rounded-lg transition-colors"
+            >
+              <Calendar size={14} />
+              Schedule a Call
+            </a>
+            <a
+              href={`mailto:${personalInfo.email}`}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-transparent border border-gray-600 hover:border-sky-500 text-gray-300 hover:text-white text-xs sm:text-sm font-semibold rounded-lg transition-colors"
+            >
+              <Mail size={14} />
+              Email Me
+            </a>
+          </div>
+          <p className="text-xs text-gray-500 dark:text-gray-500">
+            Remote-first, async-friendly
+          </p>
         </div>
 
         {/* Bottom Bar */}
