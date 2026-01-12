@@ -22,15 +22,15 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     setMounted(true)
     
-    // Get theme from localStorage or default to system
-    let savedTheme: Theme = 'system'
+    // Get theme from localStorage or default to dark
+    let savedTheme: Theme = 'dark'
     if (typeof window !== 'undefined') {
       const stored = localStorage.getItem('theme') as Theme
       if (stored && ['light', 'dark', 'system'].includes(stored)) {
         savedTheme = stored
       } else {
-        // Default to system if no preference saved
-        savedTheme = 'system'
+        // Default to dark if no preference saved
+        savedTheme = 'dark'
       }
     }
     

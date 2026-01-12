@@ -79,6 +79,27 @@ const educationItems: EducationItem[] = [
     skills: ['Algorithms', 'HTML', 'React.js', 'CSS', 'GitHub', 'Next.js', 'Data Structures', 'APIs', 'JavaScript'],
   },
   {
+    id: 'aws-restart',
+    institution: 'AWS re/Start',
+    degree: 'Cloud Computing & AWS Certification',
+    field: 'Cloud Computing, AWS Services, DevOps',
+    period: '2023 - 2024',
+    grade: 'Completed',
+    type: 'training',
+    achievements: [
+      'AWS Cloud Practitioner Certification',
+      'Hands-on experience with AWS core services',
+    ],
+    coursework: [
+      'AWS Core Services: EC2, S3, Lambda, RDS',
+      'Cloud Architecture & Design Patterns',
+      'DevOps: CI/CD, Infrastructure as Code',
+      'Security: IAM, VPC, CloudWatch',
+      'Serverless Computing & Containers',
+    ],
+    skills: ['AWS', 'Cloud Computing', 'DevOps', 'CI/CD', 'Infrastructure as Code', 'Serverless', 'Docker', 'Linux'],
+  },
+  {
     id: 'unique-group',
     institution: 'Unique Group of Institutions',
     degree: 'High School Diploma',
@@ -108,10 +129,14 @@ const educationItems: EducationItem[] = [
   },
 ]
 
-export default function Education() {
+interface EducationProps {
+  hideHeading?: boolean
+}
+
+export default function Education({ hideHeading = false }: EducationProps) {
   const { t } = useTranslation()
-  const [activeTab, setActiveTab] = useState<'university' | 'training' | 'school'>('university')
-  const [expandedId, setExpandedId] = useState<string | null>('gcu-faisalabad')
+  const [activeTab, setActiveTab] = useState<'university' | 'training' | 'school'>('training')
+  const [expandedId, setExpandedId] = useState<string | null>(null)
 
   const educationText = `Education: Government College University, Faisalabad. Bachelor of Software Engineering with CGPA 3.78 out of 4.00, Grade A+. Silver Medalist, 2nd Position in Department of Software Engineering.`
 
@@ -123,7 +148,7 @@ export default function Education() {
   }
 
   return (
-    <section id="education" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300 px-4 sm:px-6">
+    <section id="education" className="transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -131,16 +156,20 @@ export default function Education() {
         transition={{ duration: 0.6 }}
         className="max-w-6xl mx-auto"
       >
-        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
-          <GraduationCap size={24} className="sm:w-8 sm:h-8 text-primary-600 dark:text-primary-400" />
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
-            {t('education.title', 'Education')} <span className="gradient-text">{t('education.background', 'Background')}</span>
-          </h2>
-          <TextToSpeech text={educationText} sectionId="education" />
-        </div>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base px-4">
-          {t('education.description', 'Academic achievements and educational foundation that shaped my software engineering career.')}
-        </p>
+        {!hideHeading && (
+          <>
+            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+              <GraduationCap size={24} className="sm:w-8 sm:h-8 text-sky-500 dark:text-sky-400" />
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-gray-900 dark:text-white">
+                {t('education.title', 'Education')} <span className="text-sky-500 dark:text-sky-400">{t('education.background', 'Background')}</span>
+              </h2>
+              <TextToSpeech text={educationText} sectionId="education" />
+            </div>
+            <p className="text-center text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base px-4">
+              {t('education.description', 'Academic achievements and educational foundation that shaped my software engineering career.')}
+            </p>
+          </>
+        )}
 
         {/* Featured University Education - GCUF */}
         <motion.div
@@ -148,12 +177,12 @@ export default function Education() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="card mb-6 sm:mb-8 border-2 border-primary-200 dark:border-primary-800 bg-gradient-to-br from-primary-50/50 dark:from-primary-900/10 to-white dark:to-gray-800 p-4 sm:p-6"
+          className="mb-6 sm:mb-8 p-4 sm:p-6 rounded-xl border-2 border-sky-200/50 dark:border-sky-700/50"
         >
           <div className="flex flex-col md:flex-row gap-4 sm:gap-6">
             {/* University Logo/Icon - Featured */}
             <div className="flex-shrink-0 flex justify-center md:justify-start">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-primary-600 dark:bg-primary-700 rounded-xl flex items-center justify-center shadow-lg">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-sky-500 dark:bg-sky-600 rounded-xl flex items-center justify-center shadow-lg">
                 <GraduationCap size={40} className="sm:w-14 sm:h-14 md:w-14 md:h-14 text-white" />
               </div>
             </div>
@@ -166,14 +195,14 @@ export default function Education() {
                     <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-1 line-clamp-2">
                       {gcuEducation.institution}
                     </h3>
-                    <p className="text-lg sm:text-xl text-primary-600 dark:text-primary-400 font-semibold mb-1 line-clamp-1">
+                    <p className="text-lg sm:text-xl text-sky-500 dark:text-sky-400 font-semibold mb-1 line-clamp-1">
                       {gcuEducation.degree}
                     </p>
                     <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-2 sm:mb-3 line-clamp-1">
                       {gcuEducation.field}
                     </p>
                   </div>
-                  <div className="px-2 sm:px-3 py-1 bg-primary-700 dark:bg-primary-600 text-white rounded-full text-[10px] sm:text-xs font-bold flex-shrink-0 self-start">
+                  <div className="px-2 sm:px-3 py-1 bg-sky-500 dark:bg-sky-600 text-white rounded-full text-[10px] sm:text-xs font-bold flex-shrink-0 self-start">
                     FEATURED
                   </div>
                 </div>
@@ -191,20 +220,20 @@ export default function Education() {
 
               {/* CGPA and Achievement Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 mb-3 sm:mb-4">
-                <div className="p-2 sm:p-3 bg-white dark:bg-gray-700 rounded-lg border border-primary-200 dark:border-primary-800">
+                <div className="p-2 sm:p-3 rounded-lg border border-sky-200/30 dark:border-sky-700/30">
                   <div className="flex items-center gap-1.5 sm:gap-2 mb-1">
-                    <Trophy size={16} className="sm:w-4.5 sm:h-4.5 text-primary-600 dark:text-primary-400" />
+                    <Trophy size={16} className="sm:w-4.5 sm:h-4.5 text-sky-500 dark:text-sky-400" />
                     <h4 className="font-bold text-xs sm:text-sm text-gray-900 dark:text-white">CGPA</h4>
                   </div>
-                  <p className="text-xl sm:text-2xl font-bold text-primary-600 dark:text-primary-400">
+                  <p className="text-xl sm:text-2xl font-bold text-sky-500 dark:text-sky-400">
                     3.78 / 4.00
                   </p>
                   <p className="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">(A+)</p>
                 </div>
 
-                <div className="p-2 sm:p-3 bg-white dark:bg-gray-700 rounded-lg border border-primary-200 dark:border-primary-800">
+                <div className="p-2 sm:p-3 rounded-lg border border-sky-200/30 dark:border-sky-700/30">
                   <div className="flex items-center gap-1.5 sm:gap-2 mb-1">
-                    <Medal size={16} className="sm:w-4.5 sm:h-4.5 text-primary-600 dark:text-primary-400" />
+                    <Medal size={16} className="sm:w-4.5 sm:h-4.5 text-sky-500 dark:text-sky-400" />
                     <h4 className="font-bold text-xs sm:text-sm text-gray-900 dark:text-white">Achievement</h4>
                   </div>
                   <p className="text-base sm:text-lg font-bold text-gray-900 dark:text-white">
@@ -217,14 +246,14 @@ export default function Education() {
               {/* Achievements - Compact */}
               <div className="mb-3 sm:mb-4">
                 <h4 className="font-semibold text-xs sm:text-sm text-gray-900 dark:text-white mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2">
-                  <Trophy size={14} className="sm:w-4 sm:h-4 text-primary-600 dark:text-primary-400" />
+                  <Trophy size={14} className="sm:w-4 sm:h-4 text-sky-500 dark:text-sky-400" />
                   {t('education.achievements', 'Achievements')}
                 </h4>
                 <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {gcuEducation.achievements?.slice(0, 3).map((achievement, idx) => (
                     <span
                       key={idx}
-                      className="px-2 sm:px-2.5 py-0.5 sm:py-1 bg-primary-100 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 rounded-lg text-[10px] sm:text-xs font-medium border border-primary-200 dark:border-primary-800"
+                      className="px-2 sm:px-2.5 py-0.5 sm:py-1 bg-sky-100/50 dark:bg-sky-900/20 text-sky-700 dark:text-sky-300 rounded-lg text-[10px] sm:text-xs font-medium border border-sky-200/50 dark:border-sky-700/50"
                     >
                       {achievement.split(':')[0]}
                     </span>
@@ -235,14 +264,14 @@ export default function Education() {
               {/* Key Coursework - Compact */}
               <div>
                 <h4 className="font-semibold text-xs sm:text-sm text-gray-900 dark:text-white mb-1.5 sm:mb-2 flex items-center gap-1.5 sm:gap-2">
-                  <BookOpen size={14} className="sm:w-4 sm:h-4 text-primary-600 dark:text-primary-400" />
+                  <BookOpen size={14} className="sm:w-4 sm:h-4 text-sky-500 dark:text-sky-400" />
                   {t('education.keyCoursework', 'Key Coursework')}
                 </h4>
                 <div className="flex flex-wrap gap-1 sm:gap-1.5">
                   {gcuEducation.coursework?.map((course, idx) => (
                     <span
                       key={idx}
-                      className="px-1.5 sm:px-2 py-0.5 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-[10px] sm:text-xs border border-gray-200 dark:border-gray-600"
+                      className="px-1.5 sm:px-2 py-0.5 text-gray-700 dark:text-gray-300 rounded text-[10px] sm:text-xs border border-sky-200/30 dark:border-sky-700/30"
                     >
                       {course}
                     </span>
@@ -266,10 +295,10 @@ export default function Education() {
                   setActiveTab(tab.key)
                   setExpandedId(null)
                 }}
-                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-medium text-xs sm:text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-medium text-xs sm:text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 ${
                   activeTab === tab.key
-                    ? 'bg-primary-700 text-white dark:bg-primary-600'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                    ? 'bg-sky-500 text-white dark:bg-sky-600'
+                    : 'border border-sky-200/50 dark:border-sky-700/50 text-gray-800 dark:text-gray-300 hover:border-sky-300 dark:hover:border-sky-600'
                 }`}
               >
                 {tab.label}
@@ -278,7 +307,7 @@ export default function Education() {
           </div>
 
           {/* Other Education Items - Compact Accordion */}
-          <div className="space-y-2 sm:space-y-3">
+          <div className="space-y-3 sm:space-y-4">
             {filteredItems.map((edu, index) => (
               <motion.div
                 key={edu.id}
@@ -286,32 +315,44 @@ export default function Education() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05, duration: 0.3 }}
-                className="card p-3 sm:p-4"
+                className={`rounded-xl p-4 sm:p-5 border-2 transition-all ${
+                  edu.type === 'training' 
+                    ? 'border-sky-400/50 dark:border-sky-500/50 hover:border-sky-500 dark:hover:border-sky-400 shadow-lg' 
+                    : 'border-gray-200/30 dark:border-gray-700/30 hover:border-sky-300/50 dark:hover:border-sky-600/50'
+                }`}
               >
                 <button
                   onClick={() => toggleExpand(edu.id)}
-                  className="w-full flex items-center justify-between gap-2 sm:gap-4 text-left focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-lg"
+                  className="w-full flex items-center justify-between gap-2 sm:gap-4 text-left focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 rounded-lg"
                   aria-expanded={expandedId === edu.id}
                 >
-                  <div className="flex items-start gap-2 sm:gap-3 flex-1 min-w-0">
-                    <div className="p-1.5 sm:p-2 bg-primary-100 dark:bg-primary-900/20 rounded-lg flex-shrink-0">
+                  <div className="flex items-start gap-3 sm:gap-4 flex-1 min-w-0">
+                    <div className={`p-2 sm:p-3 rounded-lg flex-shrink-0 ${
+                      edu.type === 'training' 
+                        ? 'bg-sky-500/20 dark:bg-sky-500/30' 
+                        : 'bg-sky-100/30 dark:bg-sky-900/20'
+                    }`}>
                       {edu.type === 'training' ? (
-                        <Medal size={16} className="sm:w-5 sm:h-5 text-primary-600 dark:text-primary-400" />
+                        <Medal size={20} className="sm:w-6 sm:h-6 text-sky-500 dark:text-sky-400" />
                       ) : (
-                        <School size={16} className="sm:w-5 sm:h-5 text-primary-600 dark:text-primary-400" />
+                        <School size={20} className="sm:w-6 sm:h-6 text-sky-500 dark:text-sky-400" />
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-0.5 sm:mb-1 line-clamp-1">
+                      <h3 className={`font-bold text-gray-900 dark:text-white mb-1 sm:mb-1.5 line-clamp-1 ${
+                        edu.type === 'training' ? 'text-base sm:text-lg' : 'text-sm sm:text-base'
+                      }`}>
                         {edu.institution}
                       </h3>
-                      <p className="text-xs sm:text-sm text-primary-600 dark:text-primary-400 font-medium mb-0.5 sm:mb-1 line-clamp-1">
+                      <p className={`text-sky-500 dark:text-sky-400 font-medium mb-1 sm:mb-1.5 line-clamp-1 ${
+                        edu.type === 'training' ? 'text-sm sm:text-base' : 'text-xs sm:text-sm'
+                      }`}>
                         {edu.degree}
                       </p>
-                      <div className="flex items-center gap-2 sm:gap-3 text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">
+                      <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                         <span className="line-clamp-1">{edu.period}</span>
                         <span>•</span>
-                        <span className="line-clamp-1">Grade: {edu.grade}</span>
+                        <span className="line-clamp-1">{edu.grade}</span>
                       </div>
                     </div>
                   </div>
@@ -341,7 +382,7 @@ export default function Education() {
                             <ul className="space-y-1">
                               {edu.achievements.map((achievement, idx) => (
                                 <li key={idx} className="text-xs text-gray-700 dark:text-gray-300 flex items-start gap-1.5">
-                                  <div className="w-1 h-1 bg-primary-600 rounded-full mt-1.5 flex-shrink-0" />
+                                  <div className="w-1 h-1 bg-sky-500 rounded-full mt-1.5 flex-shrink-0" />
                                   <span>{achievement}</span>
                                 </li>
                               ))}
@@ -358,7 +399,7 @@ export default function Education() {
                               {edu.coursework.map((course, idx) => (
                                 <span
                                   key={idx}
-                                  className="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs"
+                                  className="px-2 py-0.5 text-gray-700 dark:text-gray-300 rounded text-xs border border-sky-200/30 dark:border-sky-700/30"
                                 >
                                   {course}
                                 </span>
@@ -376,13 +417,13 @@ export default function Education() {
                               {edu.skills.slice(0, 6).map((skill, idx) => (
                                 <span
                                   key={idx}
-                                  className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded text-[10px]"
+                                  className="px-1.5 py-0.5 text-gray-600 dark:text-gray-400 rounded text-[10px] border border-sky-200/30 dark:border-sky-700/30"
                                 >
                                   {skill}
                                 </span>
                               ))}
                               {edu.skills.length > 6 && (
-                                <span className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded text-[10px]">
+                                <span className="px-1.5 py-0.5 text-gray-600 dark:text-gray-400 rounded text-[10px] border border-sky-200/30 dark:border-sky-700/30">
                                   +{edu.skills.length - 6}
                                 </span>
                               )}
