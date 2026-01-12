@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { Briefcase, MapPin, Calendar, Building2 } from 'lucide-react'
 import BlogBackground from '@/components/BlogBackground'
 
@@ -44,16 +45,17 @@ interface ExperiencesProps {
 }
 
 export default function Experiences({ hideHeading = false }: ExperiencesProps) {
+  const { t } = useTranslation()
   const formatDate = (date: string) => {
-    if (date === 'Present') return 'Present'
+    if (date === 'Present') return t('common.present', 'Present')
     return date
   }
 
   return (
-    <section id="experiences" className="relative flex items-center justify-center py-8 sm:py-10 px-4 sm:px-6 lg:px-8">
+    <section id="experiences" className="relative flex items-center justify-center py-8 sm:py-10 overflow-hidden w-full">
       <BlogBackground />
       {/* Content */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {!hideHeading && (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -63,10 +65,10 @@ export default function Experiences({ hideHeading = false }: ExperiencesProps) {
             className="text-center mb-8 sm:mb-10"
           >
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3">
-              Professional <span className="text-sky-500 dark:text-sky-400">Experience</span>
+              {t('experiences.title')} <span className="text-sky-500 dark:text-sky-400">{t('experiences.experience')}</span>
             </h2>
             <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Building production systems for real-world applications
+              {t('experiences.description')}
             </p>
           </motion.div>
         )}

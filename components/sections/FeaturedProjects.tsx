@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { Calendar, Lock, Zap } from 'lucide-react'
 import { personalInfo } from '@/constants'
 
@@ -99,12 +100,13 @@ const aiProjects: AIProject[] = [
 ]
 
 export default function FeaturedProjects() {
+  const { t } = useTranslation()
   const [activeTab, setActiveTab] = useState<ProjectCategory>('enterprise')
 
   return (
-    <section id="projects" className="relative flex items-center justify-center py-12 sm:py-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section id="projects" className="relative flex items-center justify-center py-12 sm:py-16 overflow-hidden w-full">
       {/* Same Background as Hero */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Animated Grid Pattern */}
         <div className="absolute inset-0 opacity-10 dark:opacity-20">
           <div 
@@ -119,37 +121,39 @@ export default function FeaturedProjects() {
           />
         </div>
 
-        {/* Floating 3D Shapes */}
+        {/* Floating 3D Shapes - Constrained */}
         <motion.div
-          className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-sky-500/10 dark:from-sky-500/20 to-cyan-500/10 dark:to-cyan-500/20 rounded-full blur-3xl"
+          className="absolute top-20 left-4 sm:left-10 w-48 h-48 sm:w-72 sm:h-72 bg-gradient-to-br from-sky-500/10 dark:from-sky-500/20 to-cyan-500/10 dark:to-cyan-500/20 rounded-full blur-3xl"
           animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1],
+            x: [0, 30, 0],
+            y: [0, -30, 0],
+            scale: [1, 1.1, 1],
           }}
           transition={{
             duration: 20,
             repeat: Infinity,
             ease: "easeInOut"
           }}
+          style={{ willChange: 'transform' }}
         />
         <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-cyan-500/10 dark:from-cyan-500/20 to-sky-600/10 dark:to-sky-600/20 rounded-full blur-3xl"
+          className="absolute bottom-20 right-4 sm:right-10 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-br from-cyan-500/10 dark:from-cyan-500/20 to-sky-600/10 dark:to-sky-600/20 rounded-full blur-3xl"
           animate={{
-            x: [0, -80, 0],
-            y: [0, 60, 0],
-            scale: [1, 1.3, 1],
+            x: [0, -30, 0],
+            y: [0, 40, 0],
+            scale: [1, 1.15, 1],
           }}
           transition={{
             duration: 25,
             repeat: Infinity,
             ease: "easeInOut"
           }}
+          style={{ willChange: 'transform' }}
         />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -159,10 +163,10 @@ export default function FeaturedProjects() {
           className="text-center mb-4 sm:mb-6"
         >
           <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3">
-            Selected Work
+            {t('featuredProjects.title')}
           </h2>
           <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
-            Real-world systems built for scale, reliability, and real users — across enterprise platforms and AI-powered products.
+            {t('featuredProjects.description')}
           </p>
         </motion.div>
 
@@ -182,7 +186,7 @@ export default function FeaturedProjects() {
                 : 'bg-white/50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 hover:bg-white/70 dark:hover:bg-gray-800/70'
             }`}
           >
-            Enterprise & Industry Systems
+            {t('featuredProjects.tabEnterprise')}
           </button>
           <button
             onClick={() => setActiveTab('ai')}
@@ -192,7 +196,7 @@ export default function FeaturedProjects() {
                 : 'bg-white/50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 hover:bg-white/70 dark:hover:bg-gray-800/70'
             }`}
           >
-            AI & GenAI Products
+            {t('featuredProjects.tabAI')}
           </button>
         </motion.div>
 
@@ -216,18 +220,18 @@ export default function FeaturedProjects() {
                         {project.title}
                       </h3>
                       <div className="text-xs text-gray-600 dark:text-gray-400 mb-2">
-                        Domain: {project.domain}
+                        {t('featuredProjects.domain')}: {project.domain}
                       </div>
                     </div>
                   </div>
 
                   <div className="space-y-2 text-xs">
                     <div>
-                      <div className="font-semibold text-sky-500 dark:text-sky-400 mb-0.5">Problem</div>
+                      <div className="font-semibold text-sky-500 dark:text-sky-400 mb-0.5">{t('featuredProjects.problem')}</div>
                       <p className="text-gray-700 dark:text-gray-300">{project.problem}</p>
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900 dark:text-white mb-0.5">What I Built</div>
+                      <div className="font-semibold text-gray-900 dark:text-white mb-0.5">{t('featuredProjects.whatIBuilt')}</div>
                       <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-0.5">
                         {project.built.map((item, i) => (
                           <li key={i}>{item}</li>
@@ -235,7 +239,7 @@ export default function FeaturedProjects() {
                       </ul>
                     </div>
                     <div className="flex flex-wrap gap-1 pt-2 border-t border-gray-200 dark:border-gray-700">
-                      <span className="text-[10px] text-gray-500 dark:text-gray-500 font-medium">Tech:</span>
+                      <span className="text-[10px] text-gray-500 dark:text-gray-500 font-medium">{t('featuredProjects.tech')}:</span>
                       {project.tech.map((tech) => (
                         <span
                           key={tech}
@@ -271,15 +275,15 @@ export default function FeaturedProjects() {
 
                   <div className="space-y-2 text-xs">
                     <div>
-                      <div className="font-semibold text-sky-500 dark:text-sky-400 mb-0.5">Problem</div>
+                      <div className="font-semibold text-sky-500 dark:text-sky-400 mb-0.5">{t('featuredProjects.problem')}</div>
                       <p className="text-gray-700 dark:text-gray-300">{project.problem}</p>
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900 dark:text-white mb-0.5">Solution</div>
+                      <div className="font-semibold text-gray-900 dark:text-white mb-0.5">{t('featuredProjects.solution')}</div>
                       <p className="text-gray-700 dark:text-gray-300">{project.solution}</p>
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900 dark:text-white mb-0.5">Impact</div>
+                      <div className="font-semibold text-gray-900 dark:text-white mb-0.5">{t('featuredProjects.impact')}</div>
                       <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-0.5">
                         {project.impact.map((item, i) => (
                           <li key={i}>{item}</li>
@@ -287,7 +291,7 @@ export default function FeaturedProjects() {
                       </ul>
                     </div>
                     <div className="flex flex-wrap gap-1 pt-2 border-t border-gray-200 dark:border-gray-700">
-                      <span className="text-[10px] text-gray-500 dark:text-gray-500 font-medium">Tech:</span>
+                      <span className="text-[10px] text-gray-500 dark:text-gray-500 font-medium">{t('featuredProjects.tech')}:</span>
                       {project.tech.map((tech) => (
                         <span
                           key={tech}
@@ -314,7 +318,7 @@ export default function FeaturedProjects() {
             className="text-center mb-4"
           >
             <p className="text-xs text-gray-600 dark:text-gray-400">
-              Due to NDAs, code and live links are not public. Architecture and implementation walkthroughs are available on request.
+              {t('featuredProjects.ndaNotice')}
             </p>
           </motion.div>
         )}
@@ -328,9 +332,9 @@ export default function FeaturedProjects() {
           className="text-center pt-4"
         >
           <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3">
-            Want to see how these systems were designed and shipped?
+            {t('featuredProjects.ctaText')}
             <br />
-            Schedule a call to walk through architecture, tradeoffs, and decisions.
+            {t('featuredProjects.ctaText2')}
           </p>
           <a
             href={personalInfo.calendlyUrl}
@@ -338,7 +342,7 @@ export default function FeaturedProjects() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-5 py-2 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-sky-500/50 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
           >
-            Schedule a Call
+            {t('featuredProjects.scheduleCall')}
             <Calendar size={14} />
           </a>
         </motion.div>

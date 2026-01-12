@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { format } from 'date-fns'
 import { Calendar, Tag, ArrowRight, Star } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import BlogBackground from '@/components/BlogBackground'
 import BlogPagination from '@/components/BlogPagination'
 import BlogAdSpace from '@/components/BlogAdSpace'
@@ -17,6 +18,7 @@ interface BlogPageClientProps {
 }
 
 export default function BlogPageClient({ initialPosts }: BlogPageClientProps) {
+  const { t } = useTranslation()
   const [searchQuery, setSearchQuery] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
   
@@ -74,10 +76,10 @@ export default function BlogPageClient({ initialPosts }: BlogPageClientProps) {
               {/* Header */}
               <div className="mb-8 sm:mb-12">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-                  Blog & <span className="text-sky-500 dark:text-sky-400">Articles</span>
+                  {t('blog.title')} & <span className="text-sky-500 dark:text-sky-400">{t('blog.articles')}</span>
                 </h1>
                 <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-6">
-                  Thoughts, tutorials, and insights on web development, AI/ML, and technology.
+                  {t('blog.description')}
                 </p>
                 
                 {/* Search Bar */}
@@ -93,7 +95,7 @@ export default function BlogPageClient({ initialPosts }: BlogPageClientProps) {
                   <div className="flex items-center gap-2 mb-6">
                     <Star className="text-sky-500 dark:text-sky-400" size={24} fill="currentColor" />
                     <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-                      Featured Articles
+                      {t('blog.featuredArticles')}
                     </h2>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -105,7 +107,7 @@ export default function BlogPageClient({ initialPosts }: BlogPageClientProps) {
                       >
                         <div className="flex items-center gap-2 mb-2">
                           <Star className="text-sky-500 dark:text-sky-400" size={16} fill="currentColor" />
-                          <span className="text-xs font-semibold text-sky-600 dark:text-sky-400">Featured</span>
+                          <span className="text-xs font-semibold text-sky-600 dark:text-sky-400">{t('blog.featured')}</span>
                         </div>
                         <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-sky-500 dark:group-hover:text-sky-400 transition-colors line-clamp-2">
                           {post.title}
@@ -125,9 +127,9 @@ export default function BlogPageClient({ initialPosts }: BlogPageClientProps) {
                         <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 line-clamp-3 flex-1">
                           {post.excerpt}
                         </p>
-                        <div className="inline-flex items-center gap-2 text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300 font-semibold text-sm transition-colors mt-auto">
-                          Read more <ArrowRight size={16} />
-                        </div>
+                            <div className="inline-flex items-center gap-2 text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300 font-semibold text-sm transition-colors mt-auto">
+                              {t('blog.readMore')} <ArrowRight size={16} />
+                            </div>
                       </Link>
                     ))}
                   </div>
@@ -138,7 +140,7 @@ export default function BlogPageClient({ initialPosts }: BlogPageClientProps) {
               <section>
                 {!searchQuery && (
                   <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
-                    All Articles
+                    {t('blog.allArticles')}
                   </h2>
                 )}
                 
@@ -146,9 +148,9 @@ export default function BlogPageClient({ initialPosts }: BlogPageClientProps) {
                   <div className="mb-6">
                     <p className="text-gray-600 dark:text-gray-400">
                       {filteredPosts.length > 0 ? (
-                        <>Found <span className="font-semibold text-sky-500 dark:text-sky-400">{filteredPosts.length}</span> article{filteredPosts.length !== 1 ? 's' : ''} for &quot;{searchQuery}&quot;</>
+                        <>{t('blog.foundArticles')} <span className="font-semibold text-sky-500 dark:text-sky-400">{filteredPosts.length}</span> {filteredPosts.length !== 1 ? t('blog.articles') : t('blog.article')} {t('blog.for')} &quot;{searchQuery}&quot;</>
                       ) : (
-                        <>No articles found for &quot;{searchQuery}&quot;</>
+                        <>{t('blog.noResults')} &quot;{searchQuery}&quot;</>
                       )}
                     </p>
                   </div>
@@ -156,16 +158,16 @@ export default function BlogPageClient({ initialPosts }: BlogPageClientProps) {
 
                 {allPosts.length === 0 ? (
                   <div className="text-center py-16">
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">No blog posts yet. Check back soon!</p>
+                    <p className="text-gray-600 dark:text-gray-400 mb-4">{t('blog.noPosts')}</p>
                     <p className="text-sm text-gray-500 dark:text-gray-500">
-                      Blog posts will appear here once they&apos;re published.
+                      {t('blog.noPostsDesc')}
                     </p>
                   </div>
                 ) : filteredPosts.length === 0 ? (
                   <div className="text-center py-16">
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">No articles found matching your search.</p>
+                    <p className="text-gray-600 dark:text-gray-400 mb-4">{t('blog.noResults')}</p>
                     <p className="text-sm text-gray-500 dark:text-gray-500">
-                      Try a different search term or browse all articles.
+                      {t('blog.noResultsDesc')}
                     </p>
                   </div>
                 ) : (
@@ -197,7 +199,7 @@ export default function BlogPageClient({ initialPosts }: BlogPageClientProps) {
                               {post.excerpt}
                             </p>
                             <div className="inline-flex items-center gap-2 text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300 font-semibold text-sm transition-colors mt-auto">
-                              Read more <ArrowRight size={16} />
+                              {t('blog.readMore')} <ArrowRight size={16} />
                             </div>
                           </Link>
                         </article>

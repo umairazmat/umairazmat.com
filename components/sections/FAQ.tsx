@@ -2,52 +2,54 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { Plus, Minus, Calendar, Mail } from 'lucide-react'
 import { personalInfo } from '@/constants'
 
 export default function FAQ() {
+  const { t } = useTranslation()
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   const faqs = [
     {
-      question: 'What is your pricing model?',
-      answer: 'I work on hourly, daily, or fixed-price project agreements, depending on project scope and client needs.',
+      question: t('faq.question1'),
+      answer: t('faq.answer1'),
     },
     {
-      question: 'Do you sign NDAs?',
-      answer: 'Yes, I am happy to sign NDAs to ensure your project and data remain secure.',
+      question: t('faq.question2'),
+      answer: t('faq.answer2'),
     },
     {
-      question: 'Can you work with remote teams?',
-      answer: 'Absolutely. I specialize in remote-first, async-friendly workflows across time zones.',
+      question: t('faq.question3'),
+      answer: t('faq.answer3'),
     },
     {
-      question: 'What time zones do you work in?',
-      answer: 'I\'m flexible and can coordinate with clients in UTC ±12, with priority for Europe, USA, and Asia collaborations.',
+      question: t('faq.question4'),
+      answer: t('faq.answer4'),
     },
     {
-      question: 'What is your typical project timeline?',
-      answer: 'MVPs usually take 4–6 weeks. Full-scale systems depend on complexity; I provide clear milestones upfront.',
+      question: t('faq.question5'),
+      answer: t('faq.answer5'),
     },
     {
-      question: 'Do you provide ongoing support after launch?',
-      answer: 'Yes, I stay involved until systems are stable post-launch and offer optional maintenance plans.',
+      question: t('faq.question6'),
+      answer: t('faq.answer6'),
     },
     {
-      question: 'Which tech stacks do you specialize in?',
-      answer: 'React, Next.js, Node.js, TypeScript, MERN stack, FastAPI, AWS/GCP cloud, and AI-assisted solutions.',
+      question: t('faq.question7'),
+      answer: t('faq.answer7'),
     },
     {
-      question: 'Can you integrate AI features into projects?',
-      answer: 'Yes, I build AI/ML-powered features where it adds real business value, using LLMs, OpenAI APIs, and custom models.',
+      question: t('faq.question8'),
+      answer: t('faq.answer8'),
     },
     {
-      question: 'How do you communicate with clients?',
-      answer: 'Via async updates, Slack, email, or video calls. I document progress and maintain transparency at all stages.',
+      question: t('faq.question9'),
+      answer: t('faq.answer9'),
     },
     {
-      question: 'What types of projects do you take?',
-      answer: 'Startups shipping MVPs, enterprise platforms, remote team collaborations, AI-powered tools, or scalable web applications.',
+      question: t('faq.question10'),
+      answer: t('faq.answer10'),
     },
   ]
 
@@ -60,9 +62,9 @@ export default function FAQ() {
   const rightColumn = faqs.slice(5, 10)
 
   return (
-    <section className="relative flex items-center justify-center py-8 sm:py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative flex items-center justify-center py-8 sm:py-10 overflow-hidden w-full">
       {/* Same Background as Other Sections */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Animated Grid Pattern */}
         <div className="absolute inset-0 opacity-10 dark:opacity-20">
           <div 
@@ -107,7 +109,7 @@ export default function FAQ() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -117,10 +119,10 @@ export default function FAQ() {
           className="text-center mb-6 sm:mb-8"
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            Frequently Asked Questions
+            {t('faq.title')} {t('faq.questions')}
           </h2>
           <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-            Answers to common questions about working with me, project timelines, and remote collaboration.
+            {t('faq.description')}
           </p>
         </motion.div>
 
@@ -229,7 +231,7 @@ export default function FAQ() {
           className="text-center"
         >
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-            Still have questions?
+            {t('faq.stillHaveQuestions')}
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <a
@@ -238,14 +240,14 @@ export default function FAQ() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-sky-500/50 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
             >
-              Schedule a Call
+              {t('faq.scheduleCall')}
               <Calendar size={14} />
             </a>
             <a
               href="#contact"
               className="inline-flex items-center gap-2 px-4 py-2 bg-transparent border-2 border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white dark:text-sky-400 dark:hover:text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
             >
-              Send a Message
+              {t('faq.sendMessage')}
               <Mail size={14} />
             </a>
           </div>

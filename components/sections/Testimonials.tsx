@@ -1,12 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
+import { Quote } from 'lucide-react'
 
 export default function Testimonials() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-
+  const { t } = useTranslation()
   const testimonials = [
     {
       quote: 'Umair is an exceptionally talented developer with deep MERN stack expertise. He leads teams effectively and adapts quickly to challenges. A reliable and skilled engineer.',
@@ -52,29 +51,15 @@ export default function Testimonials() {
     },
   ]
 
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-  }
-
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  }
-
-  // Auto-play carousel
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length)
-    }, 5000) // Change every 5 seconds
-
-    return () => clearInterval(interval)
-  }, [testimonials.length])
+  // Show first 3 testimonials
+  const displayedTestimonials = testimonials.slice(0, 3)
 
   return (
-    <section id="testimonials" className="relative flex items-center justify-center py-8 sm:py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section id="testimonials" className="relative flex items-center justify-center py-8 sm:py-10 overflow-hidden w-full">
       {/* Same Background as Other Sections */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Animated Grid Pattern */}
-        <div className="absolute inset-0 opacity-10 dark:opacity-20">
+        <div className="absolute inset-0 opacity-10 dark:opacity-20 overflow-hidden">
           <div 
             className="absolute inset-0 animate-grid-move"
             style={{
@@ -87,37 +72,39 @@ export default function Testimonials() {
           />
         </div>
 
-        {/* Floating 3D Shapes */}
+        {/* Floating 3D Shapes - Constrained to prevent overflow */}
         <motion.div
-          className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-sky-500/10 dark:from-sky-500/20 to-cyan-500/10 dark:to-cyan-500/20 rounded-full blur-3xl"
+          className="absolute top-20 left-4 sm:left-10 w-48 h-48 sm:w-72 sm:h-72 bg-gradient-to-br from-sky-500/10 dark:from-sky-500/20 to-cyan-500/10 dark:to-cyan-500/20 rounded-full blur-3xl"
           animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1],
+            x: [0, 30, 0],
+            y: [0, -30, 0],
+            scale: [1, 1.1, 1],
           }}
           transition={{
             duration: 20,
             repeat: Infinity,
             ease: "easeInOut"
           }}
+          style={{ willChange: 'transform' }}
         />
         <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-cyan-500/10 dark:from-cyan-500/20 to-sky-600/10 dark:to-sky-600/20 rounded-full blur-3xl"
+          className="absolute bottom-20 right-4 sm:right-10 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-br from-cyan-500/10 dark:from-cyan-500/20 to-sky-600/10 dark:to-sky-600/20 rounded-full blur-3xl"
           animate={{
-            x: [0, -80, 0],
-            y: [0, 60, 0],
-            scale: [1, 1.3, 1],
+            x: [0, -30, 0],
+            y: [0, 40, 0],
+            scale: [1, 1.15, 1],
           }}
           transition={{
             duration: 25,
             repeat: Infinity,
             ease: "easeInOut"
           }}
+          style={{ willChange: 'transform' }}
         />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -127,23 +114,23 @@ export default function Testimonials() {
           className="text-center mb-6 sm:mb-8"
         >
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            What Clients Say
+            {t('testimonials.title')}
           </h2>
           <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-            Real feedback from startups, product teams, and industry experts I&apos;ve worked with.
+            {t('testimonials.description')}
           </p>
         </motion.div>
 
-        {/* Carousel */}
-        <div className="relative">
-          <AnimatePresence mode="wait" initial={false}>
+        {/* Testimonials Grid - 3 Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {displayedTestimonials.map((testimonial, index) => (
             <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-700 p-5 sm:p-6"
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-700 p-5 sm:p-6 flex flex-col"
             >
               {/* Quote Icon */}
               <div className="flex items-start gap-3 mb-4">
@@ -152,57 +139,25 @@ export default function Testimonials() {
                 </div>
                 <div className="flex-1">
                   <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 italic leading-relaxed">
-                    &quot;{testimonials[currentIndex].quote}&quot;
+                    &quot;{testimonial.quote}&quot;
                   </p>
                 </div>
               </div>
 
               {/* Author Info */}
-              <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700 mt-auto">
                 <div>
                   <p className="text-sm font-semibold text-gray-900 dark:text-white">
-                    {testimonials[currentIndex].name}
+                    {testimonial.name}
                   </p>
                   <p className="text-xs text-gray-600 dark:text-gray-400">
-                    {testimonials[currentIndex].role}
-                    {testimonials[currentIndex].company && ` @ ${testimonials[currentIndex].company}`}
+                    {testimonial.role}
+                    {testimonial.company && ` @ ${testimonial.company}`}
                   </p>
                 </div>
               </div>
             </motion.div>
-          </AnimatePresence>
-
-          {/* Navigation Arrows */}
-          <button
-            onClick={prevTestimonial}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 sm:-translate-x-6 p-2 bg-white dark:bg-gray-800 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 hover:bg-sky-50 dark:hover:bg-gray-700 transition-colors"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft className="text-gray-600 dark:text-gray-400" size={20} />
-          </button>
-          <button
-            onClick={nextTestimonial}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 sm:translate-x-6 p-2 bg-white dark:bg-gray-800 rounded-full shadow-lg border border-gray-200 dark:border-gray-700 hover:bg-sky-50 dark:hover:bg-gray-700 transition-colors"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight className="text-gray-600 dark:text-gray-400" size={20} />
-          </button>
-
-          {/* Dots Indicator */}
-          <div className="flex justify-center gap-2 mt-4">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`h-2 rounded-full transition-all ${
-                  index === currentIndex
-                    ? 'w-6 bg-sky-500 dark:bg-sky-400'
-                    : 'w-2 bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
-          </div>
+          ))}
         </div>
 
         {/* Optional CTA */}
@@ -214,7 +169,7 @@ export default function Testimonials() {
           className="text-center mt-6"
         >
           <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-            See more references on request
+            {t('testimonials.moreReferences')}
           </p>
         </motion.div>
       </div>

@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import { Code, Server, Cloud, Brain, ExternalLink } from 'lucide-react'
 import BlogBackground from '@/components/BlogBackground'
 
@@ -9,38 +10,39 @@ interface SkillsTechStackProps {
 }
 
 export default function SkillsTechStack({ hideHeading = false }: SkillsTechStackProps) {
+  const { t } = useTranslation()
   const skillCategories = [
     {
       icon: Code,
-      title: 'Frontend',
+      title: t('skillsTechStack.frontend'),
       skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Angular', 'Vite', 'Electron.js'],
-      description: 'Built modular React + Next.js apps with scalable state management and real-time dashboards.',
+      description: t('skillsTechStack.frontendDesc'),
     },
     {
       icon: Server,
-      title: 'Backend',
+      title: t('skillsTechStack.backend'),
       skills: ['Node.js', 'FastAPI', 'REST APIs', 'WebSockets', 'MongoDB', 'PostgreSQL'],
-      description: 'Designed Node.js & FastAPI microservices powering high-traffic systems with WebSockets and REST APIs.',
+      description: t('skillsTechStack.backendDesc'),
     },
     {
       icon: Cloud,
-      title: 'Cloud & DevOps',
+      title: t('skillsTechStack.cloud'),
       skills: ['AWS', 'GCP', 'Docker', 'Vercel', 'CI/CD pipelines', 'Serverless deployments'],
-      description: 'Deployed production apps on AWS & GCP using CI/CD pipelines and Docker containers for fast, reliable updates.',
+      description: t('skillsTechStack.cloudDesc'),
     },
     {
       icon: Brain,
-      title: 'AI / Tools',
+      title: t('skillsTechStack.ai'),
       skills: ['OpenAI APIs', 'LLMs', 'Streamlit', 'Transformers', 'Python AI libraries'],
-      description: 'Implemented AI-powered essay evaluation, code review automation, and data pipelines using LLMs and Streamlit.',
+      description: t('skillsTechStack.aiDesc'),
     },
   ]
 
   return (
-    <section id="skills" className="relative flex items-center justify-center py-8 sm:py-10 px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="relative flex items-center justify-center py-8 sm:py-10 overflow-hidden w-full">
       <BlogBackground />
       {/* Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {!hideHeading && (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -50,10 +52,10 @@ export default function SkillsTechStack({ hideHeading = false }: SkillsTechStack
             className="text-center mb-6 sm:mb-8"
           >
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-              Full-Stack & AI Expertise
+              {t('skillsTechStack.title')}
             </h2>
             <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-              Production-grade tools and frameworks I use to ship scalable systems.
+              {t('skillsTechStack.description')}
             </p>
           </motion.div>
         )}
@@ -114,7 +116,7 @@ export default function SkillsTechStack({ hideHeading = false }: SkillsTechStack
             href="#projects"
             className="inline-flex items-center gap-2 text-sm sm:text-base text-sky-500 dark:text-sky-400 hover:text-sky-600 dark:hover:text-sky-300 font-medium transition-colors"
           >
-            See how I&apos;ve applied these technologies in real projects
+            {t('skillsTechStack.cta')}
             <ExternalLink size={16} />
           </a>
         </motion.div>

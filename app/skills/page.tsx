@@ -6,6 +6,32 @@ import BlogBackground from '@/components/BlogBackground'
 export const metadata: Metadata = {
   title: 'Technical Skills & Expertise | Umair Azmat',
   description: 'Comprehensive technical skills including Frontend (React, Next.js, TypeScript), Backend (Node.js, FastAPI), Cloud (AWS, GCP), and AI/ML technologies. Production-grade tools and frameworks used to ship scalable systems.',
+  keywords: [
+    'React skills',
+    'Next.js expertise',
+    'TypeScript developer',
+    'Node.js developer',
+    'Python developer',
+    'AWS cloud engineer',
+    'full stack skills',
+    'frontend developer',
+    'backend developer',
+    'AI/ML developer',
+  ],
+  openGraph: {
+    title: 'Technical Skills & Expertise | Umair Azmat',
+    description: 'Comprehensive technical skills including Frontend, Backend, Cloud, and AI/ML technologies.',
+    type: 'website',
+    url: 'https://umairazmat.com/skills',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Technical Skills & Expertise | Umair Azmat',
+    description: 'Comprehensive technical skills including Frontend, Backend, Cloud, and AI/ML technologies.',
+  },
+  alternates: {
+    canonical: 'https://umairazmat.com/skills',
+  },
 }
 
 export default function SkillsPage() {

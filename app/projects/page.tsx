@@ -5,6 +5,30 @@ import BlogBackground from '@/components/BlogBackground'
 export const metadata: Metadata = {
   title: 'Selected Work & Projects | Umair Azmat',
   description: 'Real-world systems built for scale, reliability, and real users — across enterprise platforms and AI-powered products. See production-grade applications including EV infrastructure, enterprise SaaS, and AI-powered tools.',
+  keywords: [
+    'portfolio projects',
+    'web development projects',
+    'React projects',
+    'Next.js projects',
+    'enterprise applications',
+    'AI-powered tools',
+    'production systems',
+    'full stack projects',
+  ],
+  openGraph: {
+    title: 'Selected Work & Projects | Umair Azmat',
+    description: 'Real-world systems built for scale, reliability, and real users — across enterprise platforms and AI-powered products.',
+    type: 'website',
+    url: 'https://umairazmat.com/projects',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Selected Work & Projects | Umair Azmat',
+    description: 'Real-world systems built for scale, reliability, and real users.',
+  },
+  alternates: {
+    canonical: 'https://umairazmat.com/projects',
+  },
 }
 
 export default function ProjectsPage() {

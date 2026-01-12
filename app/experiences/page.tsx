@@ -5,6 +5,28 @@ import BlogBackground from '@/components/BlogBackground'
 export const metadata: Metadata = {
   title: 'Professional Experiences | Umair Azmat',
   description: 'Detailed professional experience including software engineering roles at Venturetronics and Powersoft19, with highlights of production systems delivered, technologies used, and impact achieved.',
+  keywords: [
+    'software engineer experience',
+    'full stack developer',
+    'professional experience',
+    'work history',
+    'career experience',
+    'software engineering roles',
+  ],
+  openGraph: {
+    title: 'Professional Experiences | Umair Azmat',
+    description: 'Detailed professional experience including software engineering roles with highlights of production systems delivered.',
+    type: 'website',
+    url: 'https://umairazmat.com/experiences',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Professional Experiences | Umair Azmat',
+    description: 'Detailed professional experience including software engineering roles.',
+  },
+  alternates: {
+    canonical: 'https://umairazmat.com/experiences',
+  },
 }
 
 export default function ExperiencesPage() {
