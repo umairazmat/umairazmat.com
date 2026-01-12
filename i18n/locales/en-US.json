@@ -36,11 +36,13 @@
     "headlineHighlight": "production-ready, scalable",
     "headlineEnd": "web & AI systems",
     "subheadline": "Tired of apps that break under real users? I build systems that scale, stay maintainable, and support real business growth.",
-    "projectsShipped": "projects shipped",
-    "studentsTrained": "students trained",
-    "usersImpacted": "users impacted",
-    "seeSelectedWork": "See Selected Work",
-    "workStyle": "Remote-first • Async-friendly • Production-focused"
+        "projectsShipped": "projects shipped",
+        "studentsTrained": "students trained",
+        "usersImpacted": "users impacted",
+        "seeSelectedWork": "See Selected Work",
+        "viewMyWork": "View My Work",
+        "contactMe": "Contact Me",
+        "workStyle": "Remote-first • Async-friendly • Production-focused"
   },
   "about": {
     "title": "About",

@@ -36,11 +36,13 @@
     "headlineHighlight": "produktionsreife, skalierbare",
     "headlineEnd": "Web- und KI-Systeme zu entwickeln",
     "subheadline": "Müde von Apps, die bei echten Benutzern versagen? Ich baue Systeme, die skalieren, wartbar bleiben und echtes Geschäftswachstum unterstützen.",
-    "projectsShipped": "Projekte geliefert",
-    "studentsTrained": "Studenten ausgebildet",
-    "usersImpacted": "Benutzer beeinflusst",
-    "seeSelectedWork": "Ausgewählte Arbeiten ansehen",
-    "workStyle": "Remote-first • Async-freundlich • Produktionsorientiert"
+        "projectsShipped": "Projekte geliefert",
+        "studentsTrained": "Studenten ausgebildet",
+        "usersImpacted": "Benutzer beeinflusst",
+        "seeSelectedWork": "Ausgewählte Arbeiten ansehen",
+        "viewMyWork": "Meine Arbeiten ansehen",
+        "contactMe": "Kontaktieren Sie mich",
+        "workStyle": "Remote-first • Async-freundlich • Produktionsorientiert"
   },
   "about": {
     "title": "Über",
