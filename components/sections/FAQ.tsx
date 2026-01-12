@@ -17,7 +17,7 @@ const faqs: FAQItem[] = [
   {
     id: 'experience',
     question: 'How many years of experience do you have?',
-    answer: 'I have 4+ years of professional experience in full-stack software development, working with technologies like React, Next.js, Node.js, Python, and cloud platforms like AWS.',
+    answer: 'I have 2+ years of professional experience in full-stack software development, working with technologies like React, Next.js, Node.js, Python, and cloud platforms like AWS.',
     category: 'General',
   },
   {
@@ -95,7 +95,7 @@ export default function FAQ() {
   const faqText = `${t('faq.description', 'Find answers to common questions about my experience, availability, and services.')}. ${filteredFAQs.length} ${t('faq.questions', 'questions')} available.`
 
   return (
-    <section id="faq" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300 px-4 sm:px-6">
+    <section id="faq" className="section-container bg-gray-100 dark:bg-gray-800 transition-colors duration-300 px-4 sm:px-6">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

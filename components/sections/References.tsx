@@ -11,7 +11,7 @@ export default function References() {
   const referencesText = `${t('references.description', 'What industry professionals and colleagues say about working with me.')}. ${references.length} ${t('references.title', 'references')} available.`
 
   return (
-    <section id="references" className="section-container bg-gray-100 dark:bg-gray-800 transition-colors duration-300 px-4 sm:px-6">
+    <section id="references" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300 px-4 sm:px-6">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

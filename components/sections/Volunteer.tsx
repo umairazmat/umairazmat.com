@@ -43,7 +43,7 @@ export default function Volunteer() {
   const volunteerText = `${t('volunteer.description', 'Contributing to communities and organizations through volunteer work and professional development programs.')}. ${filteredExperiences.length} ${t('volunteer.experience', 'experiences')} available.`
 
   return (
-    <section id="volunteer" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300 px-4 sm:px-6">
+    <section id="volunteer" className="section-container bg-gray-100 dark:bg-gray-800 transition-colors duration-300 px-4 sm:px-6">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     default: 'Umair Azmat - Full-Stack Software Engineer | React, Next.js, Node.js, Python | AWS Cloud',
     template: '%s | Umair Azmat',
   },
-  description: 'Full-Stack Software Engineer with 4+ years of experience building production-grade, scalable web applications using React, Next.js, Angular, Node.js, and REST APIs. Skilled in frontend feature ownership, clean modular UI architecture, API integrations, cloud deployment (AWS/GCP), and AI-assisted development. Available for remote work opportunities in Lahore, Pakistan.',
+  description: 'Full-Stack Software Engineer with 2+ years of experience building production-grade, scalable web applications using React, Next.js, Angular, Node.js, and REST APIs. Skilled in frontend feature ownership, clean modular UI architecture, API integrations, cloud deployment (AWS/GCP), and AI-assisted development. Available for remote work opportunities in Lahore, Pakistan.',
   keywords: [
     'Umair Azmat',
     'Full-Stack Software Engineer',
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     url: 'https://umairazmat.com',
     siteName: 'Umair Azmat Portfolio',
     title: 'Umair Azmat - Full-Stack Software Engineer | React, Next.js, Node.js, Python',
-    description: 'Full-Stack Software Engineer with 4+ years of experience building production-grade, scalable web applications using React, Next.js, Angular, Node.js, and REST APIs. Available for remote work.',
+    description: 'Full-Stack Software Engineer with 2+ years of experience building production-grade, scalable web applications using React, Next.js, Angular, Node.js, and REST APIs. Available for remote work.',
     images: [
       {
         url: '/og-image.jpg',
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     site: '@umairazmatt',
     creator: '@umairazmatt',
     title: 'Umair Azmat - Full-Stack Software Engineer',
-    description: 'Full-Stack Software Engineer with 4+ years of experience building production-grade, scalable web applications.',
+    description: 'Full-Stack Software Engineer with 2+ years of experience building production-grade, scalable web applications.',
     images: ['/og-image.jpg'],
   },
   robots: {
@@ -151,7 +151,7 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  const theme = localStorage.getItem('theme') || 'system';
+                  const theme = localStorage.getItem('theme') || 'dark';
                   const root = document.documentElement;
                   root.classList.remove('light', 'dark');
                   let resolvedTheme;

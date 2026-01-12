@@ -643,16 +643,16 @@ export const personalInfo = {
     medium: 'https://medium.com/@umairazmatt',
   },
   about: {
-    summary: 'Full-Stack Software Engineer with 4+ years of experience building and maintaining production-grade, scalable web applications using React, Next.js, Angular, Node.js, and REST APIs. Skilled in frontend feature ownership, clean modular UI architecture, API integrations, cloud deployment (AWS/GCP), and AI-assisted development. Experienced in supporting live systems in remote, Agile teams, delivering end-to-end solutions for enterprise and internal tools.',
+    summary: 'Full-Stack Software Engineer with 2+ years of experience building and maintaining production-grade, scalable web applications using React, Next.js, Angular, Node.js, and REST APIs. Skilled in frontend feature ownership, clean modular UI architecture, API integrations, cloud deployment (AWS/GCP), and AI-assisted development. Experienced in supporting live systems in remote, Agile teams, delivering end-to-end solutions for enterprise and internal tools.',
     highlights: [
-      '4+ years of professional development experience',
+      '2+ years of professional development experience',
       '500+ students trained in programming',
       'Production-grade applications delivered',
       'Expert in full-stack development and AI-assisted development',
     ],
   },
   metrics: {
-    yearsExperience: 4,
+    yearsExperience: 2,
     studentsTrained: 500,
     projectsDelivered: 15,
     githubRepos: 50,
