@@ -7,6 +7,7 @@ import { Award, ExternalLink, Calendar } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import Pagination from '@/components/Pagination'
 import TextToSpeech from '@/components/TextToSpeech'
+import Image from 'next/image'
 
 const categoryColors = {
   'AWS & Cloud': 'bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800',
@@ -113,10 +114,24 @@ export default function Certificates() {
               transition={{ delay: index * 0.05, duration: 0.3 }}
               className="card group hover:scale-[1.02] transition-transform p-4"
             >
-              <div className="flex items-start gap-3 mb-3">
-                <div className="p-2 bg-primary-100 dark:bg-primary-900/20 rounded-lg flex-shrink-0">
-                  <Award size={18} className="text-primary-600 dark:text-primary-400" />
+              {/* Certificate Image or Icon */}
+              {certificate.image ? (
+                <div className="relative w-full h-32 mb-3 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800">
+                  <Image
+                    src={certificate.image}
+                    alt={`${certificate.title} certificate`}
+                    fill
+                    className="object-contain p-2"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
                 </div>
+              ) : (
+                <div className="flex items-center justify-center w-full h-32 mb-3 rounded-lg bg-gradient-to-br from-primary-100 to-primary-200 dark:from-primary-900/20 dark:to-primary-800/20">
+                  <Award size={48} className="text-primary-600 dark:text-primary-400" />
+                </div>
+              )}
+
+              <div className="flex items-start gap-3 mb-3">
                 <div className="flex-1 min-w-0">
                   <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-1 line-clamp-2">
                     {certificate.title}

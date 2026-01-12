@@ -123,7 +123,7 @@ export default function Education() {
   }
 
   return (
-    <section id="education" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300 px-4 sm:px-6">
+    <section id="education" className="section-container bg-gray-100 dark:bg-gray-800 transition-colors duration-300 px-4 sm:px-6">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

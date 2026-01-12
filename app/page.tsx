@@ -1,46 +1,46 @@
 import Hero from '@/components/sections/Hero'
-import About from '@/components/sections/About'
-import Education from '@/components/sections/Education'
+import InstantProof from '@/components/sections/InstantProof'
+import FeaturedProjects from '@/components/sections/FeaturedProjects'
+import HowIWork from '@/components/sections/HowIWork'
+import WhoIWorkWith from '@/components/sections/WhoIWorkWith'
+import LetsBuild from '@/components/sections/LetsBuild'
+import SkillsCondensed from '@/components/sections/SkillsCondensed'
+import ExperienceCondensed from '@/components/sections/ExperienceCondensed'
 import Experience from '@/components/sections/Experience'
-import Volunteer from '@/components/sections/Volunteer'
+import TrustSection from '@/components/sections/TrustSection'
+import FinalCTA from '@/components/sections/FinalCTA'
 import Projects from '@/components/sections/Projects'
-import Skills from '@/components/sections/Skills'
-import Certificates from '@/components/sections/Certificates'
-import Learning from '@/components/sections/Learning'
-import References from '@/components/sections/References'
-import AppointmentSystem from '@/components/AppointmentSystem'
-import FAQ from '@/components/sections/FAQ'
+import About from '@/components/sections/About'
+import AboutRedesigned from '@/components/sections/AboutRedesigned'
 import Contact from '@/components/sections/Contact'
-import Chatbot from '@/components/Chatbot'
-import ChatbotFloatingButton from '@/components/ChatbotFloatingButton'
-import CTASection from '@/components/CTASection'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import ChatbotFloatingButton from '@/components/ChatbotFloatingButton'
 
 export default function Home() {
   return (
     <>
+      {/* Primary User Journey - Recruiter-Focused */}
       <Hero />
-      <About />
-      <CTASection variant="chat" message="Let's work together!" />
-      <Education />
-      <CTASection variant="email" message="Want to know more?" />
-      <Experience />
-      <CTASection variant="whatsapp" message="Want to discuss a project?" />
-      <Volunteer />
-      <CTASection variant="email" message="Have a question?" />
-      <Projects />
-      <CTASection variant="chat" message="Let's build something amazing!" />
-      <Skills />
-      <Certificates />
-      <CTASection variant="whatsapp" message="Interested in my certifications?" />
-      <Learning />
-      <CTASection variant="email" message="Want to learn together?" />
-      <References />
-      <AppointmentSystem />
-      <CTASection variant="chat" message="Ready to schedule a meeting?" />
-      <FAQ />
-      <CTASection variant="email" message="Still have questions?" />
+      <InstantProof />
+      <FeaturedProjects />
+      <HowIWork />
+      <WhoIWorkWith />
+      <LetsBuild />
+      {/* <div id="projects-full">
+        <Projects />
+      </div>
+      <SkillsCondensed />
+      <ExperienceCondensed />
+      <TrustSection />
+      <FinalCTA /> */}
+      
+      {/* Secondary Sections - Below the fold */}
+      {/* <div id="experience-full">
+        <Experience />
+      </div>
       <Contact />
+       */}
+      {/* Floating Actions */}
       <div id="chatbot-trigger" />
       <WhatsAppButton />
       <ChatbotFloatingButton />
