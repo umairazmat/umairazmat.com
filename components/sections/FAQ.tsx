@@ -1,211 +1,256 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown, HelpCircle } from 'lucide-react'
-import { useTranslation } from 'react-i18next'
-import TextToSpeech from '@/components/TextToSpeech'
-
-interface FAQItem {
-  id: string
-  question: string
-  answer: string
-  category?: string
-}
-
-const faqs: FAQItem[] = [
-  {
-    id: 'experience',
-    question: 'How many years of experience do you have?',
-    answer: 'I have 2+ years of professional experience in full-stack software development, working with technologies like React, Next.js, Node.js, Python, and cloud platforms like AWS.',
-    category: 'General',
-  },
-  {
-    id: 'availability',
-    question: 'Are you available for remote work?',
-    answer: 'Yes, I am available for remote work opportunities. I have extensive experience working in remote, Agile teams and am comfortable with async communication and full feature ownership.',
-    category: 'Availability',
-  },
-  {
-    id: 'tech-stack',
-    question: 'What is your preferred tech stack?',
-    answer: 'My preferred tech stack includes MERN (MongoDB, Express, React, Node.js), Next.js, TypeScript, Python, FastAPI, and AWS Cloud services. I also work with Angular, Tailwind CSS, and various databases.',
-    category: 'Technical',
-  },
-  {
-    id: 'projects',
-    question: 'What types of projects have you worked on?',
-    answer: 'I have worked on diverse projects including e-commerce platforms, 3D e-commerce websites, EV charging station management systems, AI-powered applications, internal enterprise tools, and educational platforms.',
-    category: 'Projects',
-  },
-  {
-    id: 'response-time',
-    question: 'What is your typical response time?',
-    answer: 'I typically respond within 24 hours. For urgent matters, I can respond faster. Feel free to reach out via email, WhatsApp, or schedule a call through the appointment system.',
-    category: 'Communication',
-  },
-  {
-    id: 'certifications',
-    question: 'What certifications do you hold?',
-    answer: 'I hold multiple certifications including AWS re/Start Graduate, Stanford Code in Place Mentor, IBM Full Stack Software Developer Specialization, Meta Front-End Developer Specialization, and various hackathon certificates from lablab.ai, NASA Space Apps, and more.',
-    category: 'Certifications',
-  },
-  {
-    id: 'location',
-    question: 'Where are you located?',
-    answer: 'I am located in Lahore, Punjab, Pakistan (PKT - UTC+5). I am available for remote work globally and can accommodate different time zones.',
-    category: 'General',
-  },
-  {
-    id: 'education',
-    question: 'What is your educational background?',
-    answer: 'I have a Bachelor of Software Engineering from Government College University Faisalabad with a CGPA of 3.78/4.00. I was a Silver Medalist (2nd Position) in the Department of Software Engineering and achieved 3× perfect 4.0 GPA across multiple semesters.',
-    category: 'Education',
-  },
-  {
-    id: 'collaboration',
-    question: 'How do you prefer to collaborate?',
-    answer: 'I prefer remote-first collaboration with async communication. I work well in Agile/Scrum teams, take full feature ownership, and am comfortable with tools like Jira, Trello, Notion, and Git for version control.',
-    category: 'Work Style',
-  },
-  {
-    id: 'ai-experience',
-    question: 'Do you have experience with AI/ML?',
-    answer: 'Yes, I have extensive experience with AI-assisted development, Generative AI, LLMs, and have participated in multiple AI hackathons. I have built AI-powered applications using OpenAI API, Streamlit, and various AI frameworks.',
-    category: 'Technical',
-  },
-]
+import { motion } from 'framer-motion'
+import { Plus, Minus, Calendar, Mail } from 'lucide-react'
+import { personalInfo } from '@/constants'
 
 export default function FAQ() {
-  const { t } = useTranslation()
-  const [openId, setOpenId] = useState<string | null>(null)
-  const [selectedCategory, setSelectedCategory] = useState<string>('All')
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
 
-  const categories = ['All', ...new Set(faqs.map((faq) => faq.category).filter((cat): cat is string => !!cat))]
+  const faqs = [
+    {
+      question: 'What is your pricing model?',
+      answer: 'I work on hourly, daily, or fixed-price project agreements, depending on project scope and client needs.',
+    },
+    {
+      question: 'Do you sign NDAs?',
+      answer: 'Yes, I am happy to sign NDAs to ensure your project and data remain secure.',
+    },
+    {
+      question: 'Can you work with remote teams?',
+      answer: 'Absolutely. I specialize in remote-first, async-friendly workflows across time zones.',
+    },
+    {
+      question: 'What time zones do you work in?',
+      answer: 'I\'m flexible and can coordinate with clients in UTC ±12, with priority for Europe, USA, and Asia collaborations.',
+    },
+    {
+      question: 'What is your typical project timeline?',
+      answer: 'MVPs usually take 4–6 weeks. Full-scale systems depend on complexity; I provide clear milestones upfront.',
+    },
+    {
+      question: 'Do you provide ongoing support after launch?',
+      answer: 'Yes, I stay involved until systems are stable post-launch and offer optional maintenance plans.',
+    },
+    {
+      question: 'Which tech stacks do you specialize in?',
+      answer: 'React, Next.js, Node.js, TypeScript, MERN stack, FastAPI, AWS/GCP cloud, and AI-assisted solutions.',
+    },
+    {
+      question: 'Can you integrate AI features into projects?',
+      answer: 'Yes, I build AI/ML-powered features where it adds real business value, using LLMs, OpenAI APIs, and custom models.',
+    },
+    {
+      question: 'How do you communicate with clients?',
+      answer: 'Via async updates, Slack, email, or video calls. I document progress and maintain transparency at all stages.',
+    },
+    {
+      question: 'What types of projects do you take?',
+      answer: 'Startups shipping MVPs, enterprise platforms, remote team collaborations, AI-powered tools, or scalable web applications.',
+    },
+  ]
 
-  const filteredFAQs =
-    selectedCategory === 'All'
-      ? faqs
-      : faqs.filter((faq) => faq.category === selectedCategory)
-
-  const toggleFAQ = (id: string) => {
-    setOpenId(openId === id ? null : id)
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index)
   }
 
-  const faqText = `${t('faq.description', 'Find answers to common questions about my experience, availability, and services.')}. ${filteredFAQs.length} ${t('faq.questions', 'questions')} available.`
+  // Split FAQs into two columns
+  const leftColumn = faqs.slice(0, 5)
+  const rightColumn = faqs.slice(5, 10)
 
   return (
-    <section id="faq" className="section-container bg-gray-100 dark:bg-gray-800 transition-colors duration-300 px-4 sm:px-6">
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
-          <HelpCircle size={24} className="sm:w-8 sm:h-8 text-primary-700 dark:text-primary-400" />
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
-            {t('faq.title', 'Frequently Asked')} <span className="gradient-text">{t('faq.questions', 'Questions')}</span>
+    <section className="relative flex items-center justify-center py-8 sm:py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Same Background as Other Sections */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Animated Grid Pattern */}
+        <div className="absolute inset-0 opacity-10 dark:opacity-20">
+          <div 
+            className="absolute inset-0 animate-grid-move"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(56, 189, 248, 0.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.2) 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px',
+            }}
+          />
+        </div>
+
+        {/* Floating 3D Shapes */}
+        <motion.div
+          className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-sky-500/10 dark:from-sky-500/20 to-cyan-500/10 dark:to-cyan-500/20 rounded-full blur-3xl"
+          animate={{
+            x: [0, 100, 0],
+            y: [0, -50, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-cyan-500/10 dark:from-cyan-500/20 to-sky-600/10 dark:to-sky-600/20 rounded-full blur-3xl"
+          animate={{
+            x: [0, -80, 0],
+            y: [0, 60, 0],
+            scale: [1, 1.3, 1],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-6 sm:mb-8"
+        >
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            Frequently Asked Questions
           </h2>
-          <TextToSpeech text={faqText} sectionId="faq" />
-        </div>
-        <p className="text-center text-gray-700 dark:text-gray-400 mb-6 sm:mb-8 max-w-2xl mx-auto text-sm sm:text-base px-4">
-          {t('faq.description', 'Find answers to common questions about my experience, availability, and services.')}
-        </p>
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+            Answers to common questions about working with me, project timelines, and remote collaboration.
+          </p>
+        </motion.div>
 
-        {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-2 mb-6 sm:mb-8 px-2">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => {
-                setSelectedCategory(category)
-                setOpenId(null)
-              }}
-              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
-                selectedCategory === category
-                  ? 'bg-primary-700 text-white dark:bg-primary-600'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-
-        {/* FAQ Items - Compact Grid Layout */}
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
-          {filteredFAQs.map((faq, index) => (
-            <motion.div
-              key={faq.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.03, duration: 0.3 }}
-              className="card p-3 sm:p-4"
-            >
-              <button
-                onClick={() => toggleFAQ(faq.id)}
-                className="w-full flex items-start justify-between gap-2 sm:gap-3 text-left focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-lg"
-                aria-expanded={openId === faq.id}
-                aria-controls={`faq-answer-${faq.id}`}
+        {/* Two-Column FAQ Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6">
+          {/* Left Column */}
+          <div className="space-y-3">
+            {leftColumn.map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05, duration: 0.4 }}
+                className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
               >
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-start gap-2 mb-1">
-                    <h3 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white line-clamp-2 flex-1">
-                      {faq.question}
-                    </h3>
-                    <ChevronDown
-                      size={18}
-                      className={`sm:w-5 sm:h-5 text-gray-500 dark:text-gray-400 transition-transform flex-shrink-0 mt-0.5 ${
-                        openId === faq.id ? 'rotate-180' : ''
-                      }`}
-                    />
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full flex items-center justify-between p-3 sm:p-4 text-left hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                >
+                  <span className="text-sm sm:text-base font-semibold text-gray-900 dark:text-white pr-4">
+                    {faq.question}
+                  </span>
+                  <div className="flex-shrink-0">
+                    {openIndex === index ? (
+                      <Minus className="text-sky-500 dark:text-sky-400" size={18} />
+                    ) : (
+                      <Plus className="text-gray-400 dark:text-gray-500" size={18} />
+                    )}
                   </div>
-                  {faq.category && (
-                    <span className="text-[10px] sm:text-xs text-primary-700 dark:text-primary-400 font-medium">
-                      {faq.category}
-                    </span>
-                  )}
-                </div>
-              </button>
-
-              <AnimatePresence>
-                {openId === faq.id && (
+                </button>
+                {openIndex === index && (
                   <motion.div
-                    id={`faq-answer-${faq.id}`}
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden mt-2 sm:mt-3"
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden"
                   >
-                    <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
-                      <div className="flex items-start gap-2 sm:gap-3">
-                        <TextToSpeech
-                          text={faq.answer}
-                          sectionId={`faq-answer-${faq.id}`}
-                          className="mt-0.5"
-                        />
-                        <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed flex-1">
-                          {faq.answer}
-                        </p>
-                      </div>
+                    <div className="px-3 sm:px-4 pb-3 sm:pb-4 pt-0">
+                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                        {faq.answer}
+                      </p>
                     </div>
                   </motion.div>
                 )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Right Column */}
+          <div className="space-y-3">
+            {rightColumn.map((faq, index) => {
+              const actualIndex = index + 5
+              return (
+                <motion.div
+                  key={actualIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: (index + 5) * 0.05, duration: 0.4 }}
+                  className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
+                >
+                  <button
+                    onClick={() => toggleFAQ(actualIndex)}
+                    className="w-full flex items-center justify-between p-3 sm:p-4 text-left hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+                  >
+                    <span className="text-sm sm:text-base font-semibold text-gray-900 dark:text-white pr-4">
+                      {faq.question}
+                    </span>
+                    <div className="flex-shrink-0">
+                      {openIndex === actualIndex ? (
+                        <Minus className="text-sky-500 dark:text-sky-400" size={18} />
+                      ) : (
+                        <Plus className="text-gray-400 dark:text-gray-500" size={18} />
+                      )}
+                    </div>
+                  </button>
+                  {openIndex === actualIndex && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-3 sm:px-4 pb-3 sm:pb-4 pt-0">
+                        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </motion.div>
+              )
+            })}
+          </div>
         </div>
 
-        {filteredFAQs.length === 0 && (
-          <p className="text-center text-gray-600 dark:text-gray-400 mt-8 text-sm sm:text-base">
-            {t('faq.noFAQs', 'No FAQs found in this category.')}
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="text-center"
+        >
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+            Still have questions?
           </p>
-        )}
-      </motion.div>
+          <div className="flex flex-wrap justify-center gap-3">
+            <a
+              href={personalInfo.calendlyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-sky-500/50 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
+            >
+              Schedule a Call
+              <Calendar size={14} />
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-transparent border-2 border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white dark:text-sky-400 dark:hover:text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
+            >
+              Send a Message
+              <Mail size={14} />
+            </a>
+          </div>
+        </motion.div>
+      </div>
     </section>
   )
 }
-

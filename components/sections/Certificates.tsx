@@ -21,7 +21,11 @@ const categoryColors = {
 
 const ITEMS_PER_PAGE = 6 // 2 rows x 3 columns
 
-export default function Certificates() {
+interface CertificatesProps {
+  hideHeading?: boolean
+}
+
+export default function Certificates({ hideHeading = false }: CertificatesProps) {
   const { t } = useTranslation()
   const allLabel = t('certificates.all', 'All')
   const [selectedCategory, setSelectedCategory] = useState<string>(allLabel)
@@ -56,22 +60,26 @@ export default function Certificates() {
   const certificatesText = `${t('certificates.description', 'Professional certifications and achievements that demonstrate my expertise and commitment to continuous learning.')}. ${filteredCertificates.length} ${t('certificates.title', 'certificates')} available.`
 
   return (
-    <section id="certificates" className="section-container bg-white dark:bg-gray-900 transition-colors duration-300 px-4 sm:px-6">
+    <section id="certificates" className="transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
-            {t('certificates.title', 'Certificates')} <span className="gradient-text">{t('certificates.licenses', '& Licenses')}</span>
-          </h2>
-          <TextToSpeech text={certificatesText} sectionId="certificates" />
-        </div>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base px-4">
-          {t('certificates.description', 'Professional certifications and achievements that demonstrate my expertise and commitment to continuous learning.')}
-        </p>
+        {!hideHeading && (
+          <>
+            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
+                {t('certificates.title', 'Certificates')} <span className="gradient-text">{t('certificates.licenses', '& Licenses')}</span>
+              </h2>
+              <TextToSpeech text={certificatesText} sectionId="certificates" />
+            </div>
+            <p className="text-center text-gray-600 dark:text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base px-4">
+              {t('certificates.description', 'Professional certifications and achievements that demonstrate my expertise and commitment to continuous learning.')}
+            </p>
+          </>
+        )}
 
         {/* Category Filter */}
         <div
@@ -89,10 +97,10 @@ export default function Certificates() {
               role="tab"
               aria-selected={selectedCategory === category}
               aria-controls="certificates-grid"
-              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-medium text-xs sm:text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-medium text-xs sm:text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 ${
                 selectedCategory === category
-                  ? 'bg-primary-700 text-white dark:bg-primary-600'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  ? 'bg-sky-500 dark:bg-sky-600 text-white'
+                  : 'bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm text-gray-800 dark:text-gray-200 hover:bg-white/90 dark:hover:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50'
               }`}
             >
               {category}
@@ -112,7 +120,7 @@ export default function Certificates() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.3 }}
-              className="card group hover:scale-[1.02] transition-transform p-4"
+              className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-md rounded-xl border border-gray-200/20 dark:border-gray-700/20 group hover:scale-[1.02] hover:bg-white/50 dark:hover:bg-gray-800/50 transition-all p-4"
             >
               {/* Certificate Image or Icon */}
               {certificate.image ? (

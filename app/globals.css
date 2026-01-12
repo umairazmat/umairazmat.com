@@ -167,3 +167,17 @@
     @apply bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors duration-200;
   }
 }
+
+/* Animated Grid Background */
+@keyframes grid-move {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+.animate-grid-move {
+  animation: grid-move 20s linear infinite;
+}

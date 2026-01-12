@@ -6,14 +6,18 @@ import { BookOpen, CheckCircle, Circle, TrendingUp } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import TextToSpeech from '@/components/TextToSpeech'
 
-export default function Learning() {
+interface LearningProps {
+  hideHeading?: boolean
+}
+
+export default function Learning({ hideHeading = false }: LearningProps) {
   const { t } = useTranslation()
   const { learning } = personalInfo
 
   const learningText = `${t('learning.description', 'Continuous learning and professional development to stay at the forefront of technology.')}. Currently focusing on ${learning.currentFocus}. Progress: ${learning.progress}%.`
 
   return (
-    <section id="learning" className="section-container bg-gray-100 dark:bg-gray-800 transition-colors duration-300 px-4 sm:px-6">
+    <section id="learning" className="transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -21,17 +25,21 @@ export default function Learning() {
         transition={{ duration: 0.6 }}
         className="max-w-4xl mx-auto"
       >
-        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
-            {t('learning.title', 'Learning')} <span className="gradient-text">{t('learning.progress', '& Progress')}</span>
-          </h2>
-          <TextToSpeech text={learningText} sectionId="learning" />
-        </div>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base px-4">
-          {t('learning.description', 'Continuous learning and professional development to stay at the forefront of technology.')}
-        </p>
+        {!hideHeading && (
+          <>
+            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
+                {t('learning.title', 'Learning')} <span className="gradient-text">{t('learning.progress', '& Progress')}</span>
+              </h2>
+              <TextToSpeech text={learningText} sectionId="learning" />
+            </div>
+            <p className="text-center text-gray-600 dark:text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base px-4">
+              {t('learning.description', 'Continuous learning and professional development to stay at the forefront of technology.')}
+            </p>
+          </>
+        )}
 
-        <div className="card p-4 sm:p-6">
+        <div className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-md rounded-xl border border-gray-200/20 dark:border-gray-700/20 p-4 sm:p-6">
           <div className="flex flex-col sm:flex-row items-start gap-4 mb-4 sm:mb-6">
             <div className="p-2 sm:p-3 bg-primary-100 dark:bg-primary-900/20 rounded-lg flex-shrink-0">
               <BookOpen size={20} className="sm:w-6 sm:h-6 text-primary-600 dark:text-primary-400" />

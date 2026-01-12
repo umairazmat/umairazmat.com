@@ -14,7 +14,11 @@ const levelColors = {
   Beginner: 'bg-gray-400',
 }
 
-export default function Skills() {
+interface SkillsProps {
+  hideHeading?: boolean
+}
+
+export default function Skills({ hideHeading = false }: SkillsProps) {
   const { t } = useTranslation()
   const allLabel = t('skills.all')
   const [selectedCategory, setSelectedCategory] = useState<string>(allLabel)
@@ -37,22 +41,26 @@ export default function Skills() {
   const skillsText = `${t('skills.description')}. ${filteredSkills.length} ${t('skills.skills', 'skills')} available across ${Object.keys(groupedSkills).length} categories.`
 
   return (
-    <section id="skills" className="section-container bg-gray-100 dark:bg-gray-800 transition-colors duration-300 px-4 sm:px-6">
+    <section id="skills" className="transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
-            {t('skills.title')} <span className="gradient-text">{t('skills.skills')}</span>
-          </h2>
-          <TextToSpeech text={skillsText} sectionId="skills" />
-        </div>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto text-sm sm:text-base px-4">
-          {t('skills.description')}
-        </p>
+        {!hideHeading && (
+          <>
+            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
+                {t('skills.title')} <span className="gradient-text">{t('skills.skills')}</span>
+              </h2>
+              <TextToSpeech text={skillsText} sectionId="skills" />
+            </div>
+            <p className="text-center text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto text-sm sm:text-base px-4">
+              {t('skills.description')}
+            </p>
+          </>
+        )}
 
         {/* Category Filter */}
         <div
@@ -67,10 +75,10 @@ export default function Skills() {
               role="tab"
               aria-selected={selectedCategory === category}
               aria-controls="skills-grid"
-              className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
+              className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 ${
                 selectedCategory === category
-                  ? 'bg-primary-700 text-white dark:bg-primary-600'
-                  : 'bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600'
+                  ? 'bg-sky-500 dark:bg-sky-600 text-white'
+                  : 'bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm text-gray-800 dark:text-gray-200 hover:bg-white/90 dark:hover:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50'
               }`}
             >
               {category}
@@ -100,7 +108,7 @@ export default function Skills() {
                     transition={{ delay: index * 0.02, duration: 0.2 }}
                     className="group relative"
                   >
-                    <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-white dark:bg-gray-700 rounded-full border border-gray-200 dark:border-gray-600 hover:border-primary-500 dark:hover:border-primary-400 transition-all">
+                    <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-full border border-gray-200/30 dark:border-gray-700/30 hover:border-sky-500 dark:hover:border-sky-400 hover:bg-white/70 dark:hover:bg-gray-800/70 transition-all">
                       <span className="text-xs sm:text-sm font-medium text-gray-900 dark:text-white">{skill.name}</span>
                       <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${levelColors[skill.level]}`} title={skill.level} />
                     </div>

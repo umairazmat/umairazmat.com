@@ -10,7 +10,11 @@ import TextToSpeech from '@/components/TextToSpeech'
 
 const ITEMS_PER_PAGE = 4 // 2 rows x 2 columns
 
-export default function Volunteer() {
+interface VolunteerProps {
+  hideHeading?: boolean
+}
+
+export default function Volunteer({ hideHeading = false }: VolunteerProps) {
   const { t } = useTranslation()
   const allLabel = t('volunteer.all', 'All')
   const [selectedType, setSelectedType] = useState<string>(allLabel)
@@ -43,22 +47,26 @@ export default function Volunteer() {
   const volunteerText = `${t('volunteer.description', 'Contributing to communities and organizations through volunteer work and professional development programs.')}. ${filteredExperiences.length} ${t('volunteer.experience', 'experiences')} available.`
 
   return (
-    <section id="volunteer" className="section-container bg-gray-100 dark:bg-gray-800 transition-colors duration-300 px-4 sm:px-6">
+    <section id="volunteer" className="transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
-            {t('volunteer.title', 'Volunteer')} <span className="gradient-text">{t('volunteer.experience', 'Experience')}</span>
-          </h2>
-          <TextToSpeech text={volunteerText} sectionId="volunteer" />
-        </div>
-        <p className="text-center text-gray-600 dark:text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base px-4">
-          {t('volunteer.description', 'Contributing to communities and organizations through volunteer work and professional development programs.')}
-        </p>
+        {!hideHeading && (
+          <>
+            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center">
+                {t('volunteer.title', 'Volunteer')} <span className="gradient-text">{t('volunteer.experience', 'Experience')}</span>
+              </h2>
+              <TextToSpeech text={volunteerText} sectionId="volunteer" />
+            </div>
+            <p className="text-center text-gray-600 dark:text-gray-400 mb-8 sm:mb-12 max-w-2xl mx-auto text-sm sm:text-base px-4">
+              {t('volunteer.description', 'Contributing to communities and organizations through volunteer work and professional development programs.')}
+            </p>
+          </>
+        )}
 
         {/* Type Filter */}
         <div
@@ -76,10 +84,10 @@ export default function Volunteer() {
               role="tab"
               aria-selected={selectedType === type}
               aria-controls="volunteer-grid"
-              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-medium text-xs sm:text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg font-medium text-xs sm:text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 ${
                 selectedType === type
-                  ? 'bg-primary-700 text-white dark:bg-primary-600'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  ? 'bg-sky-500 dark:bg-sky-600 text-white'
+                  : 'bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm text-gray-800 dark:text-gray-200 hover:bg-white/90 dark:hover:bg-gray-800/90 border border-gray-200/50 dark:border-gray-700/50'
               }`}
             >
               {type}
@@ -99,7 +107,7 @@ export default function Volunteer() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.3 }}
-              className="card group hover:scale-[1.02] transition-transform p-4"
+              className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-md rounded-xl border border-gray-200/20 dark:border-gray-700/20 group hover:scale-[1.02] hover:bg-white/50 dark:hover:bg-gray-800/50 transition-all p-4"
             >
               <div className="flex items-start gap-2 mb-3">
                 <div className="p-1.5 bg-primary-100 dark:bg-primary-900/20 rounded-lg flex-shrink-0">
