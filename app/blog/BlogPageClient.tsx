@@ -1,242 +1,227 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { createBrowserSupabaseClient } from '@/lib/supabaseBrowser'
 import { format } from 'date-fns'
-import { Calendar, Tag, ArrowRight, Star } from 'lucide-react'
-import { useTranslation } from 'react-i18next'
-import BlogBackground from '@/components/BlogBackground'
+import { Calendar, Tag, Search } from 'lucide-react'
 import BlogPagination from '@/components/BlogPagination'
-import BlogAdSpace from '@/components/BlogAdSpace'
 import BlogSearch from '@/components/BlogSearch'
-import { BlogPost } from '@/lib/blog'
 
-const POSTS_PER_PAGE = 9
-
-interface BlogPageClientProps {
-  initialPosts: BlogPost[]
+interface Blog {
+  id: string
+  title: string
+  slug: string
+  excerpt: string
+  featured: boolean
+  cover_image?: string
+  created_at: string
+  categories?: { name: string; slug: string }
+  blog_tags?: { tags: { name: string; slug: string } }[]
 }
 
-export default function BlogPageClient({ initialPosts }: BlogPageClientProps) {
-  const { t } = useTranslation()
-  const [searchQuery, setSearchQuery] = useState('')
+export default function BlogPageClient({ initialPosts }: { initialPosts?: any[] }) {
+  const supabase = createBrowserSupabaseClient()
+  const [blogs, setBlogs] = useState<Blog[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
-  
-  const allPosts = initialPosts
-  
-  // Featured posts (first 3 posts or posts marked as featured)
-  const featuredPosts = allPosts.slice(0, 3)
-  
-  // Filter posts based on search query
-  const filteredPosts = useMemo(() => {
-    if (!searchQuery.trim()) return allPosts
-    
-    const query = searchQuery.toLowerCase()
-    return allPosts.filter(post => 
-      post.title.toLowerCase().includes(query) ||
-      post.excerpt.toLowerCase().includes(query) ||
-      post.tags.some(tag => tag.toLowerCase().includes(query))
-    )
-  }, [allPosts, searchQuery])
-  
-  // Paginate filtered posts
-  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE)
-  const startIndex = (currentPage - 1) * POSTS_PER_PAGE
-  const endIndex = startIndex + POSTS_PER_PAGE
-  const posts = filteredPosts.slice(startIndex, endIndex)
-  
-  const handleSearch = (query: string) => {
-    setSearchQuery(query)
-    setCurrentPage(1) // Reset to first page on new search
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState<string>('all')
+  const [categories, setCategories] = useState<{ id: string; name: string; slug: string }[]>([])
+  const postsPerPage = 9
+
+  useEffect(() => {
+    loadBlogs()
+    loadCategories()
+  }, [selectedCategory, currentPage])
+
+  const loadCategories = async () => {
+    try {
+      const { data } = await supabase
+        .from('categories')
+        .select('id, name, slug')
+        .order('name')
+
+      if (data) {
+        setCategories(data)
+      }
+    } catch (error) {
+      console.error('Error loading categories:', error)
+    }
   }
-  
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+
+  const loadBlogs = async () => {
+    try {
+      setIsLoading(true)
+      let query = supabase
+        .from('blogs')
+        .select(`
+          *,
+          categories (name, slug),
+          blog_tags (tags (name, slug))
+        `)
+        .order('created_at', { ascending: false })
+
+      if (selectedCategory !== 'all') {
+        query = query.eq('category_id', selectedCategory)
+      }
+
+      const { data, error } = await query
+
+      if (error) {
+        console.error('Error loading blogs:', error)
+      } else {
+        setBlogs(data || [])
+      }
+    } catch (error) {
+      console.error('Error loading blogs:', error)
+    } finally {
+      setIsLoading(false)
+    }
   }
+
+  const filteredBlogs = blogs.filter((blog) => {
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase()
+      return (
+        blog.title.toLowerCase().includes(query) ||
+        blog.excerpt?.toLowerCase().includes(query) ||
+        blog.slug.toLowerCase().includes(query)
+      )
+    }
+    return true
+  })
+
+  const featuredBlogs = filteredBlogs.filter((b) => b.featured)
+  const regularBlogs = filteredBlogs.filter((b) => !b.featured)
+
+  const paginatedBlogs = [...featuredBlogs, ...regularBlogs].slice(
+    (currentPage - 1) * postsPerPage,
+    currentPage * postsPerPage
+  )
+
+  const totalPages = Math.ceil(filteredBlogs.length / postsPerPage)
 
   return (
-    <div className="min-h-screen pt-16 relative overflow-hidden">
-      {/* Background Animation */}
-      <BlogBackground />
-      
-      {/* Content */}
-      <div className="relative z-10 section-container">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-            {/* Left Vertical Ad - Hidden on mobile, visible on large screens */}
-            <aside className="hidden lg:block lg:col-span-2">
-              <div className="sticky top-20">
-                <BlogAdSpace variant="vertical" />
-              </div>
-            </aside>
+    <div className="min-h-screen pt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            Blog & <span className="text-sky-500 dark:text-sky-400">Articles</span>
+          </h1>
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Articles, tutorials, and thoughts on web development, AI/ML, and technology
+          </p>
+        </div>
 
-            {/* Main Content */}
-            <div className="lg:col-span-8">
-              {/* Header */}
-              <div className="mb-8 sm:mb-12">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-gray-900 dark:text-white">
-                  {t('blog.title')} & <span className="text-sky-500 dark:text-sky-400">{t('blog.articles')}</span>
-                </h1>
-                <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-6">
-                  {t('blog.description')}
-                </p>
-                
-                {/* Search Bar */}
-                <BlogSearch onSearch={handleSearch} />
-              </div>
-
-              {/* Top Horizontal Ad */}
-              <BlogAdSpace variant="horizontal" className="mb-8" />
-
-              {/* Featured Blogs Section */}
-              {!searchQuery && featuredPosts.length > 0 && (
-                <section className="mb-12">
-                  <div className="flex items-center gap-2 mb-6">
-                    <Star className="text-sky-500 dark:text-sky-400" size={24} fill="currentColor" />
-                    <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
-                      {t('blog.featuredArticles')}
-                    </h2>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {featuredPosts.map((post) => (
-                      <Link
-                        key={post.slug}
-                        href={`/blog/${post.slug}`}
-                        className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-5 sm:p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex flex-col group"
-                      >
-                        <div className="flex items-center gap-2 mb-2">
-                          <Star className="text-sky-500 dark:text-sky-400" size={16} fill="currentColor" />
-                          <span className="text-xs font-semibold text-sky-600 dark:text-sky-400">{t('blog.featured')}</span>
-                        </div>
-                        <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-sky-500 dark:group-hover:text-sky-400 transition-colors line-clamp-2">
-                          {post.title}
-                        </h3>
-                        <div className="flex flex-wrap items-center gap-3 text-xs text-gray-600 dark:text-gray-400 mb-3">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="inline" size={12} />
-                            <span>{format(new Date(post.date), 'MMM d, yyyy')}</span>
-                          </div>
-                          {post.tags.length > 0 && (
-                            <div className="flex items-center gap-1">
-                              <Tag className="inline" size={12} />
-                              <span className="text-xs">{post.tags[0]}</span>
-                            </div>
-                          )}
-                        </div>
-                        <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 line-clamp-3 flex-1">
-                          {post.excerpt}
-                        </p>
-                            <div className="inline-flex items-center gap-2 text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300 font-semibold text-sm transition-colors mt-auto">
-                              {t('blog.readMore')} <ArrowRight size={16} />
-                            </div>
-                      </Link>
-                    ))}
-                  </div>
-                </section>
-              )}
-
-              {/* All Articles Section */}
-              <section>
-                {!searchQuery && (
-                  <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-gray-900 dark:text-white">
-                    {t('blog.allArticles')}
-                  </h2>
-                )}
-                
-                {searchQuery && (
-                  <div className="mb-6">
-                    <p className="text-gray-600 dark:text-gray-400">
-                      {filteredPosts.length > 0 ? (
-                        <>{t('blog.foundArticles')} <span className="font-semibold text-sky-500 dark:text-sky-400">{filteredPosts.length}</span> {filteredPosts.length !== 1 ? t('blog.articles') : t('blog.article')} {t('blog.for')} &quot;{searchQuery}&quot;</>
-                      ) : (
-                        <>{t('blog.noResults')} &quot;{searchQuery}&quot;</>
-                      )}
-                    </p>
-                  </div>
-                )}
-
-                {allPosts.length === 0 ? (
-                  <div className="text-center py-16">
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">{t('blog.noPosts')}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-500">
-                      {t('blog.noPostsDesc')}
-                    </p>
-                  </div>
-                ) : filteredPosts.length === 0 ? (
-                  <div className="text-center py-16">
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">{t('blog.noResults')}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-500">
-                      {t('blog.noResultsDesc')}
-                    </p>
-                  </div>
-                ) : (
-                  <>
-                    {/* Blog Grid - 3 columns */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                      {posts.map((post) => (
-                        <article
-                          key={post.slug}
-                          className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-5 sm:p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex flex-col"
-                        >
-                          <Link href={`/blog/${post.slug}`} className="flex-1 flex flex-col">
-                            <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3 hover:text-sky-500 dark:hover:text-sky-400 transition-colors line-clamp-2">
-                              {post.title}
-                            </h2>
-                            <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3">
-                              <div className="flex items-center gap-1">
-                                <Calendar className="inline" size={14} />
-                                <span>{format(new Date(post.date), 'MMM d, yyyy')}</span>
-                              </div>
-                              {post.tags.length > 0 && (
-                                <div className="flex items-center gap-1">
-                                  <Tag className="inline" size={14} />
-                                  <span className="text-xs">{post.tags[0]}</span>
-                                </div>
-                              )}
-                            </div>
-                            <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 line-clamp-3 flex-1">
-                              {post.excerpt}
-                            </p>
-                            <div className="inline-flex items-center gap-2 text-sky-600 hover:text-sky-700 dark:text-sky-400 dark:hover:text-sky-300 font-semibold text-sm transition-colors mt-auto">
-                              {t('blog.readMore')} <ArrowRight size={16} />
-                            </div>
-                          </Link>
-                        </article>
-                      ))}
-                    </div>
-
-                    {/* Middle Horizontal Ad */}
-                    {posts.length > 0 && (
-                      <BlogAdSpace variant="horizontal" className="my-8" />
-                    )}
-
-                    {/* Pagination */}
-                    {totalPages > 1 && (
-                      <BlogPagination 
-                        currentPage={currentPage} 
-                        totalPages={totalPages}
-                        onPageChange={handlePageChange}
-                      />
-                    )}
-
-                    {/* Bottom Horizontal Ad */}
-                    {posts.length > 0 && (
-                      <BlogAdSpace variant="horizontal" className="mt-8" />
-                    )}
-                  </>
-                )}
-              </section>
-            </div>
-
-            {/* Right Vertical Ad - Hidden on mobile, visible on large screens */}
-            <aside className="hidden lg:block lg:col-span-2">
-              <div className="sticky top-20">
-                <BlogAdSpace variant="vertical" />
-              </div>
-            </aside>
+        {/* Search and Filters */}
+        <div className="mb-8 space-y-4">
+          <BlogSearch onSearch={setSearchQuery} />
+          
+          <div className="flex flex-wrap gap-2 items-center">
+            <span className="text-sm text-gray-600 dark:text-gray-400">Filter by:</span>
+            <button
+              onClick={() => setSelectedCategory('all')}
+              className={`px-4 py-2 rounded-lg text-sm transition-colors ${
+                selectedCategory === 'all'
+                  ? 'bg-sky-600 text-white'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+              }`}
+            >
+              All
+            </button>
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`px-4 py-2 rounded-lg text-sm transition-colors ${
+                  selectedCategory === cat.id
+                    ? 'bg-sky-600 text-white'
+                    : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                }`}
+              >
+                {cat.name}
+              </button>
+            ))}
           </div>
         </div>
+
+        {/* Blog Posts */}
+        {isLoading ? (
+          <div className="text-center py-12">
+            <p className="text-gray-600 dark:text-gray-400">Loading blogs...</p>
+          </div>
+        ) : paginatedBlogs.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-gray-600 dark:text-gray-400">No blog posts found.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            {paginatedBlogs.map((blog) => (
+              <Link
+                key={blog.id}
+                href={`/blog/${blog.slug}`}
+                className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow overflow-hidden group"
+              >
+                {blog.cover_image && (
+                  <div className="relative h-48 w-full overflow-hidden">
+                    <img
+                      src={blog.cover_image}
+                      alt={blog.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    {blog.featured && (
+                      <span className="absolute top-2 right-2 px-2 py-1 bg-yellow-400 text-yellow-900 text-xs font-semibold rounded">
+                        Featured
+                      </span>
+                    )}
+                  </div>
+                )}
+                <div className="p-6">
+                  <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors line-clamp-2">
+                    {blog.title}
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+                    {blog.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-500">
+                    <div className="flex items-center gap-2">
+                      <Calendar size={14} />
+                      <span>{format(new Date(blog.created_at), 'MMM d, yyyy')}</span>
+                    </div>
+                    {blog.categories && (
+                      <span className="px-2 py-1 bg-sky-100 dark:bg-sky-900/20 text-sky-700 dark:text-sky-300 rounded text-xs">
+                        {blog.categories.name}
+                      </span>
+                    )}
+                  </div>
+                  {blog.blog_tags && blog.blog_tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      {blog.blog_tags.slice(0, 3).map((bt, idx) => (
+                        <span
+                          key={idx}
+                          className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded text-xs"
+                        >
+                          <Tag size={12} className="inline mr-1" />
+                          {bt.tags.name}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <BlogPagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
+        )}
       </div>
     </div>
   )

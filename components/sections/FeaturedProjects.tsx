@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { Calendar, Lock, Zap } from 'lucide-react'
 import { personalInfo } from '@/constants'
+import Link from 'next/link'
 
 type ProjectCategory = 'enterprise' | 'ai'
 
@@ -336,15 +337,13 @@ export default function FeaturedProjects() {
             <br />
             {t('featuredProjects.ctaText2')}
           </p>
-          <a
-            href={personalInfo.calendlyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/appointments"
             className="inline-flex items-center gap-2 px-5 py-2 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-sky-500/50 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
           >
             {t('featuredProjects.scheduleCall')}
             <Calendar size={14} />
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

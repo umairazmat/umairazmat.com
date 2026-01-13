@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
-import { getAllBlogPosts } from '@/lib/blog'
 import BlogPageClient from './BlogPageClient'
+
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'Blog & Articles | Web Development, AI/ML, Technology',
@@ -34,6 +35,5 @@ export const metadata: Metadata = {
 }
 
 export default function BlogPage() {
-  const allPosts = getAllBlogPosts()
-  return <BlogPageClient initialPosts={allPosts} />
+  return <BlogPageClient />
 }

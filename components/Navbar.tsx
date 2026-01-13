@@ -44,8 +44,8 @@ export default function Navbar() {
   ]
 
   const clientsDropdown = [
-    { href: getHref('#testimonials'), label: t('navbar.references') },
-    { href: getHref('#who-i-work-with'), label: t('navbar.references') },
+    { href: getHref('#testimonials'), label: t('testimonials.title') },
+    { href: getHref('#who-i-work-with'), label: t('whoIWorkWith.title') },
   ]
 
   const contactDropdown = [

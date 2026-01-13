@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.90.1",
     "date-fns": "^3.3.0",
     "framer-motion": "^11.0.0",
     "gray-matter": "^4.0.3",
@@ -23,6 +25,7 @@
     "react-hook-form": "^7.50.0",
     "react-hot-toast": "^2.6.0",
     "react-i18next": "^16.5.1",
+    "react-markdown": "^10.1.0",
     "resend": "^6.6.0",
     "sharp": "^0.34.5",
     "zod": "^3.22.0"

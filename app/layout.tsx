@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { Inter, Roboto } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import ConditionalNavbar from '@/components/ConditionalNavbar'
+import ConditionalFooter from '@/components/ConditionalFooter'
 import Loader from '@/components/Loader'
 import SkipToContent from '@/components/SkipToContent'
 import Toaster from '@/components/Toaster'
@@ -111,17 +111,15 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
-      { url: '/icon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/icon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/icon-512x512.png', sizes: '512x512', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
     apple: [
-      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
     shortcut: '/favicon.ico',
   },
-  manifest: '/manifest.json',
+  manifest: '/site.webmanifest',
   verification: {
     google: process.env.GOOGLE_VERIFICATION_CODE || 'your-google-verification-code',
   },
@@ -174,9 +172,9 @@ export default function RootLayout({
             <AnalyticsProvider />
             <SkipToContent />
             <Loader />
-            <Navbar />
+            <ConditionalNavbar />
             <main id="main-content">{children}</main>
-            <Footer />
+            <ConditionalFooter />
             <Toaster />
           </ThemeProvider>
         </I18nProvider>

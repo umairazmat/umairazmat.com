@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { Calendar, Mail, MessageSquare, ExternalLink } from 'lucide-react'
 import { personalInfo } from '@/constants'
 import { useState } from 'react'
@@ -19,15 +20,13 @@ export default function BlogSidebar() {
           Have a project in mind? Let&apos;s discuss how I can help.
         </p>
         <div className="space-y-2">
-          <a
-            href={personalInfo.calendlyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/appointments"
             className="flex items-center gap-2 w-full px-4 py-2.5 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg transition-all duration-300 text-sm"
           >
             <Calendar size={16} />
             Schedule a Call
-          </a>
+          </Link>
           <button
             onClick={() => setIsContactModalOpen(true)}
             className="flex items-center gap-2 w-full px-4 py-2.5 bg-transparent border-2 border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white dark:text-sky-400 dark:hover:text-white font-semibold rounded-lg transition-all duration-300 text-sm"
