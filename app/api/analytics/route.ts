@@ -1,37 +1,43 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { createServerSupabaseClient } from '@/lib/supabaseServer'
 
 export const dynamic = 'force-dynamic'
 
-// This is a placeholder for analytics tracking
-// In production, you would store this data in a database
-// For now, we'll just log it (you can integrate with your preferred analytics service)
-
+// POST - Track analytics events
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { event, data } = body
+    const { event, page, ip_address, browser_info, user_agent } = body
 
     // Validate request
-    if (!event || !data) {
+    if (!event || !page) {
       return NextResponse.json(
-        { error: 'Event and data are required' },
+        { error: 'Event and page are required' },
         { status: 400 }
       )
     }
 
-    // In production, you would:
-    // 1. Store in database (MongoDB, PostgreSQL, etc.)
-    // 2. Send to analytics service (Google Analytics, Plausible, etc.)
-    // 3. Process for dashboard display
+    const supabase = await createServerSupabaseClient()
 
-    // For now, just log (remove in production or replace with actual storage)
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Analytics Event:', event, data)
+    // Get client IP from headers
+    const forwarded = request.headers.get('x-forwarded-for')
+    const realIp = request.headers.get('x-real-ip')
+    const clientIp = forwarded?.split(',')[0] || realIp || ip_address || 'unknown'
+
+    const { error } = await supabase.from('analytics').insert({
+      event,
+      page,
+      ip_address: clientIp,
+      browser_info: browser_info || null,
+      user_agent: user_agent || request.headers.get('user-agent') || null,
+      timestamp: new Date().toISOString(),
+    })
+
+    if (error) {
+      console.error('Error tracking analytics:', error)
+      // Don't fail the request - analytics should be silent
+      return NextResponse.json({ success: false }, { status: 200 })
     }
-
-    // TODO: Integrate with your database/analytics service
-    // Example:
-    // await db.analytics.create({ event, data, timestamp: new Date() })
 
     return NextResponse.json(
       { success: true, message: 'Analytics event tracked' },
@@ -40,8 +46,51 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Analytics error:', error)
     // Don't fail the request - analytics should be silent
+    return NextResponse.json({ success: false }, { status: 200 })
+  }
+}
+
+// GET - Fetch analytics (admin only)
+export async function GET(request: NextRequest) {
+  try {
+    const supabase = await createServerSupabaseClient()
+    const {
+      data: { session },
+    } = await supabase.auth.getSession()
+
+    if (!session) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const { searchParams } = new URL(request.url)
+    const page = searchParams.get('page')
+    const limit = parseInt(searchParams.get('limit') || '100')
+
+    let query = supabase
+      .from('analytics')
+      .select('*')
+      .order('timestamp', { ascending: false })
+      .limit(limit)
+
+    if (page) {
+      query = query.eq('page', page)
+    }
+
+    const { data, error } = await query
+
+    if (error) {
+      console.error('Error fetching analytics:', error)
+      return NextResponse.json(
+        { error: 'Failed to fetch analytics' },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json({ analytics: data || [] })
+  } catch (error) {
+    console.error('Error in GET /api/analytics:', error)
     return NextResponse.json(
-      { success: false },
+      { error: 'Internal server error' },
       { status: 500 }
     )
   }

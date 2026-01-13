@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { Plus, Minus, Calendar, Mail } from 'lucide-react'
 import { personalInfo } from '@/constants'
+import Link from 'next/link'
 
 export default function FAQ() {
   const { t } = useTranslation()
@@ -234,15 +235,13 @@ export default function FAQ() {
             {t('faq.stillHaveQuestions')}
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <a
-              href={personalInfo.calendlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/appointments"
               className="inline-flex items-center gap-2 px-4 py-2 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-sky-500/50 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
             >
               {t('faq.scheduleCall')}
               <Calendar size={14} />
-            </a>
+            </Link>
             <a
               href="#contact"
               className="inline-flex items-center gap-2 px-4 py-2 bg-transparent border-2 border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white dark:text-sky-400 dark:hover:text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"

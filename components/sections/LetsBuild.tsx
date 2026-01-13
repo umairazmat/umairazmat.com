@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { Calendar, Mail, MessageSquare, CheckCircle2, Clock, Globe } from 'lucide-react'
 import { personalInfo } from '@/constants'
 import ContactModal from '@/components/ContactModal'
+import Link from 'next/link'
 
 export default function LetsBuild() {
   const { t } = useTranslation()
@@ -104,16 +105,16 @@ export default function LetsBuild() {
             {/* Three buttons in one row */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* Schedule a Call */}
-              <motion.a
-                href={personalInfo.calendlyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="flex flex-col items-center gap-3 p-4 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-700 hover:border-sky-500 dark:hover:border-sky-400 hover:shadow-lg transition-all duration-300 text-center group"
               >
+                <Link
+                  href="/appointments"
+                  className="flex flex-col items-center gap-3 p-4 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg border border-gray-200 dark:border-gray-700 hover:border-sky-500 dark:hover:border-sky-400 hover:shadow-lg transition-all duration-300 text-center group"
+                >
                 <div className="p-3 bg-sky-100 dark:bg-sky-900/20 rounded-lg group-hover:bg-sky-500 dark:group-hover:bg-sky-500 transition-colors">
                   <Calendar className="text-sky-500 dark:text-sky-400 group-hover:text-white transition-colors" size={24} />
                 </div>
@@ -125,7 +126,8 @@ export default function LetsBuild() {
                     {t('letsBuild.scheduleCallDesc')}
                   </p>
                 </div>
-              </motion.a>
+              </Link>
+              </motion.div>
 
               {/* Email Me */}
               <motion.a

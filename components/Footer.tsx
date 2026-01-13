@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { Github, Linkedin, Heart, Briefcase } from 'lucide-react'
 import { personalInfo } from '@/constants'
 import { useTranslation } from 'react-i18next'
+import NewsletterForm from '@/components/NewsletterForm'
 
 export default function Footer() {
   const { t } = useTranslation()
@@ -148,26 +149,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Others Section */}
+          {/* Newsletter Section */}
           <div>
-            <h4 className="text-white font-semibold mb-3 text-sm sm:text-base">{t('footer.others')}</h4>
-            <div className="space-y-2">
-              <Link href="/skills" className="block text-xs sm:text-sm text-gray-300 dark:text-gray-400 hover:text-sky-400 transition-colors">
-                {t('navbar.skills')}
-              </Link>
-              <Link href="/certifications" className="block text-xs sm:text-sm text-gray-300 dark:text-gray-400 hover:text-sky-400 transition-colors">
-                {t('navbar.certificates')}
-              </Link>
-              <Link href="/learning" className="block text-xs sm:text-sm text-gray-300 dark:text-gray-400 hover:text-sky-400 transition-colors">
-                {t('navbar.learning')}
-              </Link>
-              <Link href="/experience" className="block text-xs sm:text-sm text-gray-300 dark:text-gray-400 hover:text-sky-400 transition-colors">
-                {t('navbar.experience')}
-              </Link>
-              <Link href="/education" className="block text-xs sm:text-sm text-gray-300 dark:text-gray-400 hover:text-sky-400 transition-colors">
-                {t('navbar.education')}
-              </Link>
-            </div>
+            <h4 className="text-white font-semibold mb-3 text-sm sm:text-base">Newsletter</h4>
+            <NewsletterForm variant="default" showInterests={true} className="max-w-xs" />
           </div>
         </div>
 
