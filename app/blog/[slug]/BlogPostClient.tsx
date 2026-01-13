@@ -199,8 +199,36 @@ export default function BlogPostClient({ slug }: { slug: string }) {
               )}
 
               <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-gray-700 mb-6">
-                <div className="prose prose-lg dark:prose-invert prose-headings:font-bold prose-a:text-sky-600 dark:prose-a:text-sky-400 prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1 prose-code:rounded max-w-none">
-                  <ReactMarkdown>{post.content}</ReactMarkdown>
+                <div className="prose prose-lg dark:prose-invert max-w-none 
+                  prose-headings:font-bold prose-headings:mt-8 prose-headings:mb-4 prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl
+                  prose-p:mb-6 prose-p:leading-relaxed prose-p:text-gray-700 dark:prose-p:text-gray-300
+                  prose-a:text-sky-600 dark:prose-a:text-sky-400 prose-a:underline hover:prose-a:text-sky-700 dark:hover:prose-a:text-sky-300
+                  prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-[''] prose-code:after:content-['']
+                  prose-pre:bg-gray-900 dark:prose-pre:bg-gray-950 prose-pre:rounded-lg prose-pre:p-4 prose-pre:overflow-x-auto
+                  prose-ul:mb-6 prose-ul:space-y-2 prose-ol:mb-6 prose-ol:space-y-2
+                  prose-li:my-2 prose-li:leading-relaxed
+                  prose-blockquote:border-l-4 prose-blockquote:border-sky-500 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:my-6
+                  prose-img:rounded-lg prose-img:my-6 prose-img:shadow-lg
+                  prose-hr:my-8 prose-hr:border-gray-300 dark:prose-hr:border-gray-600
+                  prose-strong:font-bold prose-strong:text-gray-900 dark:prose-strong:text-gray-100
+                  prose-em:italic">
+                  <ReactMarkdown
+                    components={{
+                      p: ({ children }) => <p className="mb-6 leading-relaxed">{children}</p>,
+                      h1: ({ children }) => <h1 className="text-4xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">{children}</h1>,
+                      h2: ({ children }) => <h2 className="text-3xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">{children}</h2>,
+                      h3: ({ children }) => <h3 className="text-2xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">{children}</h3>,
+                      ul: ({ children }) => <ul className="mb-6 space-y-2 list-disc list-inside">{children}</ul>,
+                      ol: ({ children }) => <ol className="mb-6 space-y-2 list-decimal list-inside">{children}</ol>,
+                      li: ({ children }) => <li className="my-2 leading-relaxed">{children}</li>,
+                      blockquote: ({ children }) => <blockquote className="border-l-4 border-sky-500 pl-4 italic my-6 text-gray-700 dark:text-gray-300">{children}</blockquote>,
+                      code: ({ children }) => <code className="bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded text-sm">{children}</code>,
+                      pre: ({ children }) => <pre className="bg-gray-900 dark:bg-gray-950 rounded-lg p-4 overflow-x-auto my-6">{children}</pre>,
+                      hr: () => <hr className="my-8 border-gray-300 dark:border-gray-600" />,
+                    }}
+                  >
+                    {post.content}
+                  </ReactMarkdown>
                 </div>
               </div>
 
