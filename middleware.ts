@@ -37,7 +37,10 @@ export async function middleware(request: NextRequest) {
       data: { user },
     } = await supabase.auth.getUser()
 
-    // Protect admin routes
+    // Add pathname to response headers for server components
+    supabaseResponse.headers.set('x-pathname', request.nextUrl.pathname)
+
+    // Protect admin routes (except login page)
     if (
       !user &&
       !request.nextUrl.pathname.startsWith('/admin/login') &&
@@ -50,6 +53,8 @@ export async function middleware(request: NextRequest) {
   } catch (error) {
     // If middleware fails, allow request to continue
     console.error('Middleware error:', error)
+    // Still set pathname header even on error
+    supabaseResponse.headers.set('x-pathname', request.nextUrl.pathname)
   }
 
   return supabaseResponse
