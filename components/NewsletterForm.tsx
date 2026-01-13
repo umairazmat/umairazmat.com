@@ -56,7 +56,7 @@ export default function NewsletterForm({
           email: data.email,
           interests: data.interests ? [data.interests] : [],
         },
-      ]).select()
+      ])
 
       if (error) {
         console.error('Lead insert error:', error)
@@ -73,7 +73,7 @@ export default function NewsletterForm({
           toast.error(`Failed to subscribe: ${error.message || 'Please try again.'}`)
         }
       } else {
-        console.log('Lead created successfully:', result)
+        console.log('Lead created successfully')
         toast.success('Successfully subscribed to newsletter!')
         setIsSuccess(true)
         reset()
