@@ -1,103 +1,233 @@
 # Umair Azmat - Professional Portfolio Website
 
-A modern, SEO-friendly personal portfolio website built with Next.js 14+ (App Router), TypeScript, and Tailwind CSS.
+A modern, SEO-friendly, multi-language personal portfolio website built with Next.js 14+ (App Router), TypeScript, and Tailwind CSS. Features full internationalization (i18n) support with 5 languages, RTL support for Arabic, responsive design, and comprehensive SEO optimization.
 
-## Features
+## 🆕 Recent Updates (2024)
 
-### Phase 1 (MVP) - Implemented ✅
+### Major Improvements
+- ✅ **Full Internationalization** - Added Italian language support, completing 5-language coverage
+- ✅ **Complete Translation Coverage** - All homepage sections, navbar, footer, contact modal, and blog pages fully translated
+- ✅ **RTL Layout Fixes** - Fixed Arabic RTL layout issues in navbar and components
+- ✅ **Responsive Navigation** - Improved mobile/tablet navigation with hamburger menu below 786px
+- ✅ **Hero Section Enhancements** - Updated buttons (View My Work, Contact Me), improved scroll behavior, styled resume download button
+- ✅ **Contact Form Integration** - Full Resend API integration with auto-close, click-outside, and Escape key support
+- ✅ **SEO Optimization** - Enhanced sitemap, robots.txt, structured data, and comprehensive meta tags
+- ✅ **Code Cleanup** - Removed unused components, pages, dependencies, and admin/auth files
+- ✅ **API Routes** - Fixed Next.js 14 compatibility for dynamic routes (async params)
+- ✅ **Build Optimization** - All build errors resolved, production-ready
 
-- ✅ **Next.js 14+ Migration** - App Router with TypeScript
-- ✅ **SEO Optimization** - Metadata, sitemap, robots.txt
-- ✅ **Remote Job Availability Widget** - Shows availability, timezone, preferred stack
-- ✅ **Interactive Experience Timeline** - Clickable, filterable, with metrics
-- ✅ **Enhanced Metrics Display** - Students trained, projects delivered, GitHub stats
-- ✅ **Contact Modal** - Professional contact form with validation
-- ✅ **Resume Download** - Easy access to resume
-- ✅ **Chatbot** - AI assistant with RAG (Retrieval Augmented Generation) for portfolio data
-- ✅ **Blog Setup** - MDX support for blog posts
-- ✅ **Single Page Portfolio** - All sections in one page
+### UI/UX Improvements
+- Language and theme switchers always visible in header (mobile/tablet)
+- Responsive logo display (Umair on mobile/tablet/laptop, Umair Azmat on desktop)
+- Resume download button in Hero section and mobile menu
+- Improved contact modal z-index and toast notifications
+- Better RTL-aware spacing and alignment
 
-### Sections
+## 🌟 Features
 
-1. **Hero Section** - Introduction with quick stats and availability widget
-2. **About** - Personal summary and highlights
-3. **Experience** - Interactive timeline with filtering and detailed metrics
-4. **Projects** - Featured projects with filtering by category
-5. **Skills** - Technical skills organized by category
-6. **Contact** - Contact information and modal form
-7. **Blog** - MDX-based blog system
+### Core Features ✅
 
-## Tech Stack
+- ✅ **Next.js 14+ App Router** - Modern React framework with TypeScript
+- ✅ **Multi-Language Support (i18n)** - 5 languages: English (US/GB), Arabic, German, Italian
+- ✅ **RTL Support** - Full right-to-left layout support for Arabic
+- ✅ **SEO Optimization** - Comprehensive metadata, sitemap, robots.txt, structured data (JSON-LD)
+- ✅ **Responsive Design** - Mobile-first design optimized for all screen sizes
+- ✅ **Dark/Light Theme** - System preference detection with manual toggle
+- ✅ **Contact Form** - Professional contact modal with Resend email integration
+- ✅ **Resume Download** - Easy access to resume PDF
+- ✅ **Blog System** - MDX-based blog with comments, search, and pagination
+- ✅ **Interactive Sections** - Animated sections with Framer Motion
+- ✅ **Analytics Ready** - Built-in analytics tracking system
+- ✅ **Accessibility** - WCAG compliant with skip-to-content, ARIA labels
 
+### Homepage Sections
+
+1. **Hero Section** - Introduction with quick stats, CTA buttons (View My Work, Contact Me, Download Resume)
+2. **About Me** - Personal summary and professional highlights
+3. **Instant Proof** - Value proposition and proof points
+4. **Skills & Tech Stack** - Technical expertise organized by category (Frontend, Backend, Cloud, AI)
+5. **Featured Projects** - Showcase of key projects with filtering
+6. **Experiences** - Interactive timeline with detailed work history
+7. **How I Work** - Work methodology and process
+8. **Who I Work With** - Ideal clients and collaboration approach
+9. **Testimonials** - Client feedback and references
+10. **FAQ** - Frequently asked questions
+11. **Let's Build** - Final CTA section
+
+### Additional Pages
+
+- **Blog** - MDX-based blog with full i18n support
+- **Projects** - Detailed project showcase
+- **Skills** - Comprehensive skills breakdown
+- **Experience** - Work experience timeline
+- **Education** - Educational background
+- **Certifications** - Professional certifications
+- **Learning** - Continuous learning resources
+- **Appointments** - Schedule a call system
+
+## 🌍 Internationalization (i18n)
+
+The website supports 5 languages with full translation coverage:
+
+- **English (US)** - `en-US` (default)
+- **English (GB)** - `en-GB`
+- **Arabic** - `ar` (with RTL support)
+- **German** - `de`
+- **Italian** - `it`
+
+### Translation Coverage
+
+- ✅ All homepage sections
+- ✅ Navigation bar and dropdowns
+- ✅ Footer
+- ✅ Contact modal
+- ✅ Blog pages
+- ✅ All static pages
+- ✅ Error pages
+
+### RTL Support
+
+Full right-to-left (RTL) layout support for Arabic:
+- Automatic text direction switching
+- RTL-aware spacing and alignment
+- Proper flex direction handling
+- Navbar and component RTL optimization
+
+## 🛠️ Tech Stack
+
+### Core
 - **Framework**: Next.js 14+ (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
-- **Forms**: React Hook Form + Zod
+- **Forms**: React Hook Form + Zod validation
 - **Icons**: Lucide React
-- **Blog**: MDX with next-mdx-remote
 
-## Getting Started
+### Internationalization
+- **i18n**: react-i18next, i18next-browser-languagedetector
+- **Language Detection**: Automatic browser language detection with localStorage persistence
+
+### Blog
+- **MDX**: next-mdx-remote
+- **Content**: Gray Matter for frontmatter parsing
+
+### Email & Communication
+- **Email Service**: Resend API
+- **Notifications**: React Hot Toast
+
+### SEO & Analytics
+- **Structured Data**: JSON-LD schema
+- **Sitemap**: Dynamic sitemap generation
+- **Robots**: Configurable robots.txt
+- **Metadata**: Comprehensive Open Graph and Twitter Card support
+
+## 📁 Project Structure
+
+```
+├── app/
+│   ├── api/                    # API routes
+│   │   ├── analytics/          # Analytics tracking
+│   │   ├── blog/               # Blog API
+│   │   ├── comments/           # Comment system (like, dislike, report)
+│   │   └── contact/            # Contact form handler
+│   ├── blog/                   # Blog pages
+│   ├── [pages]/                # Static pages (projects, skills, etc.)
+│   ├── globals.css             # Global styles with RTL support
+│   ├── layout.tsx              # Root layout with metadata
+│   ├── page.tsx                # Homepage
+│   ├── robots.ts               # Robots.txt generator
+│   └── sitemap.ts              # Sitemap generator
+├── components/
+│   ├── sections/               # Homepage sections (11 sections)
+│   ├── ContactModal.tsx        # Contact form modal
+│   ├── Navbar.tsx              # Responsive navigation with i18n
+│   ├── Footer.tsx              # Footer with translations
+│   ├── LanguageSwitcher.tsx    # Language selection component
+│   ├── ThemeToggle.tsx         # Dark/light theme toggle
+│   ├── Chatbot.tsx             # AI chatbot component
+│   └── [other components]      # Additional UI components
+├── constants/
+│   └── index.ts                # Portfolio data and configuration
+├── content/
+│   └── blog/                   # Blog posts (MDX files)
+├── i18n/
+│   ├── config.ts               # i18n configuration
+│   └── locales/                # Translation files
+│       ├── en-US.json
+│       ├── en-GB.json
+│       ├── ar.json
+│       ├── de.json
+│       └── it.json
+├── lib/
+│   └── blog.ts                 # Blog utilities
+├── providers/
+│   └── I18nProvider.tsx        # i18n provider wrapper
+└── public/
+    ├── resume/                 # Resume PDF
+    ├── images/                 # Static images
+    ├── manifest.json           # PWA manifest
+    └── robots.txt              # Static robots.txt fallback
+```
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
 - Node.js 18+ 
 - npm or yarn
+- Resend API key (for contact form)
 
 ### Installation
 
-1. Clone the repository:
+1. **Clone the repository:**
 ```bash
 git clone https://github.com/umairazmat/umairazmat.com.git
 cd umairazmat.com
 ```
 
-2. Install dependencies:
+2. **Install dependencies:**
 ```bash
 npm install
 ```
 
-3. Run the development server:
+3. **Set up environment variables:**
+Create a `.env.local` file:
+```env
+RESEND_API_KEY=your_resend_api_key_here
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
+
+4. **Run the development server:**
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+5. **Open [http://localhost:3000](http://localhost:3000)** in your browser.
 
-## Project Structure
-
-```
-├── app/
-│   ├── blog/          # Blog pages
-│   ├── globals.css    # Global styles
-│   ├── layout.tsx     # Root layout
-│   ├── page.tsx       # Home page
-│   ├── robots.ts      # Robots.txt
-│   └── sitemap.ts     # Sitemap
-├── components/
-│   ├── sections/      # Page sections
-│   ├── Chatbot.tsx    # AI chatbot
-│   ├── ContactModal.tsx
-│   ├── Navbar.tsx
-│   └── Footer.tsx
-├── constants/
-│   └── index.ts       # Portfolio data
-├── content/
-│   └── blog/          # Blog posts (MDX)
-└── lib/
-    └── blog.ts        # Blog utilities
-```
-
-## Customization
+## ⚙️ Configuration
 
 ### Update Personal Information
 
 Edit `constants/index.ts` to update:
-- Personal info (name, email, location)
+- Personal info (name, email, location, timezone)
 - Experience entries
 - Projects
 - Skills
 - Social links
+- Resume URL
+
+### Add/Update Translations
+
+Translation files are located in `i18n/locales/`. Each language has a JSON file:
+- `en-US.json` - English (US)
+- `en-GB.json` - English (GB)
+- `ar.json` - Arabic
+- `de.json` - German
+- `it.json` - Italian
+
+To add a new translation:
+1. Add the key to all language files
+2. Use `t('key.path')` in components with `useTranslation()` hook
 
 ### Add Blog Posts
 
@@ -110,6 +240,7 @@ date: 2024-01-01
 excerpt: Post excerpt
 tags: [tag1, tag2]
 author: Umair Azmat
+slug: your-post-slug
 ---
 
 Your content here...
@@ -119,53 +250,81 @@ Your content here...
 
 Place your resume PDF at `public/resume/umair-azmat-resume.pdf` and update the path in `constants/index.ts`.
 
-### Contact Form Integration
+### Contact Form Setup
 
-The contact form currently logs to console. To integrate with a service:
+The contact form uses Resend API for email delivery:
 
-1. **EmailJS**: Add EmailJS service ID
-2. **Formspree**: Add Formspree endpoint
-3. **API Route**: Create `/app/api/contact/route.ts`
+1. Sign up at [resend.com](https://resend.com)
+2. Get your API key
+3. Add to `.env.local`: `RESEND_API_KEY=your_key`
+4. Update email recipient in `app/api/contact/route.ts`
 
-Example API route:
-```typescript
-export async function POST(request: Request) {
-  const data = await request.json()
-  // Send email or save to database
-  return Response.json({ success: true })
-}
-```
+### Theme Customization
 
-### Chatbot Enhancement
+Theme colors are configured in `tailwind.config.ts`. The site uses:
+- Primary: Sky blue (`sky-500`)
+- Dark mode: Gray scale
+- Custom RTL classes for Arabic support
 
-The chatbot currently uses simple keyword matching. To enhance with GPT:
+## 🔍 SEO Configuration
 
-1. Add OpenAI API key to `.env.local`
-2. Update `components/Chatbot.tsx` to call OpenAI API
-3. Consider using vector embeddings for better RAG
+### Metadata
 
-## SEO Configuration
-
-Update SEO metadata in:
-- `app/layout.tsx` - Global metadata
+SEO metadata is configured in:
+- `app/layout.tsx` - Global metadata, Open Graph, Twitter Cards
+- `app/page.tsx` - Homepage-specific metadata
 - `app/blog/[slug]/page.tsx` - Blog post metadata
-- `app/sitemap.ts` - Sitemap URLs
-- `app/robots.ts` - Robots.txt rules
 
-## Deployment
+### Sitemap
 
-This project is configured for deployment on both **Vercel** and **Netlify**. Configuration files are included for both platforms.
+Dynamic sitemap generation in `app/sitemap.ts`:
+- Includes all main pages
+- Blog posts with priorities
+- Homepage sections
+- Change frequencies
+
+### Robots.txt
+
+Configured in `app/robots.ts`:
+- Allow/disallow rules
+- Sitemap reference
+- User-agent specific rules
+
+### Structured Data
+
+JSON-LD structured data in `components/StructuredData.tsx`:
+- Person schema
+- Organization schema
+- Website schema
+- Breadcrumb schema
+
+## 📱 Responsive Design
+
+The website is fully responsive with breakpoints:
+- **Mobile**: < 640px (sm)
+- **Tablet**: 640px - 1024px (md, lg)
+- **Desktop**: > 1024px (xl, 2xl)
+
+### Mobile Optimizations
+
+- Hamburger menu below 786px
+- Language and theme switchers always visible in header
+- Optimized touch targets
+- Mobile-first navigation
+- Responsive logo (Umair / Umair Azmat)
+
+## 🚢 Deployment
 
 ### Vercel (Recommended)
 
-Vercel is the recommended platform as it's built by the Next.js team and offers the best integration.
-
 **Quick Deploy:**
-1. Push your code to GitHub
+1. Push code to GitHub
 2. Go to [vercel.com](https://vercel.com) and sign in
-3. Click "Add New Project" and import your repository
-4. Vercel will auto-detect Next.js settings from `vercel.json`
-5. Click "Deploy" - that's it!
+3. Click "Add New Project" and import repository
+4. Add environment variables:
+   - `RESEND_API_KEY`
+   - `NEXT_PUBLIC_SITE_URL`
+5. Click "Deploy"
 
 **Manual Deploy:**
 ```bash
@@ -173,22 +332,14 @@ npm install -g vercel
 vercel
 ```
 
-**Configuration:**
-- `vercel.json` is already configured
-- Build command: `npm run build`
-- Framework: Next.js (auto-detected)
-- Regions: US East (iad1)
-
 ### Netlify
 
-Netlify also provides excellent Next.js support with their plugin.
-
 **Quick Deploy:**
-1. Push your code to GitHub
+1. Push code to GitHub
 2. Go to [netlify.com](https://netlify.com) and sign in
 3. Click "Add new site" → "Import an existing project"
-4. Connect your GitHub repository
-5. Netlify will auto-detect settings from `netlify.toml`
+4. Connect GitHub repository
+5. Add environment variables
 6. Click "Deploy site"
 
 **Manual Deploy:**
@@ -197,36 +348,18 @@ npm install -g netlify-cli
 netlify deploy --prod
 ```
 
-**Configuration:**
-- `netlify.toml` is already configured
-- Build command: `npm run build`
-- Publish directory: `.next`
-- Uses `@netlify/plugin-nextjs` for optimal Next.js support
-- Node version: 18
-
-**Important for Netlify:**
-Make sure to install the Netlify Next.js plugin:
-```bash
-npm install @netlify/plugin-nextjs --save-dev
-```
-
 ### Environment Variables
 
-For both platforms, add environment variables in their respective dashboards:
+Required for production:
+- `RESEND_API_KEY` - Resend API key for contact form
+- `NEXT_PUBLIC_SITE_URL` - Your production site URL (e.g., `https://umairazmat.com`)
 
-**Vercel:**
-- Settings → Environment Variables
-
-**Netlify:**
-- Site settings → Build & deploy → Environment variables
-
-**Common Variables:**
-- `NEXT_PUBLIC_SITE_URL` - Your site URL (e.g., `https://umairazmat.com`)
-- `OPENAI_API_KEY` - For enhanced chatbot (optional)
+Optional:
+- `OPENAI_API_KEY` - For enhanced chatbot (if implemented)
 
 ### Build Verification
 
-Test the build locally before deploying:
+Test the build locally:
 ```bash
 npm run build
 npm start
@@ -234,18 +367,126 @@ npm start
 
 Visit `http://localhost:3000` to verify everything works.
 
-## Environment Variables
+## 🧹 Code Quality
 
-Create `.env.local` for:
-- `NEXT_PUBLIC_SITE_URL` - Your site URL
-- `OPENAI_API_KEY` - For enhanced chatbot (optional)
+### Linting
 
-## License
+```bash
+npm run lint
+```
+
+### Type Checking
+
+TypeScript is configured with strict mode. Check types:
+```bash
+npx tsc --noEmit
+```
+
+### Code Cleanup
+
+The project has been cleaned up:
+- ✅ Removed unused components
+- ✅ Removed unused pages
+- ✅ Removed unused dependencies
+- ✅ Optimized imports
+- ✅ Removed admin/auth pages
+
+## 📊 API Routes
+
+### Contact Form
+- **Route**: `/api/contact`
+- **Method**: POST
+- **Body**: `{ name, email, message }`
+- **Response**: `{ success: boolean }`
+
+### Blog Posts
+- **Route**: `/api/blog/posts`
+- **Method**: GET
+- **Response**: Array of blog posts
+
+### Comments
+- **Route**: `/api/comments`
+- **Methods**: GET, POST
+- **Dynamic Routes**:
+  - `/api/comments/[id]/like` - POST
+  - `/api/comments/[id]/dislike` - POST
+  - `/api/comments/[id]/report` - POST
+
+### Analytics
+- **Route**: `/api/analytics`
+- **Method**: POST
+- **Body**: `{ event, data }`
+
+## 🎨 Customization Guide
+
+### Adding a New Language
+
+1. Create new JSON file in `i18n/locales/` (e.g., `fr.json`)
+2. Add translations following the structure of `en-US.json`
+3. Update `i18n/config.ts`:
+   ```typescript
+   import fr from './locales/fr.json'
+   // Add to resources
+   'fr': { translation: fr },
+   // Add to supportedLngs
+   supportedLngs: ['en-US', 'en-GB', 'ar', 'de', 'it', 'fr'],
+   ```
+4. Add language option to `LanguageSwitcher.tsx`
+
+### Adding a New Section
+
+1. Create component in `components/sections/`
+2. Add to `app/page.tsx`
+3. Add translations to all language files
+4. Update sitemap if needed
+
+### Modifying Styles
+
+- Global styles: `app/globals.css`
+- Tailwind config: `tailwind.config.ts`
+- Component styles: Inline Tailwind classes
+
+## 🐛 Troubleshooting
+
+### Build Errors
+
+If you encounter build errors:
+1. Clear `.next` directory: `rm -rf .next`
+2. Clear node_modules: `rm -rf node_modules && npm install`
+3. Check TypeScript errors: `npx tsc --noEmit`
+
+### Translation Issues
+
+If translations don't appear:
+1. Check browser console for missing keys
+2. Verify translation files are valid JSON
+3. Clear localStorage: `localStorage.removeItem('i18nextLng')`
+
+### RTL Layout Issues
+
+If Arabic layout is broken:
+1. Check `app/globals.css` for RTL rules
+2. Verify components use RTL-aware classes (`ms-`, `ps-`, `border-s`)
+3. Check for `no-rtl-reverse` class usage
+
+## 📄 License
 
 MIT License - see LICENSE file for details.
 
-## Contact
+## 📧 Contact
 
-- Website: [umairazmat.com](https://umairazmat.com)
-- Email: umair@umairazmat.com
+- **Website**: [umairazmat.com](https://umairazmat.com)
+- **Email**: umair@umairazmat.com
+- **GitHub**: [@umairazmat](https://github.com/umairazmat)
 
+## 🙏 Acknowledgments
+
+- Built with [Next.js](https://nextjs.org/)
+- Styled with [Tailwind CSS](https://tailwindcss.com/)
+- Icons by [Lucide](https://lucide.dev/)
+- Animations by [Framer Motion](https://www.framer.com/motion/)
+- Translations powered by [react-i18next](https://react.i18next.com/)
+
+---
+
+**Last Updated**: 2026-01-13 - Portfolio v1.0.0 with full i18n support, RTL, and comprehensive SEO optimization.
