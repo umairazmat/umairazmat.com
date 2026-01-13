@@ -10,6 +10,7 @@ import WhoIWorkWith from '@/components/sections/WhoIWorkWith'
 import Testimonials from '@/components/sections/Testimonials'
 import FAQ from '@/components/sections/FAQ'
 import LetsBuild from '@/components/sections/LetsBuild'
+import FeaturedBlogs from '@/components/sections/FeaturedBlogs'
 import WhatsAppButton from '@/components/WhatsAppButton'
 import ChatbotFloatingButton from '@/components/ChatbotFloatingButton'
 
@@ -117,6 +118,7 @@ export default function Home() {
       <Testimonials />
       <FAQ />
       <LetsBuild />
+      <FeaturedBlogs />
       {/* Floating Actions */}
       <div id="chatbot-trigger" />
       <WhatsAppButton />

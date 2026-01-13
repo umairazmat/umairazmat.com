@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { Inter, Roboto } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
+import ConditionalNavbar from '@/components/ConditionalNavbar'
+import ConditionalFooter from '@/components/ConditionalFooter'
 import Loader from '@/components/Loader'
 import SkipToContent from '@/components/SkipToContent'
 import Toaster from '@/components/Toaster'
@@ -174,9 +174,9 @@ export default function RootLayout({
             <AnalyticsProvider />
             <SkipToContent />
             <Loader />
-            <Navbar />
+            <ConditionalNavbar />
             <main id="main-content">{children}</main>
-            <Footer />
+            <ConditionalFooter />
             <Toaster />
           </ThemeProvider>
         </I18nProvider>

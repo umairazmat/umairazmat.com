@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { Calendar, ExternalLink } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { personalInfo } from '@/constants'
+import Link from 'next/link'
 
 export default function AboutMe() {
   const { t } = useTranslation()
@@ -98,15 +99,13 @@ export default function AboutMe() {
               {t('aboutMe.seeSelectedWork')}
               <ExternalLink size={16} />
             </a>
-            <a
-              href={personalInfo.calendlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/appointments"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-transparent border-2 border-sky-500 text-sky-500 hover:bg-sky-500 hover:text-white dark:text-sky-400 dark:hover:text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
             >
               {t('aboutMe.scheduleCall')}
               <Calendar size={16} />
-            </a>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

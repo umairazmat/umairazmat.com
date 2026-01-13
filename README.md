@@ -2,9 +2,28 @@
 
 A modern, SEO-friendly, multi-language personal portfolio website built with Next.js 14+ (App Router), TypeScript, and Tailwind CSS. Features full internationalization (i18n) support with 5 languages, RTL support for Arabic, responsive design, and comprehensive SEO optimization.
 
-## 🆕 Recent Updates (2024)
+## 🆕 Version 2.0 - Latest Updates (2024)
 
-### Major Improvements
+### 🎉 Major New Features
+- ✅ **Admin Dashboard System** - Complete admin panel with Supabase authentication
+  - Blog management (create, edit, delete, featured posts)
+  - Appointment management with search and filtering
+  - Newsletter leads management
+  - Site analytics dashboard
+- ✅ **Custom Appointment System** - Replaced Calendly with custom booking system
+  - Public appointment booking at `/appointments`
+  - Admin dashboard for managing appointments
+  - Full appointment details and status management
+- ✅ **Featured Blogs on Homepage** - Display 3 latest featured blog posts
+  - Matches homepage UI/UX with animated backgrounds
+  - Responsive grid layout
+  - Auto-hides if no featured blogs exist
+- ✅ **Newsletter with Interests** - Enhanced newsletter form in footer
+  - Email subscription with optional interest selection
+  - Dropdown selector for compact design
+  - Saves to Supabase leads table
+
+### Previous Updates (v1.0)
 - ✅ **Full Internationalization** - Added Italian language support, completing 5-language coverage
 - ✅ **Complete Translation Coverage** - All homepage sections, navbar, footer, contact modal, and blog pages fully translated
 - ✅ **RTL Layout Fixes** - Fixed Arabic RTL layout issues in navbar and components
@@ -12,7 +31,6 @@ A modern, SEO-friendly, multi-language personal portfolio website built with Nex
 - ✅ **Hero Section Enhancements** - Updated buttons (View My Work, Contact Me), improved scroll behavior, styled resume download button
 - ✅ **Contact Form Integration** - Full Resend API integration with auto-close, click-outside, and Escape key support
 - ✅ **SEO Optimization** - Enhanced sitemap, robots.txt, structured data, and comprehensive meta tags
-- ✅ **Code Cleanup** - Removed unused components, pages, dependencies, and admin/auth files
 - ✅ **API Routes** - Fixed Next.js 14 compatibility for dynamic routes (async params)
 - ✅ **Build Optimization** - All build errors resolved, production-ready
 
@@ -35,7 +53,15 @@ A modern, SEO-friendly, multi-language personal portfolio website built with Nex
 - ✅ **Dark/Light Theme** - System preference detection with manual toggle
 - ✅ **Contact Form** - Professional contact modal with Resend email integration
 - ✅ **Resume Download** - Easy access to resume PDF
-- ✅ **Blog System** - MDX-based blog with comments, search, and pagination
+- ✅ **Blog System** - Full-featured blog with Supabase backend
+  - Create, edit, delete blog posts
+  - Categories and tags
+  - Featured posts
+  - Comments system
+  - Search and filtering
+- ✅ **Admin Dashboard** - Complete admin panel for content management
+- ✅ **Appointment System** - Custom appointment booking system
+- ✅ **Newsletter System** - Lead capture with interest tracking
 - ✅ **Interactive Sections** - Animated sections with Framer Motion
 - ✅ **Analytics Ready** - Built-in analytics tracking system
 - ✅ **Accessibility** - WCAG compliant with skip-to-content, ARIA labels
@@ -56,14 +82,22 @@ A modern, SEO-friendly, multi-language personal portfolio website built with Nex
 
 ### Additional Pages
 
-- **Blog** - MDX-based blog with full i18n support
+- **Blog** - Full-featured blog with Supabase backend, categories, tags, comments
 - **Projects** - Detailed project showcase
 - **Skills** - Comprehensive skills breakdown
 - **Experience** - Work experience timeline
 - **Education** - Educational background
 - **Certifications** - Professional certifications
 - **Learning** - Continuous learning resources
-- **Appointments** - Schedule a call system
+- **Appointments** - Custom appointment booking system
+
+### Admin Pages (Protected)
+
+- **Admin Dashboard** - Overview with statistics (`/admin/dashboard`)
+- **Blog Management** - Create, edit, delete blog posts (`/admin/blogs`)
+- **Appointment Management** - View and manage appointments (`/admin/appointments`)
+- **Leads Management** - View newsletter subscribers (`/admin/leads`)
+- **Analytics** - Site analytics and statistics (`/admin/analytics`)
 
 ## 🌍 Internationalization (i18n)
 
@@ -110,6 +144,11 @@ Full right-to-left (RTL) layout support for Arabic:
 ### Blog
 - **MDX**: next-mdx-remote
 - **Content**: Gray Matter for frontmatter parsing
+
+### Backend & Database
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **Real-time**: Supabase Realtime (if needed)
 
 ### Email & Communication
 - **Email Service**: Resend API
@@ -193,7 +232,17 @@ npm install
 3. **Set up environment variables:**
 Create a `.env.local` file:
 ```env
+# Supabase (Required)
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_publishable_key
+# OR
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY=your_publishable_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+
+# Email (Optional - for contact form)
 RESEND_API_KEY=your_resend_api_key_here
+
+# Site URL (Optional)
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
@@ -489,4 +538,6 @@ MIT License - see LICENSE file for details.
 
 ---
 
-**Last Updated**: 2026-01-13 - Portfolio v1.0.0 with full i18n support, RTL, and comprehensive SEO optimization.
+**Last Updated**: 2024 - Portfolio v2.0.0 with admin dashboard, custom appointment system, featured blogs, and newsletter with interests.
+
+See [V2_RELEASE_NOTES.md](./V2_RELEASE_NOTES.md) for detailed v2.0 release notes and [PRODUCTION_CHECKLIST.md](./PRODUCTION_CHECKLIST.md) for production deployment checklist.
