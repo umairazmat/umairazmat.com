@@ -9,7 +9,7 @@ const appointmentSchema = z.object({
   email: z.string().email('Invalid email address').max(254, 'Email must be less than 254 characters'),
   type: z.string().min(1, 'Appointment type is required').max(50, 'Type must be less than 50 characters'),
   datetime: z.string().datetime('Invalid datetime'),
-  notes: z.string().optional().max(2000, 'Notes must be less than 2000 characters'),
+  notes: z.string().max(2000, 'Notes must be less than 2000 characters').optional(),
 })
 
 // GET - Fetch appointments (admin only)
