@@ -51,24 +51,31 @@ export default function AppointmentSystem() {
       ]).select()
 
       if (error) {
-        console.error('Appointment insert error:', error)
-        console.error('Error details:', {
-          message: error.message,
-          code: error.code,
-          details: error.details,
-          hint: error.hint,
-        })
-        toast.error(`Failed to book appointment: ${error.message || 'Please try again.'}`)
+        // Only log in development
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Appointment insert error:', error)
+          console.error('Error details:', {
+            message: error.message,
+            code: error.code,
+            details: error.details,
+            hint: error.hint,
+          })
+        }
+        toast.error('Failed to book appointment. Please try again.')
       } else {
-        console.log('Appointment created successfully:', result)
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Appointment created successfully:', result)
+        }
         toast.success('Appointment booked successfully! We will confirm shortly.')
         setIsSuccess(true)
         reset()
         setTimeout(() => setIsSuccess(false), 3000)
       }
     } catch (error: any) {
-      console.error('Appointment submission error:', error)
-      toast.error(`An error occurred: ${error?.message || 'Please try again.'}`)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Appointment submission error:', error)
+      }
+      toast.error('An error occurred. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
