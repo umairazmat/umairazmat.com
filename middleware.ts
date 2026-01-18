@@ -52,7 +52,9 @@ export async function middleware(request: NextRequest) {
     }
   } catch (error) {
     // If middleware fails, allow request to continue
-    console.error('Middleware error:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Middleware error:', error)
+    }
     // Still set pathname header even on error
     supabaseResponse.headers.set('x-pathname', request.nextUrl.pathname)
   }

@@ -16,6 +16,32 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Input length validation
+    if (name.length > 100) {
+      return NextResponse.json(
+        { error: 'Name must be less than 100 characters' },
+        { status: 400 }
+      )
+    }
+    if (email.length > 254) {
+      return NextResponse.json(
+        { error: 'Email must be less than 254 characters' },
+        { status: 400 }
+      )
+    }
+    if (subject.length > 200) {
+      return NextResponse.json(
+        { error: 'Subject must be less than 200 characters' },
+        { status: 400 }
+      )
+    }
+    if (message.length > 5000) {
+      return NextResponse.json(
+        { error: 'Message must be less than 5000 characters' },
+        { status: 400 }
+      )
+    }
+
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
@@ -28,11 +54,13 @@ export async function POST(request: NextRequest) {
     // Check if RESEND_API_KEY is configured
     const resendApiKey = process.env.RESEND_API_KEY
     if (!resendApiKey) {
-      console.error('RESEND_API_KEY is not configured')
+      // Only log in development
+      if (process.env.NODE_ENV === 'development') {
+        console.error('RESEND_API_KEY is not configured')
+      }
       return NextResponse.json(
         { 
-          error: 'Email service is not configured. Please contact the administrator.',
-          details: 'RESEND_API_KEY environment variable is missing'
+          error: 'Email service is not configured. Please contact the administrator.'
         },
         { status: 500 }
       )
@@ -50,9 +78,11 @@ export async function POST(request: NextRequest) {
 
     const resend = new Resend(resendApiKey)
     
+    const contactEmail = process.env.CONTACT_EMAIL || 'umairazmatcareer@gmail.com'
+    
     const result = await resend.emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>',
-      to: 'umairazmatcareer@gmail.com',
+      to: contactEmail,
       replyTo: email,
       subject: `Portfolio Contact: ${subject}`,
       html: `
@@ -80,11 +110,13 @@ export async function POST(request: NextRequest) {
     })
 
     if (result.error) {
-      console.error('Resend API error:', result.error)
+      // Only log in development
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Resend API error:', result.error)
+      }
       return NextResponse.json(
         { 
-          error: 'Failed to send email. Please try again later.',
-          details: process.env.NODE_ENV === 'development' ? result.error.message : undefined
+          error: 'Failed to send email. Please try again later.'
         },
         { status: 500 }
       )
@@ -95,16 +127,14 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     )
   } catch (error) {
-    console.error('Error sending email:', error)
-    
-    // Provide more specific error messages in development
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
-    const isDevelopment = process.env.NODE_ENV === 'development'
+    // Only log in development
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error sending email:', error)
+    }
     
     return NextResponse.json(
       { 
-        error: 'Failed to send email. Please try again.',
-        ...(isDevelopment && { details: errorMessage })
+        error: 'Failed to send email. Please try again.'
       },
       { status: 500 }
     )
