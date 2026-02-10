@@ -5,11 +5,11 @@ import { z } from 'zod'
 export const dynamic = 'force-dynamic'
 
 const appointmentSchema = z.object({
-  user_name: z.string().min(1, 'Name is required'),
-  email: z.string().email('Invalid email address'),
-  type: z.string().min(1, 'Appointment type is required'),
+  user_name: z.string().min(1, 'Name is required').max(100, 'Name must be less than 100 characters'),
+  email: z.string().email('Invalid email address').max(254, 'Email must be less than 254 characters'),
+  type: z.string().min(1, 'Appointment type is required').max(50, 'Type must be less than 50 characters'),
   datetime: z.string().datetime('Invalid datetime'),
-  notes: z.string().optional(),
+  notes: z.string().max(2000, 'Notes must be less than 2000 characters').optional(),
 })
 
 // GET - Fetch appointments (admin only)
@@ -39,7 +39,9 @@ export async function GET(request: NextRequest) {
     const { data, error } = await query
 
     if (error) {
-      console.error('Error fetching appointments:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching appointments:', error)
+      }
       return NextResponse.json(
         { error: 'Failed to fetch appointments' },
         { status: 500 }
@@ -48,7 +50,9 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ appointments: data || [] })
   } catch (error) {
-    console.error('Error in GET /api/appointments:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error in GET /api/appointments:', error)
+    }
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
@@ -78,7 +82,9 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (error) {
-      console.error('Error creating appointment:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error creating appointment:', error)
+      }
       return NextResponse.json(
         { error: 'Failed to create appointment' },
         { status: 500 }
@@ -91,19 +97,21 @@ export async function POST(request: NextRequest) {
       { success: true, appointment: data },
       { status: 201 }
     )
-  } catch (error: any) {
-    if (error instanceof z.ZodError) {
+    } catch (error: any) {
+      if (error instanceof z.ZodError) {
+        return NextResponse.json(
+          { error: 'Validation error' },
+          { status: 400 }
+        )
+      }
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error in POST /api/appointments:', error)
+      }
       return NextResponse.json(
-        { error: 'Validation error', details: error.errors },
-        { status: 400 }
+        { error: 'Internal server error' },
+        { status: 500 }
       )
     }
-    console.error('Error in POST /api/appointments:', error)
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
-  }
 }
 
 // PATCH - Update appointment status (admin only)
@@ -136,7 +144,9 @@ export async function PATCH(request: NextRequest) {
       .single()
 
     if (error) {
-      console.error('Error updating appointment:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error updating appointment:', error)
+      }
       return NextResponse.json(
         { error: 'Failed to update appointment' },
         { status: 500 }
@@ -145,7 +155,9 @@ export async function PATCH(request: NextRequest) {
 
     return NextResponse.json({ success: true, appointment: data })
   } catch (error) {
-    console.error('Error in PATCH /api/appointments:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error in PATCH /api/appointments:', error)
+    }
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

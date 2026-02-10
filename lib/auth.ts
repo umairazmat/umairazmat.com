@@ -17,7 +17,9 @@ export async function requireAuth() {
 
     // If no user, redirect to login
     if (!user || userError) {
-      console.log('No user found, redirecting to login')
+      if (process.env.NODE_ENV === 'development') {
+        console.log('No user found, redirecting to login')
+      }
       redirect('/admin/login')
     }
 
@@ -45,13 +47,17 @@ export async function requireAuth() {
     }
 
     if (!session) {
-      console.log('No session found, redirecting to login')
+      if (process.env.NODE_ENV === 'development') {
+        console.log('No session found, redirecting to login')
+      }
       redirect('/admin/login')
     }
 
     return { session, supabase }
   } catch (error) {
-    console.error('Auth error:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Auth error:', error)
+    }
     redirect('/admin/login')
   }
 }

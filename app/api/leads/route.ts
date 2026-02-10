@@ -5,7 +5,7 @@ import { z } from 'zod'
 export const dynamic = 'force-dynamic'
 
 const leadSchema = z.object({
-  email: z.string().email('Invalid email address'),
+  email: z.string().email('Invalid email address').max(254, 'Email must be less than 254 characters'),
   interests: z.array(z.string()).optional(),
 })
 
@@ -41,7 +41,9 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (error) {
-      console.error('Error creating lead:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error creating lead:', error)
+      }
       return NextResponse.json(
         { error: 'Failed to subscribe' },
         { status: 500 }
@@ -54,19 +56,21 @@ export async function POST(request: NextRequest) {
       { success: true, lead: data },
       { status: 201 }
     )
-  } catch (error: any) {
-    if (error instanceof z.ZodError) {
+    } catch (error: any) {
+      if (error instanceof z.ZodError) {
+        return NextResponse.json(
+          { error: 'Validation error' },
+          { status: 400 }
+        )
+      }
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error in POST /api/leads:', error)
+      }
       return NextResponse.json(
-        { error: 'Validation error', details: error.errors },
-        { status: 400 }
+        { error: 'Internal server error' },
+        { status: 500 }
       )
     }
-    console.error('Error in POST /api/leads:', error)
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
-  }
 }
 
 // GET - Fetch leads (admin only)
@@ -87,7 +91,9 @@ export async function GET(request: NextRequest) {
       .order('created_at', { ascending: false })
 
     if (error) {
-      console.error('Error fetching leads:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching leads:', error)
+      }
       return NextResponse.json(
         { error: 'Failed to fetch leads' },
         { status: 500 }
@@ -96,7 +102,9 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ leads: data || [] })
   } catch (error) {
-    console.error('Error in GET /api/leads:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error in GET /api/leads:', error)
+    }
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

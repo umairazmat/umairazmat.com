@@ -22,7 +22,7 @@ const roboto = Roboto({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://umairazmat.com'),
+  metadataBase: new URL('https://www.umairazmat.com'),
   title: {
     default: 'Umair Azmat - Full-Stack Software Engineer | React, Next.js, Node.js, Python | AWS Cloud',
     template: '%s | Umair Azmat',
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     'Agile Developer',
     'Production-Grade Applications',
   ],
-  authors: [{ name: 'Umair Azmat', url: 'https://umairazmat.com' }],
+  authors: [{ name: 'Umair Azmat', url: 'https://www.umairazmat.com' }],
   creator: 'Umair Azmat',
   publisher: 'Umair Azmat',
   category: 'Technology',
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     alternateLocale: ['en_GB', 'ar', 'de', 'it'],
-    url: 'https://umairazmat.com',
+    url: 'https://www.umairazmat.com',
     siteName: 'Umair Azmat Portfolio',
     title: 'Umair Azmat - Full-Stack Software Engineer | React, Next.js, Node.js, Python',
     description: 'Full-Stack Software Engineer with 2+ years of experience building production-grade, scalable web applications using React, Next.js, Angular, Node.js, and REST APIs. Available for remote work.',
@@ -99,13 +99,13 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://umairazmat.com',
+    canonical: 'https://www.umairazmat.com',
     languages: {
-      'en-US': 'https://umairazmat.com',
-      'en-GB': 'https://umairazmat.com',
-      'ar': 'https://umairazmat.com',
-      'de': 'https://umairazmat.com',
-      'it': 'https://umairazmat.com',
+      'en-US': 'https://www.umairazmat.com',
+      'en-GB': 'https://www.umairazmat.com',
+      'ar': 'https://www.umairazmat.com',
+      'de': 'https://www.umairazmat.com',
+      'it': 'https://www.umairazmat.com',
     },
   },
   icons: {
@@ -139,9 +139,35 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning dir="ltr">
       <head>
+        {/* Google Tag Manager */}
+        {process.env.NEXT_PUBLIC_GTM_ID && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');`,
+            }}
+          />
+        )}
+        {/* End Google Tag Manager */}
+        
         <StructuredData />
       </head>
       <body className={`${inter.variable} ${roboto.variable} font-sans`}>
+        {/* Google Tag Manager (noscript) */}
+        {process.env.NEXT_PUBLIC_GTM_ID && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
+        )}
+        {/* End Google Tag Manager (noscript) */}
         <Script
           id="theme-init"
           strategy="beforeInteractive"

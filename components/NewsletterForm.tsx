@@ -59,29 +59,36 @@ export default function NewsletterForm({
       ])
 
       if (error) {
-        console.error('Lead insert error:', error)
-        console.error('Error details:', {
-          message: error.message,
-          code: error.code,
-          details: error.details,
-          hint: error.hint,
-        })
+        // Only log in development
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Lead insert error:', error)
+          console.error('Error details:', {
+            message: error.message,
+            code: error.code,
+            details: error.details,
+            hint: error.hint,
+          })
+        }
         if (error.code === '23505') {
           // Duplicate email
           toast.error('This email is already subscribed')
         } else {
-          toast.error(`Failed to subscribe: ${error.message || 'Please try again.'}`)
+          toast.error('Failed to subscribe. Please try again.')
         }
       } else {
-        console.log('Lead created successfully')
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Lead created successfully')
+        }
         toast.success('Successfully subscribed to newsletter!')
         setIsSuccess(true)
         reset()
         setTimeout(() => setIsSuccess(false), 3000)
       }
     } catch (error: any) {
-      console.error('Newsletter submission error:', error)
-      toast.error(`An error occurred: ${error?.message || 'Please try again.'}`)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Newsletter submission error:', error)
+      }
+      toast.error('An error occurred. Please try again.')
     } finally {
       setIsSubmitting(false)
     }

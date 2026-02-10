@@ -19,10 +19,10 @@ export async function POST(request: NextRequest) {
 
     const supabase = await createServerSupabaseClient()
 
-    // Get client IP from headers
+    // Get client IP from headers (never trust client-supplied IP)
     const forwarded = request.headers.get('x-forwarded-for')
     const realIp = request.headers.get('x-real-ip')
-    const clientIp = forwarded?.split(',')[0] || realIp || ip_address || 'unknown'
+    const clientIp = forwarded?.split(',')[0] || realIp || 'unknown'
 
     const { error } = await supabase.from('analytics').insert({
       event,
@@ -34,7 +34,9 @@ export async function POST(request: NextRequest) {
     })
 
     if (error) {
-      console.error('Error tracking analytics:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error tracking analytics:', error)
+      }
       // Don't fail the request - analytics should be silent
       return NextResponse.json({ success: false }, { status: 200 })
     }
@@ -44,7 +46,9 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     )
   } catch (error) {
-    console.error('Analytics error:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Analytics error:', error)
+    }
     // Don't fail the request - analytics should be silent
     return NextResponse.json({ success: false }, { status: 200 })
   }
@@ -79,7 +83,9 @@ export async function GET(request: NextRequest) {
     const { data, error } = await query
 
     if (error) {
-      console.error('Error fetching analytics:', error)
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error fetching analytics:', error)
+      }
       return NextResponse.json(
         { error: 'Failed to fetch analytics' },
         { status: 500 }
@@ -88,7 +94,9 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ analytics: data || [] })
   } catch (error) {
-    console.error('Error in GET /api/analytics:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error in GET /api/analytics:', error)
+    }
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
