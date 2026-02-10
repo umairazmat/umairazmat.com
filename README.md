@@ -242,6 +242,10 @@ SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 # Email (Optional - for contact form)
 RESEND_API_KEY=your_resend_api_key_here
 
+# Google Analytics & Tag Manager (Optional - for tracking)
+NEXT_PUBLIC_GTM_ID=GTM-WKFSSMK3
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-J38SWH6FV7
+
 # Site URL (Optional)
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```

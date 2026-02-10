@@ -2,37 +2,15 @@ import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
   return {
+    // Keep robots simple: allow crawling, block sensitive admin/private paths,
+    // and expose the sitemap (use the canonical www URL).
     rules: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: [
-          '/api/',
-          '/_next/',
-          '/admin/',
-          '/private/',
-        ],
-      },
-      {
-        userAgent: 'Googlebot',
-        allow: '/',
-        disallow: [
-          '/api/',
-          '/admin/',
-          '/private/',
-        ],
-      },
-      {
-        userAgent: 'Bingbot',
-        allow: '/',
-        disallow: [
-          '/api/',
-          '/admin/',
-          '/private/',
-        ],
+        disallow: ['/admin/', '/private/'],
       },
     ],
-    sitemap: 'https://umairazmat.com/sitemap.xml',
-    host: 'https://umairazmat.com',
+    sitemap: 'https://www.umairazmat.com/sitemap.xml',
   }
 }
